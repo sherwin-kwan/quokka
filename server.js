@@ -22,7 +22,6 @@ db.connect();
 app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
-app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Send static files in the /public folder to client

@@ -1,7 +1,7 @@
 {
-  "name": "node-skeleton",
+  "name": "quokka",
   "version": "1.0.0",
-  "description": "",
+  "description": "Public quiz webapp",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,20 +9,20 @@
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "db:reset": "node bin/resetdb.js"
   },
-  "author": "Lighthouse Labs",
+  "author": "Chantal Snazel, Sherwin Kwan, Will Portman",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "chalk": "^2.4.2",
-    "dotenv": "^2.0.0",
-    "ejs": "^2.6.2",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "ejs": "3.1.5",
     "express": "^4.17.1",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.0",
     "node-sass-middleware": "^0.11.0",
-    "pg": "^6.4.2",
+    "pg": "^8.4.1",
     "pg-native": "^3.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^2.0.5"
   }
 }

@@ -21,7 +21,8 @@
     "morgan": "^1.10.0",
     "node-sass-middleware": "^0.11.0",
     "pg": "^8.4.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"

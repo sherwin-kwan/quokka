@@ -52,5 +52,7 @@ VALUES
 (7, 'James Buchanan', true),
 --id=26:
 (8, 'Ronald Reagan', true),
+--id=27:
 (8, 'Bill Clinton', false),
+--id=28:
 (8, 'Barack Obama', false);

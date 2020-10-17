@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%- include('../partials/_head-styles.ejs'); %>
+  <link rel="stylesheet" href="/styles/quiz-tile.css">
+  <%- include('../partials/_head-scripts.ejs'); %>
+
+  <title>QUOKKA? - Home</title>
+</head>
+<body>
+  <h1>QUOKKA?</h1>
+  <main class="quiz-tile-container">
+    <!-- Replace w/ for loop when data fetching ready -->
+    
+    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/', title:'My First QUOKKA?'}}); %>
+    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/', title:'US Presidents'}}); %>
+    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/', title:'Quiz to assert dominance'}}); %>
+    
+  </main>
+</body>
+</html>

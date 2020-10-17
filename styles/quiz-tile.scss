@@ -1,0 +1,23 @@
+
+.quiz-tile-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.quiz-tile {
+  width:43vw;
+  height:43vw;
+  text-align: center;
+  background-color: gray;
+  margin-bottom: 5%;
+
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-tile a {
+  text-decoration: none;
+}

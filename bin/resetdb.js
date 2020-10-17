@@ -38,6 +38,7 @@ try {
   console.log(`-> Connecting to PG using ${connectionString} ...`);
   client.connectSync(connectionString);
   runSchemaFiles();
+  console.log('Schema files run successfully');
   runSeedFiles();
   client.end();
 } catch (err) {

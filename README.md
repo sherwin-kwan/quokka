@@ -25,15 +25,15 @@ Route | Method | Type | Permissions |  Purpose
 / | GET | Template page | All | homepage (landing page showing all public quizzes)
 **PAGE B** | --- | --- | ---
 /quiz/:id | GET | Template page | users | quiz page, by default goes to landing page for the quiz
-/api/question/:id | GET | Endpoint | users | async displays one question on quiz page (would be called multiple times when taking a quiz)
+/quiz/:id/load | GET | Endpoint | users | async displays one question on quiz page (would be called multiple times when taking a quiz)
 /quiz/:id | POST | Submit | users | Submit a quiz
 **PAGE C** | --- | --- | ---
 /quiz/new | GET | Template page | users | create new quiz page
 /quiz/new | POST | Submit | users | submit a new quiz
 **PAGE D** | --- | --- | ---
-/user/:id | GET | Templage page | That user (?) | Get user profile
-/api/myresults/:userid | GET | Endpoint | That user | Get user's results as JSON, to async display on user profile page
-/api/myquizzes/:userid | GET | Endpoint | That user | Get user's created quizzes as JSON, to async display on user profile page
+/user/:id | GET | Templage page | users | Get user profile
+/user/:id/results | GET | Endpoint | users | Get user's results as JSON, to async display on user profile page
+/users/:id/quizzes | GET | Endpoint | users | Get user's created quizzes as JSON, to async display on user profile page
 **PAGE E** | --- | --- | ---
 /result/:attemptid | GET | Template page | All | See results of a previous attempt
 **STRETCH** | --- | --- | ---

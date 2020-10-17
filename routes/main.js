@@ -3,8 +3,12 @@
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index.ejs");
 });
+
+router.get("/pug", (req, res) => {
+  res.render("index.pug");
+})
 
 // Catch-all code for non-existent routes. If the route doesn't match anything above, it will send this 404 page:
 router.use((req, res) => {

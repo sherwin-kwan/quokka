@@ -3,10 +3,10 @@ require('dotenv').config();
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
-const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
+const ENV        = process.env.ENV || 'development';
+const express    = require('express');
+const bodyParser = require('body-parser');
+const sass       = require('node-sass-middleware');
 const app        = express();
 const morgan     = require('morgan');
 
@@ -21,31 +21,32 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Send static files in the /public folder to client
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
+app.use('/styles', sass({
+  src: __dirname + '/styles',
+  dest: __dirname + '/public/styles',
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 // Routers: these listen to requests for resources on specific paths
 
-const userRouter = require("./routes/user");
-app.use("/user", userRouter(db));
+const userRouter = require('./routes/user');
+app.use('/user', userRouter(db));
 
 const quizRouter = require('./routes/quiz');
-app.use("/quiz", quizRouter(db));
+app.use('/quiz', quizRouter(db));
 
-const resultRouter = require("./routes/result");
-app.use("/result", resultRouter(db));
+const resultRouter = require('./routes/result');
+app.use('/result', resultRouter(db));
 
-const mainRouter = require("./routes/main");
-app.use("/", mainRouter(db))
+const mainRouter = require('./routes/main');
+app.use('/', mainRouter(db))
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {

@@ -1,3 +1,47 @@
 -- Users table seeds here (Example)
 INSERT INTO users (name) VALUES ('Alice');
 INSERT INTO users (name) VALUES ('Kira');
+
+
+INSERT INTO users (fname, lname, username, password)
+VALUES
+  ('Aleksandar', 'Dmitrovic', AleksandarD, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Alfonso', 'Lotina', AlfonsoL, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Avvai', 'Ketheeswaran', AvvaiK, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Ayushi', 'Sharma', AyushiS, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Bryn', 'Schulha', BrynS, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Calvin', 'Zheng', CalvinZ, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Chantal', 'Snazel', ChantalS, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Charles', 'Thompson', CharlesT, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Cooper', 'Shang', CooperS, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Eddy', 'Bussière', EddyB, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Eric', 'McGrandle', EricM, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Graeme', 'Chalmers', GraemeC, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Helen', 'Ouyang', HelenO, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Ian', 'Cameron', IanC, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Ife', 'Olaifa', IfeO, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Jason', 'Vongsana', JasonV, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Jay', 'Ho', JayH, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Jillian', 'Martin', JillianM, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Joshua', 'Grant', JoshuaG, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Joshua', 'Tan', JoshuaT, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Kevin', 'Yang', KevinY, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Kieran', 'Sharley', KieranS, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Kourtney', 'Huget', KourtneyH, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Mackenzie', 'Joyal', MackenzieJ, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Marcello', 'Kuenzler', MarcelloK, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Michelle', 'Tran', MichelleT, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Mohammed', 'Abdulbaqi', MohammedA, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Nicholas', 'Kotsos', NicholasK, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Paige', 'Lindahl', PaigeL, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Paul', 'Chen', PaulC, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Saad', 'Muhammad', SaadM, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Scott', 'Morton', ScottM, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Shadee', 'Merhi', ShadeeM, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Sher', 'Arsalaie', SherA, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Sherwin', 'Kwan', SherwinK, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Tom', 'Adam', TomA, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Tyler', 'Asai', TylerA, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Will', 'Portman', WillP, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Will', 'Zak', WillZ, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO),
+  ('Z', 'Xian', ZX, $2b$08$1pltkVwOduhnjvAkm/TfPux5dKyvG1WoexQr9yr6xxyshtr70w/OO);

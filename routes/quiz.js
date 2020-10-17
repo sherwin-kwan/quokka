@@ -1,7 +1,10 @@
 /*
- * All routes for /quiz/... are defined here
+ * All routes for /result/... are defined here
  * See README for a list of routes.
  */
+
+const express = require('express');
+const router  = express.Router();
 
 const quizRouter = (db) => {
   router.get("/", (req, res) => {

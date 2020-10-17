@@ -1,3 +1,10 @@
+/*
+ * All other routes (other than /quiz, /result, or /user) are defined here
+ * See README for a list of routes.
+ */
+
+const express = require('express');
+const router  = express.Router();
 
 // Home page
 // Warning: avoid creating more routes in this file!

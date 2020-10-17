@@ -1,14 +1,13 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
+ * All routes for /user/... are defined here
+ * See README for a list of routes.
  */
 
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+/* The "db" argument is a Postgres Pool object */
+const userRouter = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -23,3 +22,5 @@ module.exports = (db) => {
   });
   return router;
 };
+
+module.exports = userRouter;

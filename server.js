@@ -23,6 +23,8 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Send static files in the /public folder to client
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -31,24 +33,20 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const userRouter = require("./routes/users");
-const resultRouter = require("./routes/widgets");
+// Routers: these listen to requests for resources on specific paths
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
+const userRouter = require("./routes/user");
 app.use("/user", userRouter(db));
+
+const quizRouter = require('./routes/quiz');
+app.use("/quiz", quizRouter(db));
+
+const resultRouter = require("./routes/result");
 app.use("/result", resultRouter(db));
+
+const mainRouter = require("./routes/main");
+app.use("/", mainRouter(db))
 // Note: mount other resources here, using the same pattern above
-
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  res.render("index");
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

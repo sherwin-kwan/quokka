@@ -17,6 +17,33 @@ Insert screenshots here
 * jQuery
 * SASS
 
+## Routes
+
+Route | Method | Type | Permissions |  Purpose
+---|---|---|---|---
+PAGE A | --- | --- | ---|---
+/ | GET | Template page | All | homepage (landing page showing all public quizzes)
+PAGE B | --- | --- | ---
+/quiz/:id | GET | Template page | users | quiz page, by default goes to landing page for the quiz
+/api/question/:id | GET | Endpoint | users | async displays one question on quiz page (would be called multiple times when taking a quiz)
+/quiz/:id | POST | Submit | users | Submit a quiz
+PAGE C | --- | --- | ---
+/quiz/new | GET | Template page | users | create new quiz page
+/quiz/new | POST | Submit | users | submit a new quiz
+PAGE D | --- | --- | ---
+/user/:id | GET | Templage page | That user (?) | Get user profile
+/api/myresults/:userid | GET | Endpoint | That user | Get user's results as JSON, to async display on user profile page
+/api/myquizzes/:userid | GET | Endpoint | That user | Get user's created quizzes as JSON, to async display on user profile page
+PAGE E | --- | --- | ---
+/result/:attemptid | GET | Template page | All | See results of a previous attempt
+STRETCH | --- | --- | ---
+/start/login | GET | Template page | people not logged in | login page
+/start/register | GET | Template page | people not logged in | user registration page
+/start/login | POST | Submit | people not logged in | submit login username + password
+/start/register | POST | Submit | people not logged in | register new account
+
+
+
 ## Getting Started
 
 Insert stuff about creating the .env file and connecting to a database, seeding, etc. here

@@ -37,10 +37,10 @@ PAGE D | --- | --- | ---
 PAGE E | --- | --- | ---
 /result/:attemptid | GET | Template page | All | See results of a previous attempt
 STRETCH | --- | --- | ---
-/start/login | GET | Template page | people not logged in | login page
-/start/register | GET | Template page | people not logged in | user registration page
-/start/login | POST | Submit | people not logged in | submit login username + password
-/start/register | POST | Submit | people not logged in | register new account
+/user/login | GET | Template page | people not logged in | login page
+/user/register | GET | Template page | people not logged in | user registration page
+/user/login | POST | Submit | people not logged in | submit login username + password
+/user/register | POST | Submit | people not logged in | register new account
 
 
 

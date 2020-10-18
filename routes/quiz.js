@@ -4,7 +4,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 const quizRouter = (db) => {
 
@@ -21,6 +21,10 @@ const quizRouter = (db) => {
     //       .status(500)
     //       .json({ error: err.message });
     //   });
+    res.json({
+      "notes": "This is the route that will eventually cause a quiz to load",
+      "title": "This is a quiz title", "created_by": "Some Body"
+    });
   })
 
   // Create a new quiz (template page)

@@ -1,4 +1,4 @@
---This query returns all of the quiz titles that a user has made given a user_id, ordered from most-to-least-recent.
+--This query selects all of the quiz titles that a user has made given a user_id, ordered from most-to-least-recent.
 
 SELECT title --Note: We can select add'l fields as needed here, based on what we want to display.
 FROM quizzes

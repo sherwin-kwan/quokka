@@ -1,4 +1,4 @@
---This query returns quiz title, user fname & lname, and percent_correct for a given attempt ID.
+--This query selects quiz title, user fname & lname, and percent_correct for a given attempt ID.
 
 SELECT
   quizzes.title,

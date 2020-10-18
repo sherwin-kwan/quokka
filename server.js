@@ -35,38 +35,26 @@ app.use(express.static('public'));
 
 // Routers: these listen to requests for resources on specific paths
 
-<<<<<<< HEAD
-const ejsTempRoute = require('./routes/ejs-starter')
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
 
+
+const ejsTempRoute = require('./routes/ejs-starter')
 app.use("/ejs", ejsTempRoute());
+
 // Note: mount other resources here, using the same pattern above
-=======
 const userRouter = require('./routes/user');
 app.use('/user', userRouter(db));
->>>>>>> master
 
 const quizRouter = require('./routes/quiz');
 app.use('/quiz', quizRouter(db));
 
-<<<<<<< HEAD
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
-=======
 const resultRouter = require('./routes/result');
 app.use('/result', resultRouter(db));
 
 const mainRouter = require('./routes/main');
 app.use('/', mainRouter(db))
 // Note: mount other resources here, using the same pattern above
->>>>>>> master
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

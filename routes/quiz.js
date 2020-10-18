@@ -5,12 +5,23 @@
 
 const express = require('express');
 const router = express.Router();
+const format = require('pg-format');
+
+const loadOneQuestion = (question_id, db) => {
+  db.query(`SELECT question_num, text, answer_text
+  FROM questions
+  JOIN possible_answers ON questions.id = possible_answers.questions_id
+  WHERE questions.id = $1
+  ORDER BY possible_answers.text;`)
+}
+
 
 const quizRouter = (db) => {
 
   // Load a quiz asynchronously
   router.get('/:id/load', (req, res) => {
     const quizId = req.params.id;
+
     // db.query(/* INSERT QUERY TO GET QUIZZES */)
     //   .then(data => {
     //     const users = data.rows;

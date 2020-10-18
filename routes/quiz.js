@@ -2,19 +2,36 @@
  * All routes for /result/... are defined here
  * See README for a list of routes.
  */
-
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const format = require('pg-format');
+// const database = require('../server').db;
+
+const { Pool } = require('pg');
+const dbParams = require('../lib/db.js');
+const database = new Pool(dbParams);
+database.connect();
 
 const loadOneQuestion = (question_id, db) => {
   db.query(`SELECT question_num, text, answer_text
   FROM questions
+<<<<<<< HEAD
   JOIN possible_answers ON questions.id = possible_answers.questions_id
   WHERE questions.id = $1
   ORDER BY possible_answers.text;`)
+=======
+  JOIN possible_answers ON questions.id = possible_answers.question_id
+  WHERE questions.id = ${format(question_id)}
+  ORDER BY possible_answers.answer_text;`)
+  .then((res) => {
+    console.log(res.rows);
+  })
+  .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
+>>>>>>> buggy
 };
 
+console.log(loadOneQuestion('6', database));
 
 const quizRouter = (db) => {
 
@@ -70,4 +87,10 @@ const quizRouter = (db) => {
   return router;
 };
 
-module.exports = quizRouter;
+const testFunction = function(abc) {
+  return abc + 1;
+}
+
+module.exports = {
+  quizRouter,
+  testFunction};

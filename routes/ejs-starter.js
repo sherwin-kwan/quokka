@@ -14,5 +14,9 @@ module.exports = () => {
     res.render("pages/score.ejs");
   });
 
+  router.get("/user/:id", (req, res) => {
+    res.render("pages/user.ejs");
+  });
+
   return router;
 }

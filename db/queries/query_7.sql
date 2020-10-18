@@ -1,6 +1,4 @@
---This query inserts a new row into the user_answers table for a user's possible_answer selection for one question.
-
---We will need to ensure that each question's selection is entered as a separate row when a user submits a quiz (i.e. that this query runs for each question on the quiz).
+--This query inserts a new row into the user_answers table for a user's possible_answer selection for one question when they submit a quiz.
 
 INSERT INTO user_answers (attempt_id, selected_answer)
 VALUES((

@@ -23,12 +23,28 @@ const quizRouter = (db) => {
     //   });
   })
 
+  // Create a new quiz (template page)
+  router.get('/new', (req, res) => {
+    res.send(`This is the future home of the create-a-quiz page (page C)
+    <form action='new' method='POST'>
+      <button type='submit'>Submit</buton>
+    </form>`);
+  });
+
+  // Submit a quiz
+  router.post('/new', (req, res) => {
+    res.send('You successfully created a new quiz, congrats!');
+  })
+
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
     const quizId = req.params.id;
-    res.send(`This is the future home of the quiz page for quiz ${quizId}.
-    <form action='${req.params.id}' method='POST'><button type='submit'>Submit</button></form>`);
+    res.send(`This is the future home of the quiz page (page B) for quiz ${quizId}.
+    <form action='${req.params.id}' method='POST'>
+      <button type='submit'>Submit</button>
+    </form>`);
   });
+
 
   // Submit a quiz
   router.post('/:id', (req, res) => {

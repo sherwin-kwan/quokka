@@ -8,17 +8,8 @@ const router  = express.Router();
 
 /* The "db" argument is a Postgres Pool object */
 const resultRouter = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+  router.get("/:attemptid", (req, res) => {
+    res.send(`This is the future home of results page for attempt ${req.params.attemptid}`);
   });
   return router;
 };

@@ -1,0 +1,398 @@
+[33mcommit 14db8c01230ec23dbf4c2ea8a321b3e99f647a6f[m[33m ([m[1;36mHEAD -> [m[1;32mquiz-page[m[33m)[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sun Oct 18 13:23:13 2020 -0700
+
+    move error.ejs into the pages subfolder
+
+[33mcommit 924a74c799ff45c10086a57866228d63dc5c36ee[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sun Oct 18 13:21:09 2020 -0700
+
+    update jquery version in partial
+
+[33mcommit 76b6e3901ff09af842a84f3e2c34733f330097e3[m[33m ([m[1;31mgithub/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 17:53:38 2020 +0000
+
+    merged routes in server.js
+
+[33mcommit 7299baaaf68ac30a1156153abbb784171a4e520f[m
+Merge: 8bfd494 5e35ea3
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 17:37:58 2020 +0000
+
+    Merge branch 'ejs-starter'
+    
+    Approving PR
+
+[33mcommit 5e35ea3f27deb7ff60e9c7fb5cd977cab806e159[m
+Merge: 3ba4c6c 8bfd494
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 17:37:42 2020 +0000
+
+    Commit prior to merge
+
+[33mcommit 3ba4c6cb2a846a6e9982f7707352ae1a74e2d22a[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 17:07:48 2020 +0000
+
+    created helper folder for db
+
+[33mcommit 54d6466870d4d2211aeef5372c3067afd279ded4[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 17:04:29 2020 +0000
+
+    created page D, in progress
+
+[33mcommit 8bfd494ff5707cd3d599ae861fd5b1fe0260f945[m
+Merge: 798e2f6 97410da
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Sun Oct 18 09:34:00 2020 -0700
+
+    Merge pull request #8 from sherwin-kwan/will
+    
+    Add SQL queries
+
+[33mcommit 97410da5e9e6a5dedda57de2320c4b2b8fb4d27c[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 16:10:50 2020 +0000
+
+    Fixed potential bug re: attempt ID in queries 6 & 7
+
+[33mcommit 9e2308f5901539703df2f78bb312d1c5821a27bc[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 07:54:26 2020 +0000
+
+    Finish building block SQL queries for app
+
+[33mcommit cecdcf28ab2201ad9ef05ad0b290823fb9c8a9ea[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 07:19:15 2020 +0000
+
+    More queries
+
+[33mcommit 730840acac35cf308e15fcb8c8d88d2de4058b0c[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 06:17:09 2020 +0000
+
+    Continue writing and updating queries
+
+[33mcommit 47b8a95afe934169d968eeaeadca07ec45f5a534[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 05:32:58 2020 +0000
+
+    created page E - results/:id
+
+[33mcommit 50222eef1d342bfb03f88245f3a95b6fefb54a23[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 04:42:48 2020 +0000
+
+    create page B:1+2, take quiz
+
+[33mcommit 2852753ddde8c06577cd5363e6d54335708a77c3[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 04:27:42 2020 +0000
+
+    Create new and update existing SQL queries for app
+
+[33mcommit 798e2f69133d82a4428454177072f60e38f520e7[m
+Merge: a552b05 6e3a9f8
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sat Oct 17 17:52:39 2020 -0700
+
+    Merge pull request #7 from sherwin-kwan/sherwin
+    
+    Create dummy pages for each route
+
+[33mcommit d38b9c79a3afc9db0fe4372e78d95dbf42fe92b8[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 00:38:57 2020 +0000
+
+    add header partial
+
+[33mcommit ce2db4b56bec57d7ce20006cf4e910c3ebe0233f[m
+Author: Will <wdportman@gmail.com>
+Date:   Sun Oct 18 00:37:43 2020 +0000
+
+    Write SQL queries 2-6
+
+[33mcommit 6e3a9f892f0fd115be09242195b2d17b0f20b74f[m[33m ([m[1;31mgithub/sherwin[m[33m)[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 17:29:40 2020 -0700
+
+    add login and register dummy pages
+
+[33mcommit 98e5a6de56be570f578b469077fe1d5585ff2d68[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 17:26:24 2020 -0700
+
+    add dummy pages for all core routes
+
+[33mcommit d02751fb919faa1091aaf5d6bcc2fdfc0f0b246a[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 00:23:27 2020 +0000
+
+    made ejs testing router
+
+[33mcommit 90abf9cd2966268aa9520acf3f1d4374eed10241[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 17:05:14 2020 -0700
+
+    create dummy page for create-a-quiz routes
+
+[33mcommit 189d7b498cd2fdf6a2861d88d65d363d2bda5e4e[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 17:02:18 2020 -0700
+
+    quiz routes now work with dummy pages
+
+[33mcommit 5686c589993fd6351ae960fd639b79163860a1af[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sun Oct 18 00:01:38 2020 +0000
+
+    added mobile column scss partial
+
+[33mcommit 62c88e26ba59be24f875995cc7bb71920fdcbbb1[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:54:27 2020 -0700
+
+    updated jquery version
+
+[33mcommit d5e8481c651c23c88976c1512e4c920daacd3839[m
+Author: Chantal Snazel <clsnazel@gmail.com>
+Date:   Sat Oct 17 23:43:59 2020 +0000
+
+    add new index.ejs w/ quiz tiles
+
+[33mcommit 74f9602b47dc13cf9cc55822dc712bdd8d0e2f3f[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:35:32 2020 -0700
+
+    remove pug testing to separate branch
+
+[33mcommit dc5a6341577a75de1d7f1bde9b18d0bc4eb246c8[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:30:03 2020 -0700
+
+    fix router bug
+
+[33mcommit 9219cb14835446a8c085adcdb35549af8b63bc9d[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:28:51 2020 -0700
+
+    experiment with pug
+
+[33mcommit 17d050459efa6d599248f9e37c5414ded7f7f974[m
+Merge: b602e93 3bf210c
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:22:23 2020 -0700
+
+    Merge branch 'sherwin' of https://github.com/sherwin-kwan/quokka into sherwin
+
+[33mcommit b602e93e95deb78d072b0f628a6895886653543b[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:22:04 2020 -0700
+
+    create router files and a basic error page
+
+[33mcommit 8e3270ce535cff3d0223c2cd383d17744adb3b60[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 16:21:40 2020 -0700
+
+    create router files and a basic error page
+
+[33mcommit 3bf210cc73acf405322434f830854d4a57884269[m
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Sat Oct 17 15:58:19 2020 -0700
+
+    Update README
+
+[33mcommit a5bec02767d46d64349bb64beb8654ad29b5d7c6[m
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Sat Oct 17 15:28:37 2020 -0700
+
+    Format README
+
+[33mcommit 68614181f15eb1ce82785eb35446b520ed08a3b1[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 15:26:09 2020 -0700
+
+    fix routes
+
+[33mcommit 538a9954b2a2430fd30147df337c09c1b886cd8a[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 15:23:25 2020 -0700
+
+    add route info to README
+
+[33mcommit 8aca584173e56e0fef8e965c85f50063e2d0a14e[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 14:38:01 2020 -0700
+
+    update jquery file
+
+[33mcommit 12ad93545b423cb73546ff53856566bb23dad8b3[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 14:19:29 2020 -0700
+
+    change README to have our names and notes
+
+[33mcommit 398db6b1ba1c1d919cc5c7ba86b61842210974ba[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 21:19:07 2020 +0000
+
+    Set up queries directory
+
+[33mcommit a552b055c2917ca4e118ad1799a33e155c303514[m
+Merge: fe14a8f cccd1d2
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Sat Oct 17 14:03:45 2020 -0700
+
+    Merge pull request #5 from sherwin-kwan/will
+    
+    Add seed data for the other 5 tables
+
+[33mcommit f51341cf334b1cc7dbc45a5d6e3aa326d46a71ca[m
+Author: Sherwin Kwan <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 20:56:28 2020 +0000
+
+    update gitignore
+
+[33mcommit cccd1d29820c28537926ad80b0bab55af4c9a283[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 19:52:43 2020 +0000
+
+    Finish adding seed data
+
+[33mcommit 64f1f218849a91e7674d2f102beec9ee58598185[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 19:12:34 2020 +0000
+
+    Add seed data for possible_answers table and change double-quotes to single-quotes for 02, 03, and 04 seeds files
+
+[33mcommit cdaaca031cde99d5ddd2c5a1a9590e5c38dc651c[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 18:44:06 2020 +0000
+
+    Add seed data for quizzes and questions tables
+
+[33mcommit cf79716ed796ff7e80d3b9762220a803bc7a0f4b[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 18:14:28 2020 +0000
+
+    Remove widgets seed file and create seed files for five additional tables
+
+[33mcommit fe14a8f3de7aabcd7840872e49ed016e6e65f4fa[m
+Merge: 9336899 30998aa
+Author: Will Portman <35878111+wdportman@users.noreply.github.com>
+Date:   Sat Oct 17 11:02:48 2020 -0700
+
+    Merge pull request #4 from sherwin-kwan/sherwin
+    
+    Sherwin
+
+[33mcommit eee5f4cd168abac12c989f3074419d237f136636[m
+Author: Will <wdportman@gmail.com>
+Date:   Sat Oct 17 17:57:23 2020 +0000
+
+    remove .env.example
+
+[33mcommit 30998aacb94f0588ff03f78ca86fe19475cbf60d[m
+Author: Sherwin Kwan <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 07:08:54 2020 +0000
+
+    fix string quotes bug
+
+[33mcommit ad7b24d3669bcf962a235aa394620345f2fd6613[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Fri Oct 16 23:29:29 2020 -0700
+
+    create seeds with hashed passwords
+
+[33mcommit 09889d8e60d72e027d661fb498b3cf64b4215b0c[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Fri Oct 16 23:15:41 2020 -0700
+
+    update schema files to drop/create our chosen schema
+
+[33mcommit ced5c4d1e718c72c39e767ccdd1fd0657ff56457[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Fri Oct 16 23:09:54 2020 -0700
+
+    begin writing queries to create db tables
+
+[33mcommit 9336899893d649467721dfddeefe63fb53a0064b[m
+Merge: fbbc1af 2e445bb
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Fri Oct 16 20:34:34 2020 -0700
+
+    Merge pull request #3 from sherwin-kwan/package-testing
+    
+    Update package.json, all packages are latest versions + our names are now on the package
+
+[33mcommit 2e445bbd50ae91c281d22e3d30af16d195a27e6f[m[33m ([m[1;31mgithub/package-testing[m[33m, [m[1;32mpackage-testing[m[33m)[m
+Author: Sherwin <sherwin.kwan92@gmail.com>
+Date:   Fri Oct 16 20:32:05 2020 -0700
+
+    attempt database connection
+
+[33mcommit f85a11d7b96225091d6805025dcc306171b48c98[m
+Author: Sherwin Kwan <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 03:08:59 2020 +0000
+
+    attempt to set up database connection
+
+[33mcommit 28997d58c3840c441f5874995e32fa6abd985ca0[m
+Author: Sherwin Kwan <sherwin.kwan92@gmail.com>
+Date:   Sat Oct 17 02:45:30 2020 +0000
+
+    test updating of package versions
+
+[33mcommit fbbc1af7f30093f4c9fbccc1c93e0d561ed3fbb2[m
+Merge: 2e41d2a a9784df
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Fri Oct 16 18:33:53 2020 -0700
+
+    Merge pull request #1 from sherwin-kwan/dependabot/npm_and_yarn/lodash-4.17.20
+    
+    Bump lodash from 4.17.15 to 4.17.20
+
+[33mcommit 2e41d2a11c3b10a4e3fad03dd04d906650ceffcb[m
+Merge: d4ba0f2 d146227
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Fri Oct 16 18:33:36 2020 -0700
+
+    Merge pull request #2 from sherwin-kwan/dependabot/npm_and_yarn/node-sass-4.14.1
+    
+    Bump node-sass from 4.12.0 to 4.14.1
+
+[33mcommit d1462270054d55d09efea37a51d4e14b9c0f6e4a[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sat Oct 17 01:31:36 2020 +0000
+
+    Bump node-sass from 4.12.0 to 4.14.1
+    
+    Bumps [node-sass](https://github.com/sass/node-sass) from 4.12.0 to 4.14.1.
+    - [Release notes](https://github.com/sass/node-sass/releases)
+    - [Changelog](https://github.com/sass/node-sass/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/sass/node-sass/compare/v4.12.0...v4.14.1)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit a9784df77d864d82c6d62eb7947aad33bf86faff[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sat Oct 17 01:31:29 2020 +0000
+
+    Bump lodash from 4.17.15 to 4.17.20
+    
+    Bumps [lodash](https://github.com/lodash/lodash) from 4.17.15 to 4.17.20.
+    - [Release notes](https://github.com/lodash/lodash/releases)
+    - [Commits](https://github.com/lodash/lodash/compare/4.17.15...4.17.20)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit d4ba0f2d794e0cb2a5160f715bc9edee0f9d325c[m
+Author: Sherwin Kwan <49577967+sherwin-kwan@users.noreply.github.com>
+Date:   Fri Oct 16 18:30:57 2020 -0700
+
+    Initial commit

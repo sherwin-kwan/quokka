@@ -1,3 +1,4 @@
+@import 'partials/_columns.scss';
 
 .quiz-tile-container {
   display: flex;
@@ -7,11 +8,11 @@
 }
 
 .quiz-tile {
-  width:43vw;
-  height:43vw;
+  width:$mobile-col-3;
+  height:$mobile-col-3;
   text-align: center;
   background-color: gray;
-  margin-bottom: 5%;
+  margin-bottom: $mobile-gutter;
 
   display:flex;
   align-items: center;

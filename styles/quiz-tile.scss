@@ -1,0 +1,24 @@
+@import 'partials/_columns.scss';
+
+.quiz-tile-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.quiz-tile {
+  width:$mobile-col-3;
+  height:$mobile-col-3;
+  text-align: center;
+  background-color: gray;
+  margin-bottom: $mobile-gutter;
+
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-tile a {
+  text-decoration: none;
+}

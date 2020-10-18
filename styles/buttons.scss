@@ -1,0 +1,24 @@
+@import 'partials/columns';
+
+
+form button {
+  width:100%;
+  height:$mobile-col-1;
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  border:none;
+  margin-top: $mobile-margin;
+}
+
+.share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: $mobile-col-4 + ($mobile-gutter * 2);
+  height: $mobile-col-1;
+  margin: $mobile-gutter $mobile-col-1 $mobile-gutter $mobile-col-1;
+
+  background-color: deepskyblue;
+  border-radius: 5px;
+}

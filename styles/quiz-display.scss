@@ -1,0 +1,53 @@
+@import 'partials/columns';
+
+.quiz-title {
+  text-align: center;
+  margin: $mobile-gutter 0 $mobile-gutter 0;
+}
+
+.user-header {
+  @extend .quiz-title;
+  font-size: 2.25rem;
+  font-weight:bold;
+  margin: $mobile-gutter 0 $mobile-gutter 0;
+}
+
+.score-header {
+  @extend .user-header;
+  font-size: 6.9rem;
+}
+
+.answer-container { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.answer + label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width:100%;
+  height:$mobile-col-1;
+  margin-bottom: $mobile-gutter;
+
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.answer:checked + label {
+  background-color: teal;
+}
+
+.answer {
+  appearance: none;
+}
+
+.answer.correct + label {
+  background-color: darkgreen;
+}
+
+.answer.incorrect + label {
+  background-color: darkred;
+}

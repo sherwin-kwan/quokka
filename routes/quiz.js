@@ -16,11 +16,6 @@ database.connect();
 const loadOneQuestion = (question_id, db) => {
   db.query(`SELECT question_num, text, answer_text
   FROM questions
-<<<<<<< HEAD
-  JOIN possible_answers ON questions.id = possible_answers.questions_id
-  WHERE questions.id = $1
-  ORDER BY possible_answers.text;`)
-=======
   JOIN possible_answers ON questions.id = possible_answers.question_id
   WHERE questions.id = ${format(question_id)}
   ORDER BY possible_answers.answer_text;`)
@@ -28,7 +23,6 @@ const loadOneQuestion = (question_id, db) => {
     console.log(res.rows);
   })
   .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
->>>>>>> buggy
 };
 
 console.log(loadOneQuestion('6', database));

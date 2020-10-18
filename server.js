@@ -59,5 +59,3 @@ app.use('/', mainRouter(db))
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-module.exports = { db };

@@ -10,5 +10,9 @@ module.exports = () => {
     res.render("pages/quiz-play.ejs");
   });
 
+  router.get("/result/:id", (req, res) => {
+    res.render("pages/score.ejs");
+  });
+
   return router;
 }

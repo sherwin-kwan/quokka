@@ -1,4 +1,4 @@
---This query returns the titles of the 10 most recently-created quizzes:
+--This query selects the titles of the 10 most recently-created quizzes:
 
 SELECT title
 FROM quizzes

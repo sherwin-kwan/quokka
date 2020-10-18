@@ -1,25 +1,12 @@
 <table>
   <tr>
-    <th>name</th>
+    <th class="quiz-name">name</th>
     <th>score</th>
-    <th>share</th>
+    <th>copy link</th>
   </tr>
 
   <!-- for-loop to generate table content -->
-  <tr>
-    <td>Care Bears Quiz</td>
-    <td>100%</td>
-    <td><a>></a></td>
-  </tr>
-  <tr>
-    <td>Kim Possible Lore</td>
-    <td>35
-      %</td>
-    <td><a>></a></td>
-  </tr>
-  <tr>
-    <td>Nostalgia Trip Test</td>
-    <td>90%</td>
-    <td><a>></a></td>
-  </tr>
+  <%- include('_user-results-row.ejs', {name:'Kim Possible Lore', score:'75%', link:""}) %>
+  <%- include('_user-results-row.ejs', {name:'Care Bears Quiz', score:'100%', link:""}) %>
+  <%- include('_user-results-row.ejs', {name:'Nostalgia Trip Test', score:'80%', link:""}) %>
 </table>

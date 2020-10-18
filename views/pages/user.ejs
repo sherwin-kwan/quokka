@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <%- include('../partials/_head-styles.ejs'); %>
-  <link rel="stylesheet" href="/styles/quiz-display.css" />
+  <link rel="stylesheet" href="/styles/user.css" />
   <link rel="stylesheet" href="/styles/buttons.css" />
+
   <%- include('../partials/_head-scripts.ejs'); %>
 
   <title>QUOKKA? - User</title>
@@ -16,10 +17,14 @@
   <main>
     <h2>Hello, Paulson!</h2>
     <!-- Will add swapping table view later in jquery -->
-    <a>Quiz</a>
-    <a>Results</a>
+    
+    <nav id="profile">
+      <button class="profile-tab active" id="quiz">Quiz</button>
+      <button class="profile-tab" id="results">Results</button>
+    </nav>
     <%- include('../partials/_user-quiz.ejs'); %>
     <%- include('../partials/_user-results.ejs'); %>
+    <a class="new-quiz">Make New Quiz</a>
   </main>
 </body>
 </html>

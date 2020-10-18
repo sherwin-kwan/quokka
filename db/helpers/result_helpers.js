@@ -1,9 +1,6 @@
 //Check to see if there is an attempt ID in the DB:
 
-const { Pool } = require('pg');
-
-const pool = new Pool({
-});
+const { db } = require('../../server.js');
 
 const returnIfAttemptExists = function(attemptID) {
   const queryString = `SELECT *
@@ -11,8 +8,8 @@ const returnIfAttemptExists = function(attemptID) {
   WHERE id = $1
   `
   const queryParams = [attemptID]
-  return pool.query(queryString,queryParams)
-    .then(res => res.rows)
+  return db.query(queryString,queryParams)
+    .then(res => console.log(res.rows))
 }
 
-console.log(returnIfAttemptExists(1))
+returnIfAttemptExists(1)

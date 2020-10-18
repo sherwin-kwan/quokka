@@ -9,6 +9,30 @@ const router = express.Router();
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
 
+  // Login page
+  router.get('/login', (req, res) => {
+    res.send(`This is the login page:
+    <form action='login' method='POST'>
+      <button type='submit'>Log In</buton>
+    </form>`);
+  });
+
+  router.post('/login', (req, res) => {
+    res.send('This is where you either logged in or got a password error');
+  });
+
+  router.get('/register', (req, res) => {
+    res.send(`This is the registration page:
+    <form action='register' method='POST'>
+      <button type='submit'>Register</buton>
+    </form>`);
+  });
+
+  router.post('/register', (req, res) => {
+    res.send('Yay you just registered for Quokka! Welcome to the club!');
+  });
+
+
   // Load results asynchronously
   router.get('/:id/results', (req, res) => {
     // db.query(/* INSERT QUERY TO GET PAST RESULTS */)

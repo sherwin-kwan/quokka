@@ -9,6 +9,6 @@ FROM quizzes
   JOIN attempts ON quizzes.id = attempts.quiz_id
   JOIN user_answers ON attempts.id = user_answers.attempt_id
   JOIN possible_answers ON user_answers.selected_answer = possible_answers.id
-WHERE attempts.user_id = 1
+WHERE attempts.user_id = 1 --Note: This is a placeholder; we'll need to use the ID of the logged-in user.
 GROUP BY quizzes.title, attempts.finished_at
 ORDER BY date_submitted DESC

@@ -6,15 +6,21 @@
 const express = require('express');
 const router = express.Router();
 const format = require('pg-format');
+const database = require('../server').db;
 
-const loadOneQuestion = (question_id, db) => {
-  db.query(`SELECT question_num, text, answer_text
-  FROM questions
-  JOIN possible_answers ON questions.id = possible_answers.questions_id
-  WHERE questions.id = $1
-  ORDER BY possible_answers.text;`)
-}
+// const loadOneQuestion = (question_id, db) => {
+//   db.query(`SELECT question_num, text, answer_text
+//   FROM questions
+//   JOIN possible_answers ON questions.id = possible_answers.questions_id
+//   WHERE questions.id = ${format(question_id)}
+//   ORDER BY possible_answers.text;`)
+//   .then((res) => {
+//     console.log(res.rows);
+//   })
+//   .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
+// }
 
+// console.log(loadOneQuestion(6, database));
 
 const quizRouter = (db) => {
 
@@ -70,4 +76,10 @@ const quizRouter = (db) => {
   return router;
 };
 
-module.exports = quizRouter;
+const testFunction = function(abc) {
+  return abc + 1;
+}
+
+module.exports = {
+  quizRouter,
+  testFunction};

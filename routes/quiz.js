@@ -13,7 +13,7 @@ const loadOneQuestion = (question_id, db) => {
   JOIN possible_answers ON questions.id = possible_answers.questions_id
   WHERE questions.id = $1
   ORDER BY possible_answers.text;`)
-}
+};
 
 
 const quizRouter = (db) => {

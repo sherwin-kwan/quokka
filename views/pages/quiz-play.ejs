@@ -5,12 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <%- include('../partials/_head-styles.ejs'); %>
-  
+  <link rel="stylesheet" href="/styles/quiz-display.css" />
+  <link rel="stylesheet" href="/styles/buttons.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
 
   <title>QUOKKA? - Quiz</title>
 </head>
 <body>
-  
+  <%- include('../partials/_header.ejs'); %>
+  <main>
+    <!-- back to home button for mobile? -->
+
+    <%- include('../partials/_quiz-details.ejs', {title:"U.S. Presidents", description:"With a spicy election season, challenge your knowledge with this quiz about fun, interesting and fundamental facts about the past presidents of the United States."}); %>
+    
+    <form method="POST" action="/">
+      <!-- Loop through to generate questions -->
+      <%- include('../partials/_question-module.ejs', {question: {content:"Who was the first president of the U.S.?", number:1, }}); %>
+      
+      <%- include('../partials/_question-module.ejs', {question: {content:"What was President Lyndon B. Johnson's favorite color?", number:2, }}); %>
+
+      <%- include('../partials/_question-module.ejs', {question: {content:"What is the suit color that President Obama wore on October 4th, 2010?", number:3, }}); %>
+
+      <%- include('../partials/_question-module.ejs', {question: {content:"Who was the second president of the U.S.?", number:4, }}); %>
+
+      <button action="submit">Submit Quiz!</button>
+    </form>
+  </main>
 </body>
 </html>

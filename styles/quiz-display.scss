@@ -1,0 +1,32 @@
+@import 'partials/columns';
+
+.quiz-title {
+  text-align: center;
+}
+
+.answer-container { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.answer + label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width:100%;
+  height:$mobile-col-1;
+  margin-bottom: $mobile-gutter;
+
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.answer:checked + label {
+  background-color: green;
+}
+
+.answer {
+  appearance: none;
+}

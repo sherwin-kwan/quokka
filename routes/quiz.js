@@ -28,22 +28,46 @@ const loadOneQuestion = (question_id, db) => {
   .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
 };
 
-console.log(loadOneQuestion('6', database));
+// console.log(loadOneQuestion('6', database));
 
 const loadOneQuestionJson = (question_id) => {
-  database.query(`SELECT question_num, text,
-  (SELECT json_agg(filtered_answers) FROM (SELECT id, answer_text FROM possible_answers WHERE question_id = ${format(question_id)}) filtered_answers)
-  AS answers
+  database.query(`
+  SELECT questions.question_num, questions.text,
+    (SELECT json_agg(filtered_answers) FROM
+      (SELECT id, answer_text
+        FROM possible_answers
+        WHERE question_id = questions.id
+      ) filtered_answers
+    )
+  AS answer_options
   FROM questions
   WHERE questions.id = ${format(question_id)};
   `)
   .then((res) => {
-    console.log(inspect(res.rows[0]));
+    console.log(inspect(res.rows));
   })
   .catch((err) => console.log(err));
 };
 
+const loadWholeQuizJson = (quiz_id) => {
+  database.query(`
+  SELECT questions.question_num, questions.text,
+    (SELECT json_agg(filtered_answers) FROM
+      (SELECT id, answer_text
+        FROM possible_answers
+        WHERE question_id = questions.id
+      ) filtered_answers
+    )
+  AS answer_options
+  FROM questions
+  WHERE questions.quiz_id = ${format(quiz_id)};
+  `)
+  .then((res) => console.log(res.rows))
+  .catch((err) => console.log(err));
+};
+
 console.log(loadOneQuestionJson('6'));
+console.log(loadWholeQuizJson('2'));
 
 const quizRouter = (db) => {
 

@@ -79,6 +79,30 @@ const loadWholeQuizJson = (quiz_id, db) => {
 // console.log(loadOneQuestionJson('6'));
 // console.log(loadWholeQuizJson('2'));
 
+const saveQuizAttempt = (userId, quizId, submission, db) => {
+  return db.query(`
+    INSERT INTO attempts (user_id, quiz_id, finished_at)
+      VALUES(${userId}, ${quizId}, NOW())
+      RETURNING id;`)
+    .catch(err => console.error('error creating a new row in attempts', err.stack))
+    .then((returnedRow) => {
+      const attemptId = returnedRow.rows[0].id;
+      let insertAnswersQuery = 'INSERT INTO user_answers (attempt_id, selected_answer) VALUES ';
+      for (const value of Object.values(submission)) {
+        // For each value 'a20', 'a24' etc., convert it into the ID of the response selected
+        let answerId = Number(value.substring(1));
+        if (isNaN(answerId)) {
+          throw new Error('A non-numeric answer ID was sent to the server, this attempt cannot be registered');
+        }
+        insertAnswersQuery += `(${attemptId}, ${answerId}),`;
+      };
+      // Lop off the ending comma to make the query a valid SQL query
+      insertAnswersQuery = insertAnswersQuery.substring(0, insertAnswersQuery.length - 1) + ' RETURNING *';
+      return db.query(insertAnswersQuery);
+    })
+    .catch(err => console.error('error saving quiz attempt'.err.stack));
+}
+
 const quizRouter = (db) => {
 
   // Load a quiz asynchronously
@@ -101,7 +125,7 @@ const quizRouter = (db) => {
 
   // Submit a quiz
   router.post('/new', (req, res) => {
-    res.send('You successfully created a new quiz, congrats!');
+    res.statusCode(201).send('You successfully created a new quiz, congrats!');
   })
 
   // Display quiz page (page B) - this will instead render a template once that file is done
@@ -123,9 +147,17 @@ const quizRouter = (db) => {
 
 
   // Submit a quiz
-  router.post('/:id', (req, res) => {
-    const quizId = req.params.id;
-    res.send(`You just successfully submitted quiz ${quizId}`);
+  router.post('/:quiz_id/:user_id', (req, res) => {
+    const quizId = req.params.quiz_id;
+    const userId = req.params.user_id;
+    const submission = req.body;
+    saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)
+      .then((data) => {
+        res.status(201).send(data.rows);
+      })
+      .catch(err => {
+        res.status(400).send(err);
+      });
   });
 
   return router;

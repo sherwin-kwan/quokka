@@ -24,8 +24,6 @@ const escapeChars = function (str) {
   ]}*/
 // This function takes the object corresponding to one question and generates HTML for that question on the quiz page
 
-
-
 const generateOneQuestion = (obj) => {
   const num = obj.question_num;
   // Escape the string of question text to prevent script injection attacks
@@ -41,29 +39,33 @@ const generateOneQuestion = (obj) => {
     console.log(`Error, question ${questionText} does not have any answer choices!`);
     return;
   };
-  // Note: 0-based index is used for the options so  i = 0 for answer A, i = 3 for answer D, NOT 1-based index as in Chantal's original example
+  // Note: 0-based index is used for the options so  i = 0 for answer A, i = 3 for answer D,
+  // NOT 1-based index as in Chantal's original example
   for (let i = 0; i < options.length; i++) {
+    // Sanitize the text of the answer to prevent script injections
+    const sanitized_text = escapeChars(options[i].answer_text);
     output += `
     <div class="answer-container">
       <input class="answer"  type="radio" id="q${num}-${i}"" value="a${options[i].id}" name="q${num}"  />
-      <label for="q${num}-${i}" >${options[i].answer_text}</label>
+      <label for="q${num}-${i}" >${sanitized_text}</label>
     </div>
     `;
+    // Result of this: when the form submits, it will submit in the format q1: a1; ???
   };
   return output;
 }
 
-// A future function which will use generateOneQuestion looping through an array of questions to generate a whole quiz
+// This function uses generateOneQuestion looping through an array of questions to generate a whole quiz
 const loadQuiz = ($form, quiz_id) => {
   const quizId = escapeChars(quiz_id);
-  $.ajax(`/quiz/${quizId}/load`, {method: 'GET'})
+  $.ajax(`/quiz/${quizId}/load`, { method: 'GET' })
     .then((data) => {
       $('article').hide(); // Note: Not ideal, should use DOM traversal!!
       for (let question of data) {
         const question_section = generateOneQuestion(question);
         $form.append(question_section);
       };
-      $form.append(`<button type="submit">Submit!</button>`);
+      $form.append(`<button type="submit" id="submitButton">Submit!</button>`);
       $form.show();
     })
     .fail((xhr, status, err) => {
@@ -71,28 +73,54 @@ const loadQuiz = ($form, quiz_id) => {
     })
 };
 
-const submitQuiz = 0;
+// Cause a quiz to be submitted to the database. This calls the
+const submitQuiz = ($form) => {
+  // Validate input here
+  //
+  const valid = true;
+  //
+  //
+  const currentUrl = window.location.pathname;
+  if (!valid) {
+    throw new Error('Validation failed');
+  };
+  // In the future, this needs to be changed to read a cookie
+  const userId = 35;
+  $.ajax(`${currentUrl}/${userId}`, { method: 'POST', data: $form.serialize() })
+    .then((data, status, xhr) => {
+      console.log(data, status, xhr);
+      // Redirect user back to home page (maybe, we can make this profile page in the future?)
+      // window.location.href = '/';
+    })
+    .catch(err => console.log(err.message));
+};
 
-const html = `<section>
-<h3>Question 1</h3>
-<p>Who was the first president of the U.S.?</p>
 
-<!-- for-loop question options later-->
+const form_submit = (event, $form) => {
+  event.preventDefault();
+  // Begin with validating the input
+  const chirpLength = $form.find('textarea').val().length;
+  // Errors if chirps are blank or too long.
+  if (chirpLength > maxChirpLength) {
+    throw new Error(`Your message is too long. Please shorten your chirp and try again.`);
+  } else if (chirpLength === 0) {
+    throw new Error('Please type a chirp in the text area provided');
+  }
+  // Note: No validation on the input side, people can put <script> tags into the database if they want. Data is only sanitized when output and
+  // rendered onto the page.
+  $.ajax('/tweets/', {
+    method: 'POST',
+    data: $form.serialize()
+  })
+    .then(() => {
+      $form.find('textarea').val('');
+      $form.find('.counter').val(maxChirpLength);
+      $form.find('p').text('');
+      load_chirps(true);
+    })
+    .fail((xhr, status, err) => {
+      throw new Error(`Unforutnately, your chirp could not be saved to the database. Please try again later or report a bug using
+      the link in the footer`);
+    })
+};
 
-<div class="answer-container">
-<input class="answer "  type="radio" id="q1-0"" value="green" name="q1"  />
-<label for="q1-0" >green</label>
-</div>
-<div class="answer-container">
-<input class="answer "  type="radio" id="q1-1"" value="blue" name="q1"  />
-<label for="q1-1" >blue</label>
-</div>
-<div class="answer-container">
-<input class="answer "  type="radio" id="q1-2"" value="yellow" name="q1"  />
-<label for="q1-2" >yellow</label>
-</div>
-<div class="answer-container">
-<input class="answer "  type="radio" id="q1-3"" value="pink" name="q1"  />
-<label for="q1-3" >pink</label>
-</div>
-</section>`;

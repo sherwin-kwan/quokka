@@ -7,15 +7,24 @@ $(() => {
 
   // CONSTANTS
   // Define variables (with $ to signify jQuery object) for key nodes in the DOM
-  const $theForm = $('form');
+  const $quizForm = $('form');
 
 
   $('.button-style').on('click', () => {
     try {
-      loadQuiz($theForm, 1); // Just using a hard-coded quiz 1 for now
-      
+      loadQuiz($quizForm, 1); // Just using a hard-coded quiz 1 for now
     } catch (err) {
       console.log(`Error: ${err.message}`);
+    }
+  });
+
+  $quizForm.on('submit', function (event) {
+    event.preventDefault();
+    // Pass jQuery wrapper for the form as an argument to submitQuiz
+    try { // In case validation errors happen
+      submitQuiz($(this));
+    } catch (err) {
+      console.log(err.message);
     }
   });
 });

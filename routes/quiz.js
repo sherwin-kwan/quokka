@@ -1,37 +1,30 @@
 /*
- * All routes for /result/... are defined here
+ * All routes for /quiz/... are defined here
  * See README for a list of routes.
  */
-require('dotenv').config();
-const express = require('express');
-const router = express.Router();
-const format = require('pg-format');
-// const database = require('../server').db;
 
+ // ONLY NEED TO UNCOMMENT THESE LINES IF TESTING DB QUERIES IN NODE
+/*require('dotenv').config();
 const { Pool } = require('pg');
 const dbParams = require('../lib/db.js');
 const database = new Pool(dbParams);
-database.connect();
+database.connect();*/
 
-const inspect = require('util').inspect;
+const express = require('express');
+const router = express.Router();
+const format = require('pg-format');
 
-// This function creates an array of objects, containing the answers to one question
-const loadOneQuestion = (question_id, db) => {
-  db.query(`SELECT question_num, text, answer_text
-  FROM questions
-  JOIN possible_answers ON questions.id = possible_answers.question_id
-  WHERE questions.id = ${format(question_id)}
-  ORDER BY possible_answers.answer_text;`)
-  .then((res) => {
-    console.log(res.rows);
-  })
-  .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
-};
+/* This function returns a Javascript object representing one question on a quiz, in the format
+ {question_num: 1,
+questions.text: 'What is the capital of Canada?',
+answer_options: [
+  {id: 1, answer_text: 'Toronto'},
+  {id: 2, answer_text: 'Ottawa'},
+  {id: 3, answer_text: 'Vancouver'}
+]} */
 
-// console.log(loadOneQuestion('6', database));
-
-const loadOneQuestionJson = (question_id) => {
-  database.query(`
+const loadOneQuestionJson = (question_id, db) => {
+  return db.query(`
   SELECT questions.question_num, questions.text,
     (SELECT json_agg(filtered_answers) FROM
       (SELECT id, answer_text
@@ -43,14 +36,31 @@ const loadOneQuestionJson = (question_id) => {
   FROM questions
   WHERE questions.id = ${format(question_id)};
   `)
-  .then((res) => {
-    console.log(inspect(res.rows));
-  })
-  .catch((err) => console.log(err));
+  .then(res => res.rows)
+  .catch(err => console.error('query error', err.stack));
 };
 
-const loadWholeQuizJson = (quiz_id) => {
-  database.query(`
+/* This function returns an array of Javascript objects representing a whole quiz, each object  of which represents
+a single question within that quiz, e.g.:
+ [{question_num: 1,
+    questions.text: 'What is the capital of Canada?',
+    answer_options: [
+      {id: 1, answer_text: 'Toronto'},
+      {id: 2, answer_text: 'Ottawa'},
+      {id: 3, answer_text: 'Vancouver'}
+    ]
+  },
+  {question_num: 2,
+    questions.text: 'What is the capital of France?',
+    answer_options: [
+      {id: 1, answer_text: 'Marseille'},
+      {id: 2, answer_text: 'Lille'},
+      {id: 3, answer_text: 'Paris'}
+    ]
+  }] */
+
+const loadWholeQuizJson = (quiz_id, db) => {
+  return db.query(`
   SELECT questions.question_num, questions.text,
     (SELECT json_agg(filtered_answers) FROM
       (SELECT id, answer_text
@@ -62,34 +72,24 @@ const loadWholeQuizJson = (quiz_id) => {
   FROM questions
   WHERE questions.quiz_id = ${format(quiz_id)};
   `)
-  .then((res) => console.log(res.rows))
-  .catch((err) => console.log(err));
+  .then(res => res.rows)
+  .catch(err => console.error('query error', err.stack));
 };
 
-console.log(loadOneQuestionJson('6'));
-console.log(loadWholeQuizJson('2'));
+// console.log(loadOneQuestionJson('6'));
+// console.log(loadWholeQuizJson('2'));
 
 const quizRouter = (db) => {
 
   // Load a quiz asynchronously
   router.get('/:id/load', (req, res) => {
-    const quizId = req.params.id;
-
-    // db.query(/* INSERT QUERY TO GET QUIZZES */)
-    //   .then(data => {
-    //     const users = data.rows;
-    //     res.json({ users });
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
-    res.json({
-      "notes": "This is the route that will eventually cause a quiz to load",
-      "title": "This is a quiz title", "created_by": "Some Body"
-    });
-  })
+    const quizId = format(req.params.id);
+    loadWholeQuizJson(quizId, db)
+    .then(array_of_objects => {
+      res.send(array_of_objects);
+    })
+    .catch(err => console.error('error sending json to front end', err.stack));
+  });
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
@@ -107,10 +107,11 @@ const quizRouter = (db) => {
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
     const quizId = req.params.id;
-    res.send(`This is the future home of the quiz page (page B) for quiz ${quizId}.
-    <form action='${req.params.id}' method='POST'>
-      <button type='submit'>Submit</button>
-    </form>`);
+    res.render('pages/quiz-play.ejs');
+    // res.send(`This is the future home of the quiz page (page B) for quiz ${quizId}.
+    // <form action='${req.params.id}' method='POST'>
+    //   <button type='submit'>Submit</button>
+    // </form>`);
   });
 
 
@@ -123,10 +124,19 @@ const quizRouter = (db) => {
   return router;
 };
 
-const testFunction = function(abc) {
-  return abc + 1;
-}
 
-module.exports = {
-  quizRouter,
-  testFunction};
+module.exports = quizRouter;
+
+
+// THE FOLLOWING IS OLD CODE DO NOT USE.
+  // const loadOneQuestion = (question_id, db) => {
+  //   db.query(`SELECT question_num, text, answer_text
+  //   FROM questions
+  //   JOIN possible_answers ON questions.id = possible_answers.question_id
+  //   WHERE questions.id = ${format(question_id)}
+  //   ORDER BY possible_answers.answer_text;`)
+  //   .then((res) => {
+  //     console.log(res.rows);
+  //   })
+  //   .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
+  // };

@@ -47,12 +47,13 @@ const loadQuiz = (quiz_id) => {
   const quizId = escapeChars(quiz_id);
   $.ajax(`/quiz/${quizId}/load`, {method: 'GET'})
     .then((data) => {
-      const 
+      const $theForm = $('form');
       $('article').hide(); // Note: Not ideal, should use DOM traversal!!
       for (let question of data) {
         const question_section = generateOneQuestion(question);
-        $topOfPage.append(question_section);
-      }
+        $theForm.append(question_section);
+      };
+      $theForm.show();
     })
     .fail((xhr, status, err) => {
       console.log(`${status} ${err} There was an error loading the questions for quiz ${quizId}`);

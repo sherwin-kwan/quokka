@@ -1,5 +1,9 @@
 @import 'partials/columns';
 
+form {
+  display: none;
+}
+
 .quiz-title {
   text-align: center;
   margin: $mobile-gutter 0 $mobile-gutter 0;
@@ -17,7 +21,7 @@
   font-size: 6.9rem;
 }
 
-.answer-container { 
+.answer-container {
   display: flex;
   flex-direction: column;
   justify-content: center;

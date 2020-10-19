@@ -3,5 +3,11 @@
 // for a button too early, and since the button hasn't loaded yet, there is an error and when the button finally loads, it's too late to be useful.)
 
 $(() => {
-
+  $('.button-style').on('click', () => {
+    try {
+      loadQuiz(1); // Just using a hard-coded quiz 1 for now
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+  })
 })

@@ -39,8 +39,25 @@ const generateOneQuestion = (obj) => {
     <h3>Question ${num}</h3>
     <p>${questionText}</p>
   </sectiom>`;
+  return output;
 }
 
+// A future function which will use generateOneQuestion looping through an array of questions to generate a whole quiz
+const loadQuiz = (quiz_id) => {
+  const quizId = escapeChars(quiz_id);
+  $.ajax(`/quiz/${quizId}/load`, {method: 'GET'})
+    .then((data) => {
+      const 
+      $('article').hide(); // Note: Not ideal, should use DOM traversal!!
+      for (let question of data) {
+        const question_section = generateOneQuestion(question);
+        $topOfPage.append(question_section);
+      }
+    })
+    .fail((xhr, status, err) => {
+      console.log(`${status} ${err} There was an error loading the questions for quiz ${quizId}`);
+    })
+};
 
 const html = `<section>
 <h3>Question 1</h3>

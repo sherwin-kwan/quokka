@@ -1,10 +1,17 @@
 <section>
   <section class="question-header">
     <p>Question #<%= question.number %></p>
-    <% if (question.options.length <= 2) { %>
-      <p class="result-word-incorrect">CORRECT</p>
+    <% if ((() => {
+      for (const questionOption of question.options) {
+            if (questionOption.is_correct && questionOption.user_selected) {
+              return true;
+            }
+          }
+          return false;
+        })()) { %>
+      <p class="result-word-correct">CORRECT</p>
     <% } else{ %>
-      <p class="result-word-correct">INCORRECT</p>
+      <p class="result-word-incorrect">INCORRECT</p>
       <% } %>
   </section>
   <p><%= question.content %></p>

@@ -20,4 +20,26 @@ const getAttemptData = function(attemptId, db) {
     .then(res => res.rows[0])
     .catch(err => console.log(err))
 };
-module.exports = { getAttemptData }
+
+const getQuestionData = function(attemptId, db, callback) {
+    const queryString = `
+    SELECT questions.id, question_num, text
+    FROM questions
+      JOIN quizzes ON questions.quiz_id = quizzes.id
+      JOIN attempts on quizzes.id = attempts.quiz_id
+    WHERE attempts.id = $1
+    ORDER BY question_num
+    `;
+    const queryParams = [attemptId];
+    return db.query(queryString, queryParams, (err, result) => {
+      if (err) {
+        return console.error('Error executing query', err.stack);
+      }
+      callback(result.rows);
+    });
+};
+
+// const getPossibleAnswers =
+
+module.exports = { getAttemptData, getQuestionData }
+

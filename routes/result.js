@@ -24,7 +24,7 @@ const resultRouter = (db) => {
         res.send(`No results found for attempt ID ${attemptId}`);
       }
     })
-        .catch(err => console.error('Error executing query', err.stack));
+    .catch(err => console.error('Error executing query', err.stack));
   });
   return router;
 };

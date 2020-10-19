@@ -20,16 +20,6 @@
       <p class="score-header"><%= overallResults.percent_correct %>%</p>
       <a class="share" >Copy link to results </a>
     </section>
-    <!-- <% for (const quizQuestion of quizJson) { %>
-      <%=quizQuestion.question_num%>
-      <%=quizQuestion.text%>
-      <br>
-      <% for(const option of quizQuestion.answer_options) { %>
-        <%=option.answer_text%>
-        <br>
-      <% } %>
-      <br>
-    <% } %> -->
 
     <% for (const quizQuestion of quizJson) { %>
       <%- include('../partials/_question-module.ejs',
@@ -40,7 +30,7 @@
             number: quizQuestion.question_num,
             options: quizQuestion.answer_options,
             clickable: false,
-            showCorrect: false
+            showCorrect: true
           }
         }
       ); %>

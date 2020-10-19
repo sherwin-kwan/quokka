@@ -11,8 +11,8 @@
           label: option.answer_text,
           clickable: question.clickable,
           showCorrect: question.showCorrect,
-          correct: true,
-          selected: true
+          correct: option.is_correct,
+          selected: option.user_selected
         }
       }
     ); %>

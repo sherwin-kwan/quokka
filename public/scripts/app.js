@@ -7,4 +7,8 @@ $(() => {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });;
+
+  const View = $.Ejs({ async: false });
+  const html = View.render('welcome', { title: 'jQuery Ejs!!' });
+
 });

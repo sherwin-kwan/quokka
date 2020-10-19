@@ -3,7 +3,7 @@
  * See README for a list of routes.
  */
 
- // ONLY NEED TO UNCOMMENT THESE LINES IF TESTING DB QUERIES IN NODE
+// ONLY NEED TO UNCOMMENT THESE LINES IF TESTING DB QUERIES IN NODE
 /*require('dotenv').config();
 const { Pool } = require('pg');
 const dbParams = require('../lib/db.js');
@@ -36,8 +36,8 @@ const loadOneQuestionJson = (question_id, db) => {
   FROM questions
   WHERE questions.id = ${format(question_id)};
   `)
-  .then(res => res.rows)
-  .catch(err => console.error('query error', err.stack));
+    .then(res => res.rows)
+    .catch(err => console.error('query error', err.stack));
 };
 
 /* This function returns an array of Javascript objects representing a whole quiz, each object  of which represents
@@ -72,8 +72,8 @@ const loadWholeQuizJson = (quiz_id, db) => {
   FROM questions
   WHERE questions.quiz_id = ${format(quiz_id)};
   `)
-  .then(res => res.rows)
-  .catch(err => console.error('query error', err.stack));
+    .then(res => res.rows)
+    .catch(err => console.error('query error', err.stack));
 };
 
 // console.log(loadOneQuestionJson('6'));
@@ -85,10 +85,10 @@ const quizRouter = (db) => {
   router.get('/:id/load', (req, res) => {
     const quizId = format(req.params.id);
     loadWholeQuizJson(quizId, db)
-    .then(array_of_objects => {
-      res.send(array_of_objects);
-    })
-    .catch(err => console.error('error sending json to front end', err.stack));
+      .then(array_of_objects => {
+        res.send(array_of_objects);
+      })
+      .catch(err => console.error('error sending json to front end', err.stack));
   });
 
   // Create a new quiz (template page)
@@ -106,12 +106,19 @@ const quizRouter = (db) => {
 
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
-    const quizId = req.params.id;
-    res.render('pages/quiz-play.ejs');
-    // res.send(`This is the future home of the quiz page (page B) for quiz ${quizId}.
-    // <form action='${req.params.id}' method='POST'>
-    //   <button type='submit'>Submit</button>
-    // </form>`);
+    const quizId = format(req.params.id);
+    db.query(`SELECT title, description
+    FROM quizzes
+    WHERE id = ${quizId}`)
+      .then(data => {
+        console.log(data.rows);
+        const templateVars = {
+          title: data.rows[0].title,
+          description: data.rows[0].description
+        };
+        res.render('pages/quiz-play.ejs', templateVars);
+      })
+      .catch(err => console.error('error retrieving quiz title and description', err.stack));
   });
 
 

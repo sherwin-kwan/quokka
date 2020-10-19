@@ -17,7 +17,7 @@
   <main>
     <!-- back to home button for mobile? -->
 
-    <%- include('../partials/_quiz-details.ejs', {title:"U.S. Presidents", description:"With a spicy election season, challenge your knowledge with this quiz about fun, interesting and fundamental facts about the past presidents of the United States."}); %>
+    <%- include('../partials/_quiz-details.ejs', {title, description}); %>
 
     <form method="POST" action="/">
       <!-- Loop through to generate questions -->

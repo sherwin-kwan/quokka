@@ -1,0 +1,8 @@
+<section>
+  <h3>Question <%= questionIndex + 1 %></h3>
+  <button onclick="">delete</button>
+  <input type="text" name="q<%= questionIndex %>"/>
+  <%- include('_new-answer.ejs', {questionIndex, optionIndex:0}) %>
+  <%- include('_new-answer.ejs', {questionIndex, optionIndex:1}) %>
+  <button> + Add Option </button>
+</section>

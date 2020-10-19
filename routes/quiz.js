@@ -165,17 +165,3 @@ const quizRouter = (db) => {
 
 
 module.exports = quizRouter;
-
-
-// THE FOLLOWING IS OLD CODE DO NOT USE.
-  // const loadOneQuestion = (question_id, db) => {
-  //   db.query(`SELECT question_num, text, answer_text
-  //   FROM questions
-  //   JOIN possible_answers ON questions.id = possible_answers.question_id
-  //   WHERE questions.id = ${format(question_id)}
-  //   ORDER BY possible_answers.answer_text;`)
-  //   .then((res) => {
-  //     console.log(res.rows);
-  //   })
-  //   .catch((err) => console.log(`Houston we have a problem!!! ${err}`));
-  // };

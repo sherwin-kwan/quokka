@@ -73,7 +73,7 @@ const loadQuiz = ($form, quiz_id) => {
     })
 };
 
-// Cause a quiz to be submitted to the database. This calls the
+// Cause a quiz to be submitted to the database. This calls the saveQuizAttempt function on the back end at routes/quiz.js
 const submitQuiz = ($form) => {
   // Validate input here
   //
@@ -88,39 +88,13 @@ const submitQuiz = ($form) => {
   const userId = 35;
   $.ajax(`${currentUrl}/${userId}`, { method: 'POST', data: $form.serialize() })
     .then((data, status, xhr) => {
-      console.log(data, status, xhr);
-      // Redirect user back to home page (maybe, we can make this profile page in the future?)
-      // window.location.href = '/';
+      if (xhr.status === 201) {
+      // After a successful quiz save, display submitted (maybe, we can make this redirect to profile page in the future?)
+        $form.append('<h2>Submitted!</h2>');
+      } else {
+        // Something went wrong
+        console.log(data, status);
+      }
     })
     .catch(err => console.log(err.message));
 };
-
-
-const form_submit = (event, $form) => {
-  event.preventDefault();
-  // Begin with validating the input
-  const chirpLength = $form.find('textarea').val().length;
-  // Errors if chirps are blank or too long.
-  if (chirpLength > maxChirpLength) {
-    throw new Error(`Your message is too long. Please shorten your chirp and try again.`);
-  } else if (chirpLength === 0) {
-    throw new Error('Please type a chirp in the text area provided');
-  }
-  // Note: No validation on the input side, people can put <script> tags into the database if they want. Data is only sanitized when output and
-  // rendered onto the page.
-  $.ajax('/tweets/', {
-    method: 'POST',
-    data: $form.serialize()
-  })
-    .then(() => {
-      $form.find('textarea').val('');
-      $form.find('.counter').val(maxChirpLength);
-      $form.find('p').text('');
-      load_chirps(true);
-    })
-    .fail((xhr, status, err) => {
-      throw new Error(`Unforutnately, your chirp could not be saved to the database. Please try again later or report a bug using
-      the link in the footer`);
-    })
-};
-

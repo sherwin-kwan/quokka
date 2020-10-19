@@ -53,6 +53,7 @@ const loadQuiz = (quiz_id) => {
         const question_section = generateOneQuestion(question);
         $theForm.append(question_section);
       };
+      $theForm.append(`<button type="submit">Submit!</button>`);
       $theForm.show();
     })
     .fail((xhr, status, err) => {

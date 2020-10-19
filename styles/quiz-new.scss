@@ -1,0 +1,72 @@
+@import 'partials/columns';
+
+// input[type=text] {
+//   width:100%
+// }
+
+//New Questions
+header.new-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.new-question {
+  // display: flex;
+  margin-top: $mobile-gutter;
+  width: 100%;
+  height: $mobile-col-1;
+  text-align: center;
+}
+
+// New Options
+div.new-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: $mobile-gutter/2 0 $mobile-gutter/2 0;
+
+  label {
+    text-align: center;
+  }
+
+  label.option-correct{
+    width: $mobile-col-1;
+  }
+
+  label.option-text{
+    width: $mobile-col-5;
+  }
+}
+
+
+.new-option input[type=text] {
+  width: $mobile-col-5;
+  height: $mobile-col-1;
+}
+.new-option input[type=checkbox] {
+  width: $mobile-col-1;
+  height: $mobile-col-1;
+}
+
+button.new-option {
+  width:$mobile-col-5;
+  height: $mobile-col-1;
+  margin-left: $mobile-col-1 + $mobile-gutter;
+  text-align: center;
+}
+
+//Other
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid dimgray;
+  width:100%;
+  height:$mobile-col-1;
+  margin-bottom: $mobile-gutter;
+}
+
+label {
+  font-weight: bold;
+  // margin-top: $mobile-gutter;
+}

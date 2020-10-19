@@ -28,38 +28,50 @@ const escapeChars = function (str) {
 
 const generateOneQuestion = (obj) => {
   const num = obj.question_num;
-  // Escape all strings in the output to prevent script injection attacks
+  // Escape the string of question text to prevent script injection attacks
   const questionText = escapeChars(obj.text);
-  const options = escapeChars(obj.answer_options);
+  const options = obj.answer_options;
+  // Begin by printing the question number and text
+  let output = `<section>
+    <h3>Question ${num}</h3>
+    <p>${questionText}</p>
+  </sectiom>`;
+  // Append the answers
   if (!options.length) {
     console.log(`Error, question ${questionText} does not have any answer choices!`);
     return;
   };
-  const output = `<section>
-    <h3>Question ${num}</h3>
-    <p>${questionText}</p>
-  </sectiom>`;
+  // Note: 0-based index is used for the options so  i = 0 for answer A, i = 3 for answer D, NOT 1-based index as in Chantal's original example
+  for (let i = 0; i < options.length; i++) {
+    output += `
+    <div class="answer-container">
+      <input class="answer"  type="radio" id="q${num}-${i}"" value="a${options[i].id}" name="q${num}"  />
+      <label for="q${num}-${i}" >${options[i].answer_text}</label>
+    </div>
+    `;
+  };
   return output;
 }
 
 // A future function which will use generateOneQuestion looping through an array of questions to generate a whole quiz
-const loadQuiz = (quiz_id) => {
+const loadQuiz = ($form, quiz_id) => {
   const quizId = escapeChars(quiz_id);
   $.ajax(`/quiz/${quizId}/load`, {method: 'GET'})
     .then((data) => {
-      const $theForm = $('form');
       $('article').hide(); // Note: Not ideal, should use DOM traversal!!
       for (let question of data) {
         const question_section = generateOneQuestion(question);
-        $theForm.append(question_section);
+        $form.append(question_section);
       };
-      $theForm.append(`<button type="submit">Submit!</button>`);
-      $theForm.show();
+      $form.append(`<button type="submit">Submit!</button>`);
+      $form.show();
     })
     .fail((xhr, status, err) => {
       console.log(`${status} ${err} There was an error loading the questions for quiz ${quizId}`);
     })
 };
+
+const submitQuiz = 0;
 
 const html = `<section>
 <h3>Question 1</h3>

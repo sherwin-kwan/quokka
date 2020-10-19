@@ -5,11 +5,26 @@
 
 const express = require('express');
 const router  = express.Router();
+const { getAttemptData, loadWholeQuizJson } = require('../db/helpers/result_helpers.js')
 
 /* The "db" argument is a Postgres Pool object */
 const resultRouter = (db) => {
   router.get("/:attemptid", (req, res) => {
-    res.send(`This is the future home of results page for attempt ${req.params.attemptid}`);
+    const attemptId = req.params.attemptid;
+    getAttemptData(attemptId, db)
+    .then(overallResults => {
+      if (overallResults) {
+        const templateVars = { overallResults };
+        loadWholeQuizJson(attemptId, db)
+        .then(quizJson => {
+          templateVars.quizJson = quizJson;
+          res.render("../views/pages/result", templateVars);
+        })
+      } else {
+        res.send(`No results found for attempt ID ${attemptId}`);
+      }
+    })
+    .catch(err => console.error('Error executing query', err.stack));
   });
   return router;
 };

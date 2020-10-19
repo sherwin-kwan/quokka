@@ -17,7 +17,12 @@
   font-size: 6.9rem;
 }
 
-.answer-container { 
+.num-correct-header {
+  @extend .user-header;
+  font-size: 1.5rem;
+}
+
+.answer-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,4 +55,20 @@
 
 .answer.incorrect + label {
   background-color: darkred;
+}
+
+.question-header {
+  @extend .user-header;
+  font-size: 1.33rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.result-word-correct {
+  color: darkgreen;
+}
+
+.result-word-incorrect {
+  color: darkred;
 }

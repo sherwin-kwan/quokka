@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%- include('../partials/_head-styles.ejs'); %>
+  <link rel="stylesheet" href="/styles/quiz-display.css" />
+  <link rel="stylesheet" href="/styles/buttons.css" />
+  <%- include('../partials/_head-scripts.ejs'); %>
+
+  <title>QUOKKA? - <%= overallResults.title %> Results</title>
+</head>
+<body>
+  <%- include('../partials/_header.ejs'); %>
+  <main>
+    <h2 class="quiz-title"><%= overallResults.title %></h2>
+    <section>
+      <p class="user-header"><%= overallResults.fname %> <%= overallResults.lname %>'s Results</p>
+      <p class="score-header"><%= overallResults.percent_correct %>%</p>
+      <p class="num-correct-header"''><%= overallResults.num_correct %> out of <%= overallResults.num_total %></p>
+      <a class="share" >Copy link to results </a>
+    </section>
+
+    <% for (const quizQuestion of quizJson) { %>
+      <%- include('../partials/_question-module.ejs',
+        {
+        question:
+          {
+            content: quizQuestion.text,
+            number: quizQuestion.question_num,
+            options: quizQuestion.answer_options,
+            clickable: false,
+            showCorrect: true
+          }
+        }
+      ); %>
+    <% }; %>
+
+
+  </main>
+</body>
+</html>

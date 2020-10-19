@@ -5,6 +5,10 @@ module.exports = () => {
   router.get("/", (req, res) => {
     res.render("pages/index.ejs");
   });
+  
+  router.get("/quiz/new", (req, res) => {
+    res.render("pages/quiz-new.ejs");
+  });
 
   router.get("/quiz/:id", (req, res) => {
     res.render("pages/quiz-play.ejs");
@@ -17,6 +21,7 @@ module.exports = () => {
   router.get("/user/:id", (req, res) => {
     res.render("pages/user.ejs");
   });
+
 
   return router;
 }

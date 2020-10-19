@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('../partials/_head-styles.ejs'); %>
+  <link rel="stylesheet" href="/styles/quiz-new.css" />
+  <link rel="stylesheet" href="/styles/buttons.css" />
+
+  <%- include('../partials/_head-scripts.ejs'); %>
+
+  <title>QUOKKA? - New Quiz</title>
+</head>
+<body>
+  <%- include('../partials/_header.ejs'); %>
+  <main>
+    <h2>Make a New Quiz</h2>
+    <form>
+      <label for="quiz-name">Quiz name</label>
+      <input type="text" name="quiz-name" />
+      <label for="quiz-description">Description</label>
+      <input type="text" name="quiz-description"/>
+
+      <!-- will add more in jquery w/ add question button  -->
+      <%- include('../partials/_new-question.ejs', {questionIndex:0}) %>
+
+      <button class="new-question" onclick="">+ Add Question</button>
+      <button class="" onclick="" action="submit">Save Quiz</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/buttons.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
   <script defer src="/scripts/quiz-functions.js"></script>
+  <script defer src="/scripts/quiz-play.js"></script>
 
   <title>QUOKKA? - Quiz</title>
 </head>
@@ -19,7 +20,7 @@
 
     <%- include('../partials/_quiz-details.ejs', {title, description}); %>
 
-    <form method="POST" action="/">
+    <form method="POST">
       <!-- Loop through to generate questions -->
       <%- include('../partials/_question-module.ejs', {question: {content:"Who was the first president of the U.S.?", number:1, clickable:true, showCorrect:false }}); %>
 

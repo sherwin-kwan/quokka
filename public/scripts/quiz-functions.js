@@ -1,5 +1,17 @@
 // Helper functions for the quiz page
 
+// Escaping and Sanitizing
+// Helper function (copied from Compass) which escapes unwanted characters in a string to prevent script injections
+// It borrows the jQuery "createTextNode" function (used for sanitizing the contents of HTML nodes), by creating
+// a dummy div tag to encase the string. The div is not actually output as HTML.
+
+const escapeChars = function (str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+
 // The API endpoint quiz/:id/load sends an array of objects to the front end, with each object representing one question, for example:
 /*{
   "question_num":1,
@@ -16,14 +28,40 @@
 
 const generateOneQuestion = (obj) => {
   const num = obj.question_num;
-  const questionText = obj.text;
-  const options = obj.answer_options;
+  // Escape all strings in the output to prevent script injection attacks
+  const questionText = escapeChars(obj.text);
+  const options = escapeChars(obj.answer_options);
   if (!options.length) {
     console.log(`Error, question ${questionText} does not have any answer choices!`);
     return;
   };
-
-  for (let option of options) {
-
-  }
+  const output = `<section>
+    <h3>Question ${num}</h3>
+    <p>${questionText}</p>
+  </sectiom>`;
 }
+
+
+const html = `<section>
+<h3>Question 1</h3>
+<p>Who was the first president of the U.S.?</p>
+
+<!-- for-loop question options later-->
+
+<div class="answer-container">
+<input class="answer "  type="radio" id="q1-0"" value="green" name="q1"  />
+<label for="q1-0" >green</label>
+</div>
+<div class="answer-container">
+<input class="answer "  type="radio" id="q1-1"" value="blue" name="q1"  />
+<label for="q1-1" >blue</label>
+</div>
+<div class="answer-container">
+<input class="answer "  type="radio" id="q1-2"" value="yellow" name="q1"  />
+<label for="q1-2" >yellow</label>
+</div>
+<div class="answer-container">
+<input class="answer "  type="radio" id="q1-3"" value="pink" name="q1"  />
+<label for="q1-3" >pink</label>
+</div>
+</section>`;

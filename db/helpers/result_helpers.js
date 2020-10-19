@@ -6,7 +6,9 @@ const getAttemptData = function(attemptId, db) {
       quizzes.title AS title,
       users.fname AS fname,
       users.lname AS lname,
-      ROUND((SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END)/1.00) / (count(user_answers.*)/1.00)*100) AS percent_correct,
+      SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END) AS num_correct,
+      COUNT(user_answers.*) AS num_total,
+      ROUND((SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END)/1.00) / (COUNT(user_answers.*)/1.00)*100) AS percent_correct,
       quizzes.id AS quiz_id
     FROM attempts
       JOIN quizzes ON attempts.quiz_id = quizzes.id

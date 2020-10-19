@@ -17,6 +17,11 @@
   font-size: 6.9rem;
 }
 
+.num-correct-header {
+  @extend .user-header;
+  font-size: 1.5rem;
+}
+
 .answer-container {
   display: flex;
   flex-direction: column;

@@ -13,6 +13,9 @@ const dbParams = require('../lib/db.js');
 const database = new Pool(dbParams);
 database.connect();
 
+const inspect = require('util').inspect;
+
+// This function creates an array of objects, containing the answers to one question
 const loadOneQuestion = (question_id, db) => {
   db.query(`SELECT question_num, text, answer_text
   FROM questions
@@ -26,6 +29,21 @@ const loadOneQuestion = (question_id, db) => {
 };
 
 console.log(loadOneQuestion('6', database));
+
+const loadOneQuestionJson = (question_id) => {
+  database.query(`SELECT question_num, text,
+  (SELECT json_agg(filtered_answers) FROM (SELECT id, answer_text FROM possible_answers WHERE question_id = ${format(question_id)}) filtered_answers)
+  AS answers
+  FROM questions
+  WHERE questions.id = ${format(question_id)};
+  `)
+  .then((res) => {
+    console.log(inspect(res.rows[0]));
+  })
+  .catch((err) => console.log(err));
+};
+
+console.log(loadOneQuestionJson('6'));
 
 const quizRouter = (db) => {
 

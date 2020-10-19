@@ -1,8 +1,14 @@
 <section>
-  <h3>Question <%= questionIndex + 1 %></h3>
-  <button onclick="">delete</button>
+  <header class="new-question">
+    <h3>Question <%= questionIndex + 1 %></h3>
+    <button onclick="">delete</button>
+  </header>
   <input type="text" name="q<%= questionIndex %>"/>
+  <div class="new-option">
+    <label class="option-correct" for="q<%= questionIndex %>-0-correct" >correct?</label>
+    <label class="option-text" for="q<%= questionIndex %>-0-text"> option text</label>
+  </div>
   <%- include('_new-answer.ejs', {questionIndex, optionIndex:0}) %>
   <%- include('_new-answer.ejs', {questionIndex, optionIndex:1}) %>
-  <button> + Add Option </button>
+  <button class="new-option"> + Add Option </button>
 </section>

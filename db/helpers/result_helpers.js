@@ -23,41 +23,37 @@ const getAttemptData = function(attemptId, db) {
 };
 
 
-//Load a JSON of the full quiz given quiz_id:
+//Load a JSON of the full quiz (questions & answer options with is_correct and user_selected) given attempt_id:
 
-const loadWholeQuizJson = (quiz_id, db) => {
+const loadWholeQuizJson = (attemptId, db) => {
   const queryString = `
   SELECT questions.question_num, questions.text,
     (SELECT json_agg(filtered_answers) FROM
-      (SELECT id, answer_text
+      (SELECT
+        possible_answers.id,
+        possible_answers.answer_text,
+        possible_answers.is_correct,
+        CASE WHEN possible_answers.id IN (
+          SELECT selected_answer
+          FROM possible_answers
+            JOIN user_answers ON possible_answers.id = user_answers.selected_answer
+            JOIN attempts ON user_answers.attempt_id = attempts.id
+            WHERE attempts.id = $1
+        ) THEN 1 ELSE 0 END AS user_selected
         FROM possible_answers
-        WHERE question_id = questions.id
+        WHERE possible_answers.question_id = questions.id
       ) filtered_answers
     )
   AS answer_options
   FROM questions
-  WHERE questions.quiz_id = $1
+    JOIN quizzes ON questions.quiz_id = quizzes.id
+    JOIN attempts ON quizzes.id = attempts.quiz_id
+  WHERE attempts.id = $1
   `
-  const queryParams = [quiz_id];
+  const queryParams = [attemptId];
   return db.query(queryString, queryParams)
   .then(res => res.rows)
   .catch(err => console.error('query error', err.stack));
 };
 
 module.exports = { getAttemptData, loadWholeQuizJson }
-
-
-// const getQuestionData = function(attemptId, db, callback) {
-//       const queryString = `
-//       SELECT questions.id, question_num, text
-//       FROM questions
-//         JOIN quizzes ON questions.quiz_id = quizzes.id
-//         JOIN attempts on quizzes.id = attempts.quiz_id
-//       WHERE attempts.id = $1
-//       ORDER BY question_num
-//       `;
-//       const queryParams = [attemptId];
-//       return db.query(queryString, queryParams)
-//       .then(res => res.rows)
-//       .catch(err => console.log(err))
-//   };

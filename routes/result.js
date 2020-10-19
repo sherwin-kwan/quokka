@@ -15,7 +15,7 @@ const resultRouter = (db) => {
     .then(overallResults => {
       if (overallResults) {
         const templateVars = { overallResults };
-        loadWholeQuizJson(overallResults.quiz_id, db)
+        loadWholeQuizJson(attemptId, db)
         .then(quizJson => {
           templateVars.quizJson = quizJson;
           res.render("../views/pages/result", templateVars);

@@ -12,7 +12,8 @@ $(() => {
 
   $('.button-style').on('click', () => {
     try {
-      loadQuiz($quizForm, 1); // Just using a hard-coded quiz 1 for now
+      const quizId = window.location.pathname.split('/').pop(); // Extracts the number from the URL, so '/quiz/43' becomes '43';
+      loadQuiz($quizForm, quizId); // Just using a hard-coded quiz 1 for now
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }

@@ -14,7 +14,6 @@ const resultRouter = (db) => {
     getAttemptData(attemptId, db)
     .then(overallResults => {
       if (overallResults) {
-        console.log(overallResults);
         const templateVars = { overallResults };
         loadWholeQuizJson(attemptId, db)
         .then(quizJson => {

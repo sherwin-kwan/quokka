@@ -1,5 +1,12 @@
 <section>
-  <h3>Question <%= question.number %></h3>
+  <section class="question-header">
+    <p>Question #<%= question.number %></p>
+    <% if (question.options.length <= 2) { %>
+      <p class="result-word-incorrect">CORRECT</p>
+    <% } else{ %>
+      <p class="result-word-correct">INCORRECT</p>
+      <% } %>
+  </section>
   <p><%= question.content %></p>
 
   <% for (const option of question.options) { %>

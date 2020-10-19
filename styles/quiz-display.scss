@@ -56,3 +56,19 @@
 .answer.incorrect + label {
   background-color: darkred;
 }
+
+.question-header {
+  @extend .user-header;
+  font-size: 1.33rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.result-word-correct {
+  color: darkgreen;
+}
+
+.result-word-incorrect {
+  color: darkred;
+}

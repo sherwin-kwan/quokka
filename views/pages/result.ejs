@@ -20,7 +20,7 @@
       <p class="score-header"><%= overallResults.percent_correct %>%</p>
       <a class="share" >Copy link to results </a>
     </section>
-    <% for (const quizQuestion of quizJson) { %>
+    <!-- <% for (const quizQuestion of quizJson) { %>
       <%=quizQuestion.question_num%>
       <%=quizQuestion.text%>
       <br>
@@ -29,7 +29,24 @@
         <br>
       <% } %>
       <br>
-    <% } %>
+    <% } %> -->
+
+    <% for (const quizQuestion of quizJson) { %>
+      <%- include('../partials/_question-module.ejs',
+        {
+        question:
+          {
+            content: quizQuestion.text,
+            number: quizQuestion.question_num,
+            options: quizQuestion.answer_options,
+            clickable: false,
+            showCorrect: false
+          }
+        }
+      ); %>
+    <% }; %>
+
+
   </main>
 </body>
 </html>

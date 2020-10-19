@@ -2,10 +2,19 @@
   <h3>Question <%= question.number %></h3>
   <p><%= question.content %></p>
 
-  <!-- for-loop question options later-->
-
-  <%- include('../partials/_question-answer.ejs', {questionIndex : question.number, option: { index:0, label:"green", clickable:question.clickable, showCorrect:question.showCorrect, correct:false, selected:true }}); %>
-  <%- include('../partials/_question-answer.ejs', {questionIndex : question.number, option: { index:1, label:"blue", clickable:question.clickable, showCorrect:question.showCorrect, correct:true }}); %>
-  <%- include('../partials/_question-answer.ejs', {questionIndex : question.number, option: { index:2, label:"yellow", clickable:question.clickable, showCorrect:question.showCorrect, correct:false  }}); %>
-  <%- include('../partials/_question-answer.ejs', {questionIndex : question.number, option: { index:3, label:"pink", clickable:question.clickable, showCorrect:question.showCorrect, correct:false }}); %>
+  <% for (const option of question.options) { %>
+    <%- include('../partials/_question-answer.ejs',
+      {
+        questionIndex : question.number,
+        option: {
+          index: 0,
+          label: option.answer_text,
+          clickable: question.clickable,
+          showCorrect: question.showCorrect,
+          correct: true,
+          selected: true
+        }
+      }
+    ); %>
+  <% }; %>
 </section>

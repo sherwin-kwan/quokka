@@ -10,7 +10,7 @@ answer_options: [
   {id: 3, answer_text: 'Vancouver'}
 ]} */
 
-const loadOneQuestionJson = (question_id, db) => {
+const loadOneQuestionJson = (questionId, db) => {
   return db.query(`
   SELECT questions.question_num, questions.text,
     (SELECT json_agg(filtered_answers) FROM
@@ -21,7 +21,7 @@ const loadOneQuestionJson = (question_id, db) => {
     )
   AS answer_options
   FROM questions
-  WHERE questions.id = ${format(question_id)};
+  WHERE questions.id = ${format(questionId)};
   `)
     .then(res => res.rows)
     .catch(err => console.error('query error', err.stack));
@@ -46,7 +46,7 @@ a single question within that quiz, e.g.:
     ]
   }] */
 
-const loadWholeQuizJson = (quiz_id, db) => {
+const loadWholeQuizJson = (quizId, db) => {
   return db.query(`
   SELECT questions.question_num, questions.text,
     (SELECT json_agg(filtered_answers) FROM
@@ -57,7 +57,7 @@ const loadWholeQuizJson = (quiz_id, db) => {
     )
   AS answer_options
   FROM questions
-  WHERE questions.quiz_id = ${format(quiz_id)};
+  WHERE questions.quiz_id = ${format(quizId)};
   `)
     .then(res => res.rows)
     .catch(err => console.error('query error', err.stack));
@@ -82,12 +82,12 @@ const saveQuizAttempt = (userId, quizId, submission, db) => {
           throw new Error('A non-numeric answer ID was sent to the server, this attempt cannot be registered');
         }
         insertAnswersQuery += `(${attemptId}, ${answerId}),`;
-      };
+      }
       // Lop off the ending comma to make the query a valid SQL query
       insertAnswersQuery = insertAnswersQuery.substring(0, insertAnswersQuery.length - 1) + ' RETURNING *';
       return db.query(insertAnswersQuery);
     })
-    .catch(err => console.error('error saving quiz attempt'.err.stack));
-}
+    .catch(err => console.error('error saving quiz attempt', err.stack));
+};
 
 module.exports = { loadOneQuestionJson, loadWholeQuizJson, saveQuizAttempt };

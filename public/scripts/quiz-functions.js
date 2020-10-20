@@ -5,7 +5,7 @@
 // It borrows the jQuery "createTextNode" function (used for sanitizing the contents of HTML nodes), by creating
 // a dummy div tag to encase the string. The div is not actually output as HTML.
 
-const escapeChars = function (str) {
+const escapeChars = (str) => {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
@@ -38,22 +38,22 @@ const generateOneQuestion = (obj) => {
   if (!options.length) {
     console.log(`Error, question ${questionText} does not have any answer choices!`);
     return;
-  };
+  }
   // Note: 0-based index is used for the options so  i = 0 for answer A, i = 3 for answer D,
   // NOT 1-based index as in Chantal's original example
   for (let i = 0; i < options.length; i++) {
     // Sanitize the text of the answer to prevent script injections
-    const sanitized_text = escapeChars(options[i].answer_text);
+    const sanitizedText = escapeChars(options[i].answer_text);
     output += `
     <div class="answer-container">
       <input class="answer"  type="radio" id="q${num}-${i}"" value="a${options[i].id}" name="q${num}"  />
-      <label for="q${num}-${i}" >${sanitized_text}</label>
+      <label for="q${num}-${i}" >${sanitizedText}</label>
     </div>
     `;
     // Result of this: when the form submits, it will submit in the format q1: a1; ???
-  };
+  }
   return output;
-}
+};
 
 // This function uses generateOneQuestion looping through an array of questions to generate a whole quiz
 const loadQuiz = ($form, quiz_id) => {
@@ -62,15 +62,15 @@ const loadQuiz = ($form, quiz_id) => {
     .then((data) => {
       $('article').hide(); // Note: Not ideal, should use DOM traversal!!
       for (let question of data) {
-        const question_section = generateOneQuestion(question);
-        $form.append(question_section);
-      };
+        const questionSection = generateOneQuestion(question);
+        $form.append(questionSection);
+      }
       $form.append(`<button type="submit" id="submitButton">Submit!</button>`);
       $form.show();
     })
     .fail((xhr, status, err) => {
       console.log(`${status} ${err} There was an error loading the questions for quiz ${quizId}`);
-    })
+    });
 };
 
 // Cause a quiz to be submitted to the database. This calls the saveQuizAttempt function on the back end at routes/quiz.js
@@ -83,7 +83,7 @@ const submitQuiz = ($form) => {
   const currentUrl = window.location.pathname;
   if (!valid) {
     throw new Error('Validation failed');
-  };
+  }
   // In the future, this needs to be changed to read a cookie
   const userId = 35;
   $.ajax(`${currentUrl}/${userId}`, { method: 'POST', data: $form.serialize() })

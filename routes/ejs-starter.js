@@ -5,7 +5,7 @@ module.exports = () => {
   router.get("/", (req, res) => {
     res.render("pages/index.ejs");
   });
-  
+
   router.get("/quiz/new", (req, res) => {
     res.render("pages/quiz-new.ejs");
   });
@@ -24,4 +24,4 @@ module.exports = () => {
 
 
   return router;
-}
+};

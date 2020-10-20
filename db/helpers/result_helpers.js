@@ -51,11 +51,11 @@ const loadWholeQuizJson = (attemptId, db) => {
     JOIN quizzes ON questions.quiz_id = quizzes.id
     JOIN attempts ON quizzes.id = attempts.quiz_id
   WHERE attempts.id = $1
-  `
+  `;
   const queryParams = [attemptId];
   return db.query(queryString, queryParams)
-  .then(res => res.rows)
-  .catch(err => console.error('query error', err.stack));
+    .then(res => res.rows)
+    .catch(err => console.error('query error', err.stack));
 };
 
-module.exports = { getAttemptData, loadWholeQuizJson }
+module.exports = { getAttemptData, loadWholeQuizJson };

@@ -21,8 +21,8 @@ const quizRouter = (db) => {
   router.get('/:id/load', (req, res) => {
     const quizId = format(req.params.id);
     loadWholeQuizJson(quizId, db)
-      .then(array_of_objects => {
-        res.send(array_of_objects);
+      .then(arrayOfObjects => {
+        res.send(arrayOfObjects);
       })
       .catch(err => console.error('error sending json to front end', err.stack));
   });
@@ -38,7 +38,7 @@ const quizRouter = (db) => {
   // Submit a quiz
   router.post('/new', (req, res) => {
     res.statusCode(201).send('You successfully created a new quiz, congrats!');
-  })
+  });
 
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
@@ -64,9 +64,6 @@ const quizRouter = (db) => {
 
   // Submit a quiz
   router.post('/:quiz_id/:user_id', (req, res) => {
-    const quizId = req.params.quiz_id;
-    const userId = req.params.user_id;
-    const submission = req.body;
     saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)
       .then((data) => {
         res.status(201).send(data.rows);

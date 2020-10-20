@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const sass       = require('node-sass-middleware');
 const app        = express();
 const morgan     = require('morgan');
-const mySecretKey= require('secret-key.js');
+const mySecretKey= require('./secret-key.js');
 const cookieSession = require('cookie-session');
 
 // PG database client/connection setup

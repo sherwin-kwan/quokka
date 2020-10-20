@@ -24,7 +24,6 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
   output += `
   <button class="new-option"> + Add Option </button>
   </section>`;
-  console.log(output);
   return output;
 };
 

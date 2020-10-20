@@ -29,10 +29,7 @@ const quizRouter = (db) => {
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
-    res.send(`This is the future home of the create-a-quiz page (page C)
-    <form action='new' method='POST'>
-      <button type='submit'>Submit</buton>
-    </form>`);
+    res.render('pages/quiz-new.ejs');
   });
 
   // Submit a quiz

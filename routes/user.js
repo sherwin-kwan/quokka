@@ -10,6 +10,28 @@ const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpe
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
 
+
+  // Register:
+  router.get('/register', (req, res) => {
+    res.render('pages/login_register.ejs', { procedure: 'register' });
+  });
+
+  router.post('/register', (req, res) => {
+    res.send(`Sorry, we haven't developed the registration feature yet`);
+  });
+
+  // Login:
+
+  // Login page
+  router.get('/login', (req, res) => {
+    res.render('pages/login_register.ejs', { procedure: 'login' });
+  });
+
+  router.post('/login', (req, res) => {
+    console.log(req.body);
+    res.send('This is where you either logged in or got a password error');
+  });
+
   // User profile:
   router.get("/:id", (req, res) => {
     const userId = req.params.id;
@@ -25,29 +47,6 @@ const userRouter = (db) => {
   });
 
 
-  // Register:
-  router.get('/register', (req, res) => {
-    res.send(`This is the registration page:
-    <form action='register' method='POST'>
-      <button type='submit'>Register</buton>
-    </form>`);
-  });
-
-  router.post('/register', (req, res) => {
-    res.send('Yay you just registered for Quokka! Welcome to the club!');
-  });
-
-
-  // Login:
-
-  // Login page
-  router.get('/login', (req, res) => {
-    res.render('pages/login.ejs', { type: 'login' });
-  });
-
-  router.post('/login', (req, res) => {
-    res.send('This is where you either logged in or got a password error');
-  });
 
 
   return router;

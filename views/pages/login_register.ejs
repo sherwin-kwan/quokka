@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%- include('../partials/_head-styles.ejs'); %>
+  <%- include('../partials/_head-scripts.ejs'); %>
+
+  <title>QUOKKA? - Home</title>
+</head>
+
+<body>
+  <%- include('../partials/_header.ejs'); %>
+  <main>
+    <h1>Quokka - <%= procedure %></h1>
+    <!-- Password warning message only displays on the register page -->
+    <% if (procedure === 'register') { %>
+    <p class="passwordWarning">Warning, please don't use any passwords you use on other sites. Hashing has not been set up yet and this
+      system might not be secure!
+    </p>
+    <% } %>
+    <!-- A convenient link for users to go between login and register pages -->
+    <p class="switchProcedure">
+      <%- (procedure === 'register') ? 'Already have an account? <a href="/user/login">Sign In!</a>' : `Don't have an account yet? <a href="/user/register">Register today!</a>` %>
+    </p>
+    <form method="POST">
+      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+        <label for="name">First Name:
+          <input class="form-create" name="fname" type="text"></label>
+      </div>
+      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+        <label for="name">Last Name:
+          <input class="form-create" name="lname" type="text"></label>
+      </div>
+      <!--<div class="name-wrapper">
+        <label for="email">Email:
+          <input class="form-create" name="email" type="text"></label>
+      </div>-->
+      <div class="name-wrapper">
+        <label for="name">Username:
+          <input class="form-create" name="username" type="text"></label>
+      </div>
+      <div class="name-wrapper">
+        <label for="password">Password:
+          <input type="password" class="form-create" name="password" type="text"></label>
+      </div>
+      <button class="btn btn-primary" type="submit">
+        <%- (procedure === 'register') ? 'Register New Account' : 'Log In'; %></button>
+    </form>
+  </main>
+
+
+</body>
+
+</html>

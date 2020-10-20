@@ -1,4 +1,4 @@
-// Helper functions for the quiz page
+// Helper functions for the quiz taking page (page B)
 
 // Escaping and Sanitizing
 // Helper function (copied from Compass) which escapes unwanted characters in a string to prevent script injections

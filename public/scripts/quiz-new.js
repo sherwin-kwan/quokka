@@ -50,6 +50,7 @@ $(() => {
   });
 
   $form.on('submit', function(e) {
+    alert('Submitting!');
     e.preventDefault();
     try {
       submitNewQuiz($(this));

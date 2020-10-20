@@ -13,7 +13,7 @@ database.connect();*/
 const express = require('express');
 const router = express.Router();
 const format = require('pg-format');
-const { loadWholeQuizJson, saveQuizAttempt } = require('../db/helpers/quiz_helpers.js');
+const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz } = require('../db/helpers/quiz_helpers.js');
 const inspect = require('util').inspect;
 
 const quizRouter = (db) => {
@@ -34,11 +34,16 @@ const quizRouter = (db) => {
   });
 
   // Submit a quiz
-  router.post('/new', (req, res) => {
-    console.log('Params are: ' + inspect(req.params));
-    console.log('Body is: \n' + inspect(req.body));
-    res.status(201).send(`You just submitted a quiz as follows: ${inspect(req.body)}.
-    Code to save this in the database still has to be written.`);
+  router.post('/new/:creator_id', (req, res) => {
+    saveNewQuiz(req.params, req.body, db)
+    .then(data => {
+      const output = `Created quiz ${data[0]},
+      Created questions ${data[1]},
+      Created options ${data[2]}`;
+      console.log(output);
+      res.status(201).send(`You just submitted a quiz as follows: ${output}`);
+    })
+    .catch(err => console.error('Error saving a quiz ' + err.stack));
   });
 
   // Display quiz page (page B) - this will instead render a template once that file is done
@@ -57,7 +62,8 @@ const quizRouter = (db) => {
       })
       .catch(err => {
         console.error('error retrieving quiz title and description', err.stack);
-        res.render('pages/error.ejs', {message: `Your quiz could not be retrieved. If you reached this page via a link, please ask the person
+        res.render('pages/error.ejs', {
+          message: `Your quiz could not be retrieved. If you reached this page via a link, please ask the person
         who sent you this link to double-check that it's correct.`});
       });
   });

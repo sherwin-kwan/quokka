@@ -16,10 +16,7 @@ const mainRouter = (db) => {
 
   // Catch-all code for non-existent routes. If the route doesn't match anything above, it will send this 404 page:
   router.use((req, res) => {
-    res.status(404).render('error');
-    const templateVars = new Object;
-    templateVars.message = `The page you're looking for could not be found.`;
-    res.render('pages/error.ejs', templateVars);
+    res.status(404).render('pages/error.ejs', {message: `The page you're looking for could not be found.`});
   });
 
   return router;

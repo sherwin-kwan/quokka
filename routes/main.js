@@ -5,12 +5,22 @@
 
 const express = require('express');
 const router  = express.Router();
+const { loadPublicQuizzes } = require('../db/helpers/home_helpers');
 
 const mainRouter = (db) => {
   // Home page
   // Warning: avoid creating more routes in this file!
   // Separate them into separate routes files (see above).
   router.get("/", (req, res) => {
+    loadPublicQuizzes(db)
+    .then(results => {
+      // console.log(results);
+      let parsedResults = [];
+      for (let quiz of results) {
+        parsedResults.push({link:`/quiz/${quiz.id}`, title:quiz.title});
+      }
+      console.log(parsedResults);
+    });
     res.render("pages/index.ejs");
   });
 

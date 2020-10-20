@@ -37,11 +37,7 @@ const quizRouter = (db) => {
   router.post('/new/:creator_id', (req, res) => {
     saveNewQuiz(req.params, req.body, db)
     .then(data => {
-      const output = `Created quiz ${data[0]},
-      Created questions ${data[1]},
-      Created options ${data[2]}`;
-      console.log(output);
-      res.status(201).send(`You just submitted a quiz as follows: ${output}`);
+      res.status(201).send(JSON.stringify(data)); // Will send an array [quizId, array of questions, array of answers]
     })
     .catch(err => console.error('Error saving a quiz ' + err.stack));
   });

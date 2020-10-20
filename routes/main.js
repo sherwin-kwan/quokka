@@ -20,6 +20,7 @@ const mainRouter = (db) => {
         parsedResults.push({link:`/quiz/${quiz.id}`, title:quiz.title});
       }
       console.log(parsedResults);
+      res.render("pages/index.ejs", {quizzes:parsedResults});  
     });
     res.render("pages/index.ejs");
   });

@@ -11,10 +11,7 @@ const userRouter = (db) => {
 
   // Login page
   router.get('/login', (req, res) => {
-    res.send(`This is the login page:
-    <form action='login' method='POST'>
-      <button type='submit'>Log In</buton>
-    </form>`);
+    res.render('pages/login.ejs', { })
   });
 
   router.post('/login', (req, res) => {

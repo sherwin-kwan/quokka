@@ -1,5 +1,9 @@
 @import 'partials/columns';
 
+form {
+  display: none;
+}
+
 .quiz-title {
   text-align: center;
   margin: $mobile-gutter 0 $mobile-gutter 0;

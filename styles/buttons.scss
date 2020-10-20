@@ -1,7 +1,7 @@
 @import 'partials/columns';
 
 
-form > button[action=submit] {
+form > button[action=submit], .button-style {
   width:100%;
   height:$mobile-col-1;
   background-color: cornflowerblue;

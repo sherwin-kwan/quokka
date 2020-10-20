@@ -46,7 +46,7 @@ const userRouter = (db) => {
     //       .json({ error: err.message });
     //   });
     res.json({ "notes": "This is the route where user's previous results will pop up",
-     "score": "90%", "status": "this page is just a test" });
+      "score": "90%", "status": "this page is just a test" });
   });
 
   // Load the user's quizzes asynchronously
@@ -62,7 +62,7 @@ const userRouter = (db) => {
     //       .json({ error: err.message });
     //   });
     res.json([{ "quiz": "1", "status": "this page is just a test" },
-    { "quiz": "2", "status": "this is just a test" }]);
+      { "quiz": "2", "status": "this is just a test" }]);
   });
 
   // User profile page. Fetches a template (until it's ready, right now it just displays dummy text)

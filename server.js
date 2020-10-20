@@ -39,7 +39,7 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 
 
-const ejsTempRoute = require('./routes/ejs-starter')
+const ejsTempRoute = require('./routes/ejs-starter');
 app.use("/ejs", ejsTempRoute());
 
 // Note: mount other resources here, using the same pattern above
@@ -53,9 +53,11 @@ const resultRouter = require('./routes/result');
 app.use('/result', resultRouter(db));
 
 const mainRouter = require('./routes/main');
-app.use('/', mainRouter(db))
+app.use('/', mainRouter(db));
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+module.exports = { db };

@@ -5,9 +5,20 @@
 
 const express = require('express');
 const router = express.Router();
+const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
+
+  // User profile:
+  router.get("/:id", (req, res) => {
+    const userId = req.params.id;
+    getUserName(userId, db)
+      .then (name =>
+        res.send(name)
+        )
+  });
+
 
   // Register:
   router.get('/register', (req, res) => {
@@ -34,12 +45,6 @@ const userRouter = (db) => {
     res.send('This is where you either logged in or got a password error');
   });
 
-
-  // User profile:
-  router.get("/:id", (req, res) => {
-    const userId = req.params.id;
-    res.send(`This is the future profile page for user ${userId}`);
-  });
 
   return router;
 };

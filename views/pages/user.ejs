@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="/styles/buttons.css" />
 
   <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/user.js"></script>
 
-  <title>QUOKKA? - User</title>
+  <title>QUOKKA? - <%= name.fname %> <%= name.lname %></title>
 </head>
 <body>
   <%- include('../partials/_header.ejs'); %>
@@ -19,11 +20,15 @@
     <!-- Will add swapping table view later in jquery -->
 
     <nav id="profile">
-      <button class="profile-tab active" id="quiz">Your quizzes</button>
-      <button class="profile-tab" id="results">Your results</button>
+      <button class="profile-tab active" id="quiz">Created quizzes</button>
+      <button class="profile-tab" id="results">Quiz results</button>
     </nav>
-    <%- include('../partials/_user-quiz.ejs'); %>
-    <%- include('../partials/_user-results.ejs'); %>
+    <section id="listOfQuizzesCreated">
+      <%- include('../partials/_user-quiz.ejs'); %>
+    </section>
+    <section id="listOfResults" class="initialHide">
+      <%- include('../partials/_user-results.ejs'); %>
+    </section>
     <!-- <a class="new-quiz">Make New Quiz</a> -->
   </main>
 </body>

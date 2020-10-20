@@ -13,7 +13,7 @@ const userRouter = (db) => {
   // User profile:
   router.get("/:id", (req, res) => {
     const userId = req.params.id;
-    getUserName(userId, db)
+    getQuizzesTaken(userId, db)
       .then (name =>
         res.json(name)
         )

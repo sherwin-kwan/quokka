@@ -1,11 +1,16 @@
 <table>
   <tr>
-    <th class="quiz-name">name</th>
-    <th>public</th>
+    <th class="quiz-name">Quiz name</th>
+    <th>Public</th>
+    <th>Link</th>
   </tr>
 
-  <!-- for-loop to generate content -->
-  <%- include('_user-quiz-row.ejs', {name:'LOTR Master Quiz', isPublic:true}) %>
-  <%- include('_user-quiz-row.ejs', {name:'Prequel Meme Supreme', isPublic:false}) %>
-  <%- include('_user-quiz-row.ejs', {name:'Quiz to assert dominance', isPublic:true}) %>
+  <% for (const quiz of quizzesCreated) { %>
+    <%- include('_user-quiz-row.ejs',
+      {
+        name: quiz.title,
+        isPublic: quiz.is_public
+      }
+    ) %>
+  <% }; %>
 </table>

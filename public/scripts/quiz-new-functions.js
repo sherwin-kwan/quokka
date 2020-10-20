@@ -24,7 +24,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
   output += `
   <button class="new-option"> + Add Option </button>
   </section>`;
-  console.log(output);
+  // console.log(output);
   return output;
 };
 
@@ -83,5 +83,5 @@ const submitNewQuiz = ($form) => {
         alert(data, status, 'Failure!');
       }
     })
-    .catch(err => console.log(err.message));
+    .catch(err => console.log("Problem:", err, err.message));
 };

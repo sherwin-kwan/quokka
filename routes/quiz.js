@@ -37,7 +37,8 @@ const quizRouter = (db) => {
   router.post('/new', (req, res) => {
     console.log('Params are: ' + inspect(req.params));
     console.log('Body is: \n' + inspect(req.body));
-    res.status(201).send('You successfully created a new quiz, congrats!');
+    res.status(201).send(`You just submitted a quiz as follows: ${inspect(req.body)}.
+    Code to save this in the database still has to be written.`);
   });
 
   // Display quiz page (page B) - this will instead render a template once that file is done

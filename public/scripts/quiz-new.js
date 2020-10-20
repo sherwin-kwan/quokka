@@ -49,7 +49,7 @@ $(() => {
     deleteOption($(e.target));
   });
 
-  $form.on('submit', (e) => {
+  $form.on('submit', function(e) {
     e.preventDefault();
     try {
       submitNewQuiz($(this));

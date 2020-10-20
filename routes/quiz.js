@@ -68,6 +68,7 @@ const quizRouter = (db) => {
 
   // Submit a quiz
   router.post('/:quiz_id/:user_id', (req, res) => {
+    console.log('Reached the server!!');
     saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)
       .then((data) => {
         res.status(201).send(data.rows);

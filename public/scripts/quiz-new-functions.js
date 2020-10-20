@@ -24,13 +24,12 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
   output += `
   <button class="new-option"> + Add Option </button>
   </section>`;
-  // console.log(output);
   return output;
 };
 
 const generateOptionMarkup = (questionNum) => {
   return `
-  <div class="new-option" data-question-num=${questionNum}>
+  <div class="new-option" data-question-num=$s{questionNum}>
     <input type="radio" name="a${questionNum}" value="correct"/>
     <input type="text" name="a${questionNum}"/>
     <button class="delete-option"><strong>-</strong></button>
@@ -76,7 +75,7 @@ const submitNewQuiz = ($form) => {
         // After a successful quiz save, redirect user to the results page
         const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds], [array of optionIds]]
         const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions and ${arr[2].length} answer choices.
-        You may find your quiz at the following link: ${window.location.href + '/quiz/' + arr[0]}`;
+        You may find your quiz at the following link: ${window.location.host + '/quiz/' + arr[0]}`;
         alert(message);
       } else {
         // Something went wrong

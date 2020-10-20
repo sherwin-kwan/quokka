@@ -21,7 +21,7 @@ const resultRouter = (db) => {
               res.render("../views/pages/result", templateVars);
             });
         } else {
-          res.render(`No results found for attempt ID ${attemptId}`);
+          res.status(404).render('../views/pages/error.ejs', {message: `No results for this quiz ID!`});
         }
       })
       .catch(err => console.error('Error executing query', err.stack));

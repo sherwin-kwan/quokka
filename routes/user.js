@@ -15,7 +15,7 @@ const userRouter = (db) => {
     const userId = req.params.id;
     getUserName(userId, db)
       .then (name =>
-        res.send(name)
+        res.json(name)
         )
   });
 

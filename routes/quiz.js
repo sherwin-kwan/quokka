@@ -14,6 +14,7 @@ const express = require('express');
 const router = express.Router();
 const format = require('pg-format');
 const { loadWholeQuizJson, saveQuizAttempt } = require('../db/helpers/quiz_helpers.js');
+const inspect = require('util').inspect;
 
 const quizRouter = (db) => {
 
@@ -34,7 +35,9 @@ const quizRouter = (db) => {
 
   // Submit a quiz
   router.post('/new', (req, res) => {
-    res.statusCode(201).send('You successfully created a new quiz, congrats!');
+    console.log('Params are: ' + inspect(req.params));
+    console.log('Body is: \n' + inspect(req.body));
+    res.status(201).send('You successfully created a new quiz, congrats!');
   });
 
   // Display quiz page (page B) - this will instead render a template once that file is done

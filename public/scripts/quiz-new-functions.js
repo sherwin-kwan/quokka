@@ -33,10 +33,10 @@ const default_num_of_options = 4;
 
 const generateQuestionMarkup = (questionNum, num_of_options) => {
   let output = `
-  <section id="question-${questionNum}">
+  <section data-question-num="${questionNum}">
     <header class="new-question">
       <h3>Question ${questionNum}</h3>
-      <button class="delete-question" data-question-num="${questionNum}">delete</button>
+      <button class="delete-question">delete</button>
     </header>
     <input type="text" name="q${questionNum}"/>
     <div class="new-option">
@@ -56,10 +56,10 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
 
 const generateOptionMarkup = (questionNum, optionIndex) => {
   return `
-  <div class="new-option">
-    <input type="checkbox" id="q${questionNum}-${optionIndex}-correct" name="q${questionNum}-${optionIndex}-correct"/>
-    <input type="text" id="q${questionNum}-${optionIndex}-text" name="q${questionNum}-${optionIndex}-text"/>
-    <button class="delete-option" data-question-num=${questionNum} data-option-index=${optionIndex}><strong>-</strong></button>
+  <div class="new-option" data-question-num=${questionNum} data-option-index=${optionIndex}>
+    <input type="checkbox" name="q${questionNum}-${optionIndex}-correct"/>
+    <input type="text" name="q${questionNum}-${optionIndex}-text"/>
+    <button class="delete-option"><strong>-</strong></button>
   </div>`;
 }
 
@@ -68,8 +68,9 @@ const addNewQuestion = ($questions, currentQuestionCount) => {
   $questions.append(markup);
 };
 
-const deleteQuestion = (question_num) => {
-  alert('Not yet coded: delete a question');
+// This takes a jQuery wrapper on a button as an argument, and removes the question (section) it's located in
+const deleteQuestion = ($button) => {
+  $button.closest('section').remove();
 };
 
 // where questionNum is the question number to which this option should be appended.
@@ -79,8 +80,10 @@ const addNewOption = ($node, questionNum, lastOption) => {
   alert('Not yet coded: add an option');
 };
 
-const deleteOption = () => {
-  alert('Not yet coded: delete an option');
+// This function takes a delete button (the HTML element, not jQuery element) beside an option as an argument, and deletes the option
+// (i.e. deletes its parent div entirely)
+const deleteOption = (button) => {
+  button.parentElement.remove();
 };
 
 const submitNewQuiz = ($form) => {

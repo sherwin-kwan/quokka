@@ -34,19 +34,19 @@ $(() => {
 
   $form.on('click', 'button.delete-question', (e) => {
     e.preventDefault();
-    deleteQuestion(i + 1);
+    deleteQuestion($(e.target));
   });
 
   $form.on('click', 'button.new-option', (e) => {
     e.preventDefault();
-    console.log(e.target);
-    addNewOption();
+    const questionNum = e.target.parentElement.dataset.questionNum;
+    const $parentSection = $(e.target).closest('section');
+    addNewOption($parentSection, questionNum);
   });
 
   $form.on('click', 'button.delete-option', (e) => {
     e.preventDefault();
-    console.log(e.target);
-    deleteOption();
+    deleteOption(e.target);
   });
 
   $form.on('submit', (e) => {

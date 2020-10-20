@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const sass       = require('node-sass-middleware');
 const app        = express();
 const morgan     = require('morgan');
+const mySecretKey= require('secret-key.js');
 const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
@@ -33,6 +34,14 @@ app.use('/styles', sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static('public'));
+
+// Cookies
+
+app.use(cookieSession({
+  name: 'session',
+  keys: [mySecretKey],
+  maxAge: 3600000 // expires after 1 hour
+}));
 
 // Routers: these listen to requests for resources on specific paths
 

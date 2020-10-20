@@ -25,7 +25,8 @@ const userRouter = (db) => {
           RETURNING *;`);
       })
       .then((newUser) => {
-        console.log(newUser.rows[0]);
+        console.log(newUser.rows[0].id);
+        req.session.currentUser = newUser.rows[0].id;
         res.redirect('/');
       });
   });

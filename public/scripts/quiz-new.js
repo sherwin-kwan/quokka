@@ -10,6 +10,16 @@ $( () => {
   // RUNS ON DOCUMENT READY
 
   // CONSTANTS
+  const $questions = $('article');
+  console.log($questions);
+
+  // WARNING: Index for questions is 1-based. The first question is question 1; the second question is question 2; and so on
+  // However, the index for options is 0-based. The first answer is option 0, the next answer is option 1, and so on.
+  addNewQuestion($questions, 1);
+  addNewQuestion($questions, 2);
+  addNewQuestion($questions, 3);
+
+  // Button handlers
   $('button').each((i, btn) => {
     $(btn).on('click', (e) => {
       e.preventDefault();

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,22 +14,29 @@
 
   <title>QUOKKA? - New Quiz</title>
 </head>
+
 <body>
   <%- include('../partials/_header.ejs'); %>
   <main>
     <h2>Make a New Quiz</h2>
     <form>
-      <label for="quiz-name">Quiz name</label>
-      <input type="text" name="quiz-name" />
-      <label for="quiz-description">Description</label>
-      <input type="text" name="quiz-description"/>
+      <label for="title">Quiz name</label>
+      <input type="text" name="title" />
+      <label for="description">Short blurb about your quiz</label>
+      <input type="text" name="description" />
+      <!-- WARNING: The original version of this file started numbering from questionIndex 0.
+      This has now been changed. The first question now has questionIndex 1, so it's consistent with quiz-play.ejs -->
+      <article>
+        <!-- Hard coded question 1 which always appears -->
+        <%- include('../partials/_new-question.ejs', {questionIndex:1}) %>
 
-      <!-- will add more in jquery w/ add question button  -->
-      <%- include('../partials/_new-question.ejs', {questionIndex:0}) %>
-
+        <!-- This partial has been commented out. jQuery is being used to load all questions after question 1. -->
+        <%- /* include('../partials/_new-question.ejs', {questionIndex: X})  */ %>
+      </article>
       <button class="new-question"> + Add Question</button>
       <button class="save-quiz" type="submit">Save Quiz</button>
     </form>
   </main>
 </body>
+
 </html>

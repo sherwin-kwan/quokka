@@ -21,7 +21,7 @@ const resultRouter = (db) => {
           res.render("../views/pages/result", templateVars);
         })
       } else {
-        res.send(`No results found for attempt ID ${attemptId}`);
+        res.render(`No results found for attempt ID ${attemptId}`);
       }
     })
     .catch(err => console.error('Error executing query', err.stack));

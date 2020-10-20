@@ -89,8 +89,9 @@ const submitQuiz = ($form) => {
   $.ajax(`${currentUrl}/${userId}`, { method: 'POST', data: $form.serialize() })
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
-      // After a successful quiz save, display submitted (maybe, we can make this redirect to profile page in the future?)
-        $form.append('<h2>Submitted!</h2>');
+      // After a successful quiz save, redirect user to the results page
+        const attemptId = data[0].attempt_id;
+        window.location.href = `/result/${attemptId}`;
       } else {
         // Something went wrong
         console.log(data, status);

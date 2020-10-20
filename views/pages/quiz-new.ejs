@@ -27,10 +27,7 @@
       <!-- WARNING: The original version of this file started numbering from questionIndex 0.
       This has now been changed. The first question now has questionIndex 1, so it's consistent with quiz-play.ejs -->
       <article>
-        <!-- Hard coded question 1 which always appears and cannot be deleted -->
-        <%- include('../partials/_new-question.ejs', {questionIndex: 1}) %>
-
-        <!-- This partial has been commented out. jQuery is being used to load all questions after question 1. -->
+        <!-- This partial has been commented out. jQuery is being used to load all questions on this page. -->
         <%- /* include('../partials/_new-question.ejs', {questionIndex: X})  */ %>
       </article>
       <button class="new-question" data-att="att"> + Add Question</button>

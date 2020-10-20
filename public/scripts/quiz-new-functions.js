@@ -1,7 +1,7 @@
 // Helper functions for the quiz creation page (page C)
 
 // CONSTANTS
-const default_num_of_options = 4;
+const default_num_of_options = 2;
 
 // Needed HTML for each question:
 /*
@@ -73,17 +73,27 @@ const deleteQuestion = ($button) => {
   $button.closest('section').remove();
 };
 
-// where questionNum is the question number to which this option should be appended.
-// if there are currently 3 options, lastOption = 2, and this will add a fourth option with index 3.
-const addNewOption = ($node, questionNum, lastOption) => {
-  $node.append(generateOptionMarkup(questionNum, lastOption + 1));
-  alert('Not yet coded: add an option');
+// This takes a jQuery wrapper on a button as an argument, and adds an option immediately prior to that button
+const addNewOption = ($button) => {
+  $previousOption = $button.prev();
+  // If the user is trying to add the first option (i.e. previously, all the options were deleted), $previousOption will be the div
+  // containing the "correct?" and "option text" labels.
+  // Otherwise, $previousOption will be the last option so far on this question (the 3rd option out of 3, for example)
+  // Or more specifically, a jQuery wrapper on the div that represents that option, which will have an 'option-index' property in the dataset
+  if ($previousOption.data('option-index') >= 0) {
+    const markup = generateOptionMarkup($previousOption.data('question-num'), $previousOption.data('option-index') + 1);
+    $previousOption.after(markup);
+  } else {
+    // We are adding the first option to a question that currently has no options, so get the question number from the parent section's HTML dataset.
+    const markup = generateOptionMarkup($previousOption.closest('section').data('question-num'), 0);
+    $previousOption.after(markup);
+  }
 };
 
-// This function takes a delete button (the HTML element, not jQuery element) beside an option as an argument, and deletes the option
+// This function takes a jQuery wrapper on a button beside an option as an argument, and deletes the option
 // (i.e. deletes its parent div entirely)
-const deleteOption = (button) => {
-  button.parentElement.remove();
+const deleteOption = ($button) => {
+  $button.closest('div').remove();
 };
 
 const submitNewQuiz = ($form) => {
@@ -96,6 +106,7 @@ const submitNewQuiz = ($form) => {
   }
   const userId = 35; // Hard coded to Sherwin for now, will change in the future once we set up cookies
   const dataString = $form.serialize();
+  console.log('Behold the data: ' + dataString);
   // Make Ajax post to the current URL
   $.ajax(window.location.pathname, { method: 'POST', data: $form.serialize() })
     .then((data, status, xhr) => {

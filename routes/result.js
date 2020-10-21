@@ -24,7 +24,7 @@ const resultRouter = (db) => {
         res.status(404).render('../views/pages/error.ejs', {message: `Your quiz results could not be retrieved. If you reached this page via a link, please ask the person who sent you this link to double-check that it's correct.`});
       }
     })
-    .catch(err => console.error('Error executing query', err.stack));
+    .catch(err => console.error('Error:', err.stack));
   });
   return router;
 };

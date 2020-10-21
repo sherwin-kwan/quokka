@@ -19,7 +19,7 @@ $(() => {
 
   $('tr td input[type="checkbox"]').on('click', function() {
     const quizId = $(this).attr('id');
-
-  })
+    $.post(`/quiz/${quizId}/public`);
+  });
 
 });

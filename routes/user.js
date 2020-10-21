@@ -6,17 +6,8 @@
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
-const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
+const { checkUser, getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
-// Checks if a given username appears in the database. If found, returns their password; otherwise, returns false
-const checkUser = (username, db) => {
-  return db.query(`
-  SELECT id, username, password FROM users
-  WHERE username = $1`, [username])
-    .then((data) => {
-      return (data.rows.length) ? [data.rows[0].id, data.rows[0].password] : false;
-    });
-};
 
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
@@ -27,7 +18,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login_register.ejs', { procedure: 'register' });
+    res.render('pages/login-register.ejs', { procedure: 'register' });
   });
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
@@ -57,7 +48,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login_register.ejs', { procedure: 'login' });
+    res.render('pages/login-register.ejs', { procedure: 'login' });
   });
 
 

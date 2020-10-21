@@ -95,7 +95,7 @@ const changeIsPublicBoolean = function(quizId, db) {
   const queryString = `
     UPDATE quizzes
     SET is_public = NOT is_public
-    WHERE id = $1
+    WHERE id = $1;
   `;
   const queryParams = [quizId];
   return db.query(queryString, queryParams)

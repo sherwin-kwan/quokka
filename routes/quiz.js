@@ -64,8 +64,16 @@ const quizRouter = (db) => {
   //Update isPublic status of quiz
   router.post('/:quiz_id/public', (req, res) => {
     changeIsPublicBoolean(req.params.quiz_id, db)
-      .then(result => console.log(result))
-      .catch(err => console.error('Error:', err.stack));
+      .then(result => {
+        console.log(result)
+        res.status(201).send();
+      })
+      .catch(err =>{
+        console.error('Error:', err.stack);
+     
+        res.status(500).json({ error: err.message });
+ 
+      });
     });
 
   // Submit a quiz

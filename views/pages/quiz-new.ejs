@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +9,32 @@
   <link rel="stylesheet" href="/styles/buttons.css" />
 
   <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/quiz-new-functions.js"></script>
+  <script defer src="/scripts/quiz-new.js"></script>
 
-  <title>QUOKKA? - New Quiz</title>
+  <title>Make a New QUOKKA? Quiz</title>
 </head>
+
 <body>
   <%- include('../partials/_header.ejs'); %>
   <main>
     <h2>Make a New Quiz</h2>
     <form>
-      <label for="quiz-name">Quiz name</label>
-      <input type="text" name="quiz-name" />
-      <label for="quiz-description">Description</label>
-      <input type="text" name="quiz-description"/>
-
-      <!-- will add more in jquery w/ add question button  -->
-      <%- include('../partials/_new-question.ejs', {questionIndex:0}) %>
-
-      <button class="new-question" onclick="">+ Add Question</button>
-      <button class="" onclick="" action="submit">Save Quiz</button>
+      <label for="title">Quiz name</label>
+      <input type="text" name="title" />
+      <label for="description">Short blurb about your quiz</label>
+      <input type="text" name="description" />
+      <input type="checkbox" name="is_public"><label for="is_public">Make quiz appear publicly on home page</label>
+      <!-- WARNING: The original version of this file started numbering from questionIndex 0.
+      This has now been changed. The first question now has questionIndex 1, so it's consistent with quiz-play.ejs -->
+      <article>
+        <!-- This partial has been commented out. jQuery is being used to load all questions on this page. -->
+        <%- /* include('../partials/_new-question.ejs', {questionIndex: X})  */ %>
+      </article>
+      <button class="new-question" data-att="att"> + Add Question</button>
+      <button class="save-quiz" type="submit">Save Quiz</button>
     </form>
   </main>
 </body>
+
 </html>

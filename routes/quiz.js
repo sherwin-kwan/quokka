@@ -12,15 +12,14 @@ database.connect();*/
 
 const express = require('express');
 const router = express.Router();
-const format = require('pg-format');
-const { loadWholeQuizJson, saveQuizAttempt, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
+const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
+const inspect = require('util').inspect;
 
 const quizRouter = (db) => {
 
   // Load a quiz asynchronously
   router.get('/:id/load', (req, res) => {
-    const quizId = format(req.params.id);
-    loadWholeQuizJson(quizId, db)
+    loadWholeQuizJson(req.params.id, db)
       .then(arrayOfObjects => {
         res.send(arrayOfObjects);
       })
@@ -29,23 +28,24 @@ const quizRouter = (db) => {
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
-    res.send(`This is the future home of the create-a-quiz page (page C)
-    <form action='new' method='POST'>
-      <button type='submit'>Submit</buton>
-    </form>`);
+    res.render('pages/quiz-new.ejs');
   });
 
   // Submit a quiz
   router.post('/new', (req, res) => {
-    res.statusCode(201).send('You successfully created a new quiz, congrats!');
+    saveNewQuiz(req.session.currentUser, req.body, db)
+    .then(data => {
+      console.log(data);
+      res.status(201).send(JSON.stringify(data)); // Will send an array [quizId, array of questions, array of answers]
+    })
+    .catch(err => console.error('Error saving a quiz ' + err.stack));
   });
 
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
-    const quizId = format(req.params.id);
     db.query(`SELECT title, description
     FROM quizzes
-    WHERE id = ${quizId}`)
+    WHERE id = $1`, [req.params.id])
       .then(data => {
         console.log(data.rows);
         const templateVars = {
@@ -56,7 +56,8 @@ const quizRouter = (db) => {
       })
       .catch(err => {
         console.error('error retrieving quiz title and description', err.stack);
-        res.render('pages/error.ejs', {message: `Your quiz could not be retrieved. If you reached this page via a link, please ask the person
+        res.render('pages/error.ejs', {
+          message: `Your quiz could not be retrieved. If you reached this page via a link, please ask the person
         who sent you this link to double-check that it's correct.`});
       });
   });
@@ -76,9 +77,10 @@ const quizRouter = (db) => {
       });
     });
 
-  // Submit a quiz
-  router.post('/:quiz_id/:user_id', (req, res) => {
-    saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)
+  // Submit a quiz attempt
+  router.post('/:quiz_id', (req, res) => {
+    console.log('Reached the server!!');
+    saveQuizAttempt(req.session.currentUser, req.params.quiz_id, req.body, db)
       .then((data) => {
         res.status(201).send(data.rows);
       })

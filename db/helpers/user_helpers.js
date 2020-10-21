@@ -1,3 +1,15 @@
+
+// FOR LOGINS
+// Checks if a given username appears in the database. If found, returns their password; otherwise, returns false
+const checkUser = (username, db) => {
+  return db.query(`
+  SELECT id, username, password FROM users
+  WHERE username = $1`, [username])
+    .then((data) => {
+      return (data.rows.length) ? [data.rows[0].id, data.rows[0].password] : false;
+    });
+};
+
 //Given user ID, select name
 const getUserName = function(userId, db) {
   const queryString = `
@@ -49,4 +61,4 @@ const getQuizzesTaken = function(userId, db) {
     .catch(err => console.error('getQuizzesTaken query error', err.stack));
 };
 
-module.exports = { getUserName, getQuizzesCreated, getQuizzesTaken };
+module.exports = { checkUser, getUserName, getQuizzesCreated, getQuizzesTaken };

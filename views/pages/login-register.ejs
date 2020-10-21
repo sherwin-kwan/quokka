@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%- include('../partials/_head-styles.ejs'); %>
+
+  <link rel="stylesheet" href="/styles/user.css" />
+  <link rel="stylesheet" href="/styles/buttons.css" />
+  <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/login-register.js"></script>
+
+  <title>QUOKKA? - <%= procedure %> </title>
+</head>
+
+<body>
+  <%- include('../partials/_header.ejs'); %>
+  <main>
+    <h2>Welcome to Quokka - <%= procedure %></h2>
+    <nav class="toggle">
+      <button id="login" class="profile-tab <% if (procedure === 'login') { %> active <% } %>">Log In</button>
+      <button id="register" class="profile-tab <% if (procedure === 'register') { %> active <% } %>">Sign Up</button>
+    </nav>
+    <form method="POST" class="login <%- (procedure === 'login') ? 'showing' : 'initialHide'; %>">
+      <div class="name-wrapper">
+        <label for="name">Username:
+          <input class="form-create" name="username" type="text"></label>
+      </div>
+      <div class="name-wrapper">
+        <label for="password">Password:
+          <input type="password" class="form-create" name="password"></label>
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+    <form method="POST" class="register <%- (procedure === 'login') ? 'initialHide' : 'showing'; %> ">
+      <p class="passwordWarning">Warning, please don't use any passwords you use on other sites. Hashing has not been
+        set up yet and this
+        system might not be secure!
+      </p>
+      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+        <label for="name">First Name:
+          <input class="form-create" name="fname" type="text"></label>
+      </div>
+      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+        <label for="name">Last Name:
+          <input class="form-create" name="lname" type="text"></label>
+      </div>
+      <!--<div class="name-wrapper">
+          <label for="email">Email:
+            <input class="form-create" name="email" type="text"></label>
+        </div>-->
+      <div class="name-wrapper">
+        <label for="name">Username:
+          <input class="form-create" name="username" type="text"></label>
+      </div>
+      <div class="name-wrapper">
+        <label for="password">Password:
+          <input type="password" class="form-create" name="password"></label>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- A convenient link for users to go between login and register pages -->
+
+
+  </main>
+
+
+</body>
+
+</html>

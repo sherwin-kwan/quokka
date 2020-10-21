@@ -1,4 +1,4 @@
-// Helper functions for the quiz page
+// Helper functions for the quiz taking page (page B)
 
 // Escaping and Sanitizing
 // Helper function (copied from Compass) which escapes unwanted characters in a string to prevent script injections
@@ -80,13 +80,11 @@ const submitQuiz = ($form) => {
   const valid = true;
   //
   //
-  const currentUrl = window.location.pathname;
   if (!valid) {
     throw new Error('Validation failed');
   }
   // In the future, this needs to be changed to read a cookie
-  const userId = 35;
-  $.ajax(`${currentUrl}/${userId}`, { method: 'POST', data: $form.serialize() })
+  $.ajax(`${window.location.pathname}`, { method: 'POST', data: $form.serialize() })
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
       // After a successful quiz save, redirect user to the results page

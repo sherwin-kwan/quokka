@@ -2,6 +2,9 @@
 // Failure to do so may result in asynchronous problems (i.e. the script attempts to create an event listener
 // for a button too early, and since the button hasn't loaded yet, there is an error and when the button finally loads, it's too late to be useful.)
 
+// This script is loaded onto the quiz taking page (page B, /quiz/:id)
+// Helper functions are found in quiz-play-functions.js
+
 $(() => {
   // RUNS ON DOCUMENT READY
 

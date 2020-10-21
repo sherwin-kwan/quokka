@@ -20,7 +20,7 @@ const getUserName = function(userId, db) {
   const queryParams = [userId];
   return db.query(queryString, queryParams)
     .then(res => res.rows[0])
-    .catch(err => console.error('query error', err.stack));
+    .catch(err => console.error('getUserName query error', err.stack));
 };
 
 //Given a user ID, select quiz title and isPublic for every quiz the user has created:
@@ -37,7 +37,7 @@ const getQuizzesCreated = function(userId, db) {
   const queryParams = [userId];
   return db.query(queryString, queryParams)
     .then(res => res.rows)
-    .catch(err => console.error('query error', err.stack));
+    .catch(err => console.error('getQuizzesCreated query error', err.stack));
 };
 
 //Given a user ID, select the high score & quiz title for each quiz the user has taken:
@@ -58,7 +58,7 @@ const getQuizzesTaken = function(userId, db) {
   const queryParams = [userId];
   return db.query(queryString, queryParams)
     .then(res => res.rows)
-    .catch(err => console.error('query error', err.stack));
+    .catch(err => console.error('getQuizzesTaken query error', err.stack));
 };
 
 module.exports = { checkUser, getUserName, getQuizzesCreated, getQuizzesTaken };

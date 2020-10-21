@@ -256,4 +256,17 @@ const saveNewQuiz = (userId, body, db) => {
     });
 };
 
-module.exports = { loadOneQuestionJson, loadWholeQuizJson, saveQuizAttempt, saveNewQuiz };
+//Update boolean value of quiz is_public field to the opposite of what it currently is:
+const changeIsPublicBoolean = function(quizId, db) {
+  const queryString = `
+    UPDATE quizzes
+    SET is_public = NOT is_public
+    WHERE id = $1;
+  `;
+  const queryParams = [quizId];
+  return db.query(queryString, queryParams)
+  .then(res => res.rows)
+  .catch(err => console.error('Error changing isPublic boolean:', err.stack));
+}
+
+module.exports = { loadOneQuestionJson, loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean };

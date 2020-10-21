@@ -1,7 +1,5 @@
 // Functions for login and registration page (/user/login or /user/register)
 
-const { format } = require("morgan");
-
 $(() => {
   // On document ready
 
@@ -24,7 +22,7 @@ $(() => {
     $loginForm.hide();
   });
 
-  $loginForm.on('submit', async (e) => {
+  $loginForm.on('submit', (e) => {
     e.preventDefault();
     // VAlidation code here
     //
@@ -32,11 +30,19 @@ $(() => {
     //
     //
     if (valid) {
-      const result = await $.ajax('/user/login', {method: 'POST', data: $loginForm.serialize()});
+      $.ajax('/user/login', { method: 'POST', data: $loginForm.serialize() })
+        .then(// Successful
+          (data, status, xhr) => {
+            window.location.href = '/';
+          }
+        )
+        .catch(err => {
+          alert(err.responseText);
+        });
     };
   });
 
-  $registerForm.on('submit', async (e) => {
+  $registerForm.on('submit', (e) => {
     e.preventDefault();
     // VAlidation code here
     //
@@ -44,7 +50,15 @@ $(() => {
     //
     //
     if (valid) {
-      const result = await $.ajax('/user/register', {method: 'POST', data: $registerForm.serialize()});
+      $.ajax('/user/register', { method: 'POST', data: $registerForm.serialize() })
+        .then(// Successful
+          (data, status, xhr) => {
+            window.location.href = '/';
+          }
+        )
+        .catch(err => {
+          alert(err.responseText);
+        });
     };
   });
 

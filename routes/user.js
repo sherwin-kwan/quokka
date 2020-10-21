@@ -27,7 +27,7 @@ const userRouter = (db) => {
 
     const check = await checkUser(req.body.username, db);
     if (check) {
-      res.status(400).send({ message: 'User already exists. Please log in.' });
+      res.status(400).send('User already exists. Please log in.');
       return;
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 8);
@@ -37,7 +37,7 @@ const userRouter = (db) => {
 
     console.log(newUser.rows[0].id);
     req.session.currentUser = newUser.rows[0].id;
-    res.redirect('/');
+    res.status(200).send('OK');
   });
 
   // Login:
@@ -57,15 +57,17 @@ const userRouter = (db) => {
 
   router.post('/login', async (req, res) => {
     // Look up the hashed password for this user
+    console.log('Login processing');
     const data = await checkUser(req.body.username, db); // In the format [id, hashed_password]
     const hash = data[1];
     if (!hash) {
-      res.status(404).send('Your username does not appear in our database. Perhaps you need to create an account?')
+      res.status(400).send('Your username does not appear in our database. Perhaps you need to create an account?')
     } else if (!await bcrypt.compare(req.body.password, hash)) {
-      res.status(403).send(`Sorry, email and password don't match.`);
+      res.status(400).send(`Sorry, email and password don't match.`);
     } else {
+      console.log('Login OK');
       req.session.currentUser = data[0];
-      res.redirect('/');
+      res.status(200).send('OK');
     }
   });
 

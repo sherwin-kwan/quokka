@@ -8,17 +8,15 @@
 }
 
 .quiz-tile {
-  width:$mobile-col-3;
-  height:$mobile-col-3;
-  text-align: center;
-  background-color: gray;
-  margin-bottom: $mobile-gutter;
-
   display:flex;
   align-items: center;
   justify-content: center;
-}
 
-.quiz-tile a {
+  width:$mobile-col-3;
+  height:$mobile-col-3;
+  margin-bottom: $mobile-gutter;
+  
+  background-color: gray;
+  text-align: center;
   text-decoration: none;
 }

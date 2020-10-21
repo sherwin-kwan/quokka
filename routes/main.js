@@ -22,7 +22,7 @@ const mainRouter = (db) => {
       console.log(parsedResults);
       res.render("pages/index.ejs", {quizzes:parsedResults});  
     });
-    res.render("pages/index.ejs");
+    // res.render("pages/index.ejs");
   });
 
   // Catch-all code for non-existent routes. If the route doesn't match anything above, it will send this 404 page:

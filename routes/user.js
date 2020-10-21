@@ -6,7 +6,6 @@
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
-const format = require('pg-format');
 const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
 /* The "db" argument is a Postgres Pool object */
@@ -24,8 +23,8 @@ const userRouter = (db) => {
     bcrypt.hash(req.body.password, 8)
       .then((hashedPassword) => {
         return db.query(`INSERT INTO users (fname, lname, username, password) VALUES
-          ('${format(req.body.fname)}', '${format(req.body.lname)}', '${format(req.body.username)}', '${hashedPassword}')
-          RETURNING *;`);
+          ($1, $2, $3, $4)
+          RETURNING *;`, [req.body.fname, req.body.lname, req.body.username, hashedPassword]);
       })
       .then((newUser) => {
         console.log(newUser.rows[0].id);
@@ -41,26 +40,28 @@ const userRouter = (db) => {
     res.render('pages/login_register.ejs', { procedure: 'login' });
   });
 
+  // router.post('/login', (req, res) => {
+  //   const userID = findUserByEmail(req.body.email, users);
+  //   const templateVars = defaultTemplateVars();
+  //   // Two checks: 1) does the user exist? 2) does the user enter the correct password?
+  //   if (!userID) {
+  //     templateVars.message = 'Your email does not appear in our database. Perhaps you need to create an account?';
+  //     res.status(403).render('error', templateVars);
+  //     return;
+  //   }
+  //   if (!bcrypt.compareSync(req.body.password, users[userID].password)) {
+  //     templateVars.message = 'Sorry, email and password do not match. Please try again.';
+  //     res.status(403).render('error', templateVars);
+  //     return;
+  //   }
+  //   // If email and password check out, log the user in and create a session cookie
+  //   req.session.userID = userID;
+  //   res.redirect('/urls');
+  // });
+
+
   // Handles login requests
   // Username and password will be submitted as parameters in req.body
-  router.post('/login', (req, res) => {
-    const userID = findUserByEmail(req.body.email, users);
-    const templateVars = defaultTemplateVars();
-    // Two checks: 1) does the user exist? 2) does the user enter the correct password?
-    if (!userID) {
-      templateVars.message = 'Your email does not appear in our database. Perhaps you need to create an account?';
-      res.status(403).render('error', templateVars);
-      return;
-    }
-    if (!bcrypt.compareSync(req.body.password, users[userID].password)) {
-      templateVars.message = 'Sorry, email and password do not match. Please try again.';
-      res.status(403).render('error', templateVars);
-      return;
-    }
-    // If email and password check out, log the user in and create a session cookie
-    req.session.userID = userID;
-    res.redirect('/urls');
-  });
 
   router.post('/login', (req, res) => {
     res.send(`Sorry, logging in hasn't been implemented yet`);

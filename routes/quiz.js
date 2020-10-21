@@ -12,7 +12,6 @@ database.connect();*/
 
 const express = require('express');
 const router = express.Router();
-const format = require('pg-format');
 const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz } = require('../db/helpers/quiz_helpers.js');
 const inspect = require('util').inspect;
 
@@ -20,8 +19,7 @@ const quizRouter = (db) => {
 
   // Load a quiz asynchronously
   router.get('/:id/load', (req, res) => {
-    const quizId = format(req.params.id);
-    loadWholeQuizJson(quizId, db)
+    loadWholeQuizJson(req.params.id, db)
       .then(arrayOfObjects => {
         res.send(arrayOfObjects);
       })
@@ -45,10 +43,9 @@ const quizRouter = (db) => {
 
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
-    const quizId = format(req.params.id);
     db.query(`SELECT title, description
     FROM quizzes
-    WHERE id = ${quizId}`)
+    WHERE id = $1`, [req.params.id])
       .then(data => {
         console.log(data.rows);
         const templateVars = {
@@ -66,7 +63,7 @@ const quizRouter = (db) => {
   });
 
 
-  // Submit a quiz
+  // Submit a quiz attempt
   router.post('/:quiz_id/:user_id', (req, res) => {
     console.log('Reached the server!!');
     saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)

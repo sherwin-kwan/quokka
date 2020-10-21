@@ -73,8 +73,8 @@ const submitNewQuiz = ($form) => {
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
         // After a successful quiz save, redirect user to the results page
-        const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds], [array of optionIds]]
-        const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions and ${arr[2].length} answer choices.
+        const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds]]
+        const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions.
         You may find your quiz at the following link: ${window.location.host + '/quiz/' + arr[0]}`;
         alert(message);
       } else {

@@ -24,8 +24,7 @@ $(() => {
 
   const verifyInputNotEmpty = ($form) => {
     for (input of $form.find(`input[type='text']`)) {
-      console.log($(input).val());
-      if ($(input).val().length === 0) {
+      if (input.value.length === 0) {
         throw new Error('All fields are required and cannot be empty');
       }
     }
@@ -43,17 +42,18 @@ $(() => {
             window.location.href = '/';
           }
         ).catch(err => {
+          console.log('An error happened', err.responseText);
           throw new Error(err.responseText);
         })
     } catch (err) {
-      console.log(err.message);
-      $form.find('div.error-message').append(err.message);
+      console.log('Message caught is: ', err.message);
+      $form.find('div.error-message').html(err.message);
     };
   };
 
   $loginForm.on('submit', (e) => {
     e.preventDefault();
-    ajaxLoginHandler($registerForm, 'login');
+    ajaxLoginHandler($loginForm, 'login');
   });
 
   $registerForm.on('submit', (e) => {

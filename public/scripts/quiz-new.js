@@ -54,7 +54,11 @@ $(() => {
     try {
       submitNewQuiz($(this));
     } catch (err) {
-      console.log(err.message, err.stack);
+      if (err.responseText) {
+        console.log(err.responseText);
+      } else {
+        console.log(err.message);
+      }
     }
   })
 });

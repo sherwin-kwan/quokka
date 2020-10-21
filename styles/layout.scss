@@ -8,9 +8,11 @@ body {
   }
 }
 
-.color-testing {
+/* Use this for testing jQuery picking elements */
+.color-test {
   background-color: red;
   color: green;
+  border: 5px solid black;
 }
 
 .error-message {

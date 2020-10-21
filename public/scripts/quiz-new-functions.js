@@ -78,8 +78,7 @@ const submitNewQuiz = ($form) => {
         alert(message);
       } else {
         // Something went wrong
-        alert(data, status, 'Failure!');
+        throw new Error(data + status);
       }
-    })
-    .catch(err => console.log("Problem:", err, err.message));
+    });
 };

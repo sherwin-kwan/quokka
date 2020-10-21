@@ -8,7 +8,12 @@ body {
   }
 }
 
-color-testing {
+.color-testing {
   background-color: red;
   color: green;
+}
+
+.error-message {
+  color: red;
+  font-weight: 500;
 }

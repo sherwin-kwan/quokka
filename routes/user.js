@@ -10,6 +10,30 @@ const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpe
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
 
+  // User profile:
+  router.get("/:id", (req, res) => {
+    const userId = req.params.id;
+    getUserName(userId, db)
+    .then (name => {
+      if (name) {
+        const templateVars = { name };
+        getQuizzesCreated(userId, db)
+        .then(quizzesCreated => {
+          templateVars.quizzesCreated = quizzesCreated;
+          getQuizzesTaken(userId, db)
+          .then(quizzesTaken => {
+            templateVars.quizzesTaken = quizzesTaken;
+            console.log(templateVars);
+            res.render('../views/pages/user', templateVars);
+          });
+        });
+      } else {
+        res.status(404).render('../views/pages/error.ejs', {message: `This profile page could not be retrieved. If you reached this page via a link, please ask the person who sent you this link to double-check that it's correct.`});
+      }
+    })
+    .catch(err => console.error('Error executing query', err.stack));
+  });
+
 
   // Register:
   router.get('/register', (req, res) => {

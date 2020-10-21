@@ -6,7 +6,7 @@ const loadPublicQuizzes = (db) => {
   FROM quizzes
   WHERE is_public = true
   ORDER BY created_at DESC
-  LIMIT 10;`)
+  LIMIT 16;`)
   .then(results => {
     return results.rows;
   })

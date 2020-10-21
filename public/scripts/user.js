@@ -1,10 +1,7 @@
-//when you click button, it shows its content and hides the other
-
-//when you click button, it changes class
-
 //The below line is shorthand for "$(document).ready(function () {"; it means the function won't be invoked until the page is loaded
 $(() => {
 
+  //The below two blocks of code handle the toggling between quizzes_made and quiz_results on the user profile page:
   $('#quiz').on('click', () => {
     $('#listOfResults').hide();
     $('#listOfQuizzesCreated').show();
@@ -18,5 +15,9 @@ $(() => {
     $('#results').addClass('active');
     $('#quiz').removeClass('active');
   });
+
+  $('input[type="checkbox"]').on('click', () => {
+
+  })
 
 });

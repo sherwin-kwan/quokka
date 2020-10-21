@@ -1,15 +1,16 @@
 <table>
   <tr>
-    <th class="quiz-name">Quiz name</th>
+    <th class="quiz-name">Quiz Results</th>
     <th>Score</th>
-    <th>Link</th>
+    <th></th>
   </tr>
 
   <% for (const quiz of quizzesTaken) { %>
     <%- include('_user-results-row.ejs',
       {
         name: quiz.title,
-        score: quiz.percent_correct
+        score: quiz.percent_correct,
+        attempt_id: quiz.attempt_id
       }
     ) %>
   <% }; %>

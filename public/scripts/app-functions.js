@@ -1,7 +1,7 @@
 // Use this file for functions that will be invoked on multiple pages in Quokka.
 
-//Copy to clipboard - the text of an element:
-const copyToClipboardElement = function (element) {
+//Copy the text content of an element to clipboard:
+const copyToClipboardElementText = function (element) {
   const $container = $('<input>');
   $('body').append($container);
   $container.val($(element).text()).select();
@@ -9,3 +9,11 @@ const copyToClipboardElement = function (element) {
   $container.remove();
 };
 
+//Copy any provided string to clipboard:
+const copyToClipboardAnyString = function (string) {
+  const $container = $('<input>');
+  $('body').append($container);
+  $container.val(string).select();
+  document.execCommand('copy');
+  $container.remove();
+};

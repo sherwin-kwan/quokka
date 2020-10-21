@@ -22,9 +22,16 @@ $(() => {
     $.post(`/quiz/${quizId}/public`);
   });
 
-  $('tr td :button').on('click', function() {
-    const element = "hi";
-    copyToClipboard(element);
+  $('.quizCopyButton').on('click', function() {
+    const quizId = $(this).parent().parent().attr('id');
+    const string = `http://localhost:8080/quiz/${quizId}`;
+    copyToClipboardAnyString(string);
+  })
+
+  $('.resultsCopyButton').on('click', function() {
+    const attemptId = $(this).parent().parent().attr('id');
+    const string = `http://localhost:8080/result/${attemptId}`;
+    copyToClipboardAnyString(string);
   })
 
 });

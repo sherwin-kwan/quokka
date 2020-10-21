@@ -23,9 +23,10 @@ nav#profile {
 
 table {
   width:100%;
-  // th {
-  //   text-align: left;
-  // }
+  margin-bottom: $mobile-col-1;
+  th {
+    text-align: left;
+  }
   tr {
     display: flex;
     justify-content: space-between;
@@ -37,7 +38,7 @@ table {
       width:$mobile-col-1;
     }
     .quiz-name {
-      width: 64%;
+      width: 45%;
       text-align: left;
     }
 
@@ -66,4 +67,8 @@ table {
   background-color: cadetblue;
   border-radius: 5px;
 
+}
+
+.initialHide {
+  display: none;
 }

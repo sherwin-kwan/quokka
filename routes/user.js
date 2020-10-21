@@ -5,22 +5,12 @@
 
 const express = require('express');
 const router = express.Router();
+const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
 
-  // Login page
-  router.get('/login', (req, res) => {
-    res.send(`This is the login page:
-    <form action='login' method='POST'>
-      <button type='submit'>Log In</buton>
-    </form>`);
-  });
-
-  router.post('/login', (req, res) => {
-    res.send('This is where you either logged in or got a password error');
-  });
-
+  // Register:
   router.get('/register', (req, res) => {
     res.send(`This is the registration page:
     <form action='register' method='POST'>
@@ -33,42 +23,41 @@ const userRouter = (db) => {
   });
 
 
-  // Load results asynchronously
-  router.get('/:id/results', (req, res) => {
-    // db.query(/* INSERT QUERY TO GET PAST RESULTS */)
-    //   .then(data => {
-    //     const users = data.rows;
-    //     res.json({ users });
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
-    res.json({ "notes": "This is the route where user's previous results will pop up",
-      "score": "90%", "status": "this page is just a test" });
+  // Login:
+  router.get('/login', (req, res) => {
+    res.send(`This is the login page:
+    <form action='login' method='POST'>
+      <button type='submit'>Log In</buton>
+    </form>`);
   });
 
-  // Load the user's quizzes asynchronously
-  router.get('/:id/quizzes', (req, res) => {
-    // db.query(/* INSERT QUERY TO GET THE USER'S CREATED QUIZZES */)
-    //   .then(data => {
-    //     const users = data.rows;
-    //     res.json({ users });
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
-    res.json([{ "quiz": "1", "status": "this page is just a test" },
-      { "quiz": "2", "status": "this is just a test" }]);
+  router.post('/login', (req, res) => {
+    res.send('This is where you either logged in or got a password error');
   });
 
-  // User profile page. Fetches a template (until it's ready, right now it just displays dummy text)
+
+  // User profile:
   router.get("/:id", (req, res) => {
     const userId = req.params.id;
-    res.send(`This is the future profile page for user ${userId}`);
+    getUserName(userId, db)
+    .then (name => {
+      if (name) {
+        const templateVars = { name };
+        getQuizzesCreated(userId, db)
+        .then(quizzesCreated => {
+          templateVars.quizzesCreated = quizzesCreated;
+          getQuizzesTaken(userId, db)
+          .then(quizzesTaken => {
+            templateVars.quizzesTaken = quizzesTaken;
+            console.log(templateVars);
+            res.render('../views/pages/user', templateVars);
+          });
+        });
+      } else {
+        res.status(404).render('../views/pages/error.ejs', {message: `This profile page could not be retrieved. If you reached this page via a link, please ask the person who sent you this link to double-check that it's correct.`});
+      }
+    })
+    .catch(err => console.error('Error executing query', err.stack));
   });
 
   return router;

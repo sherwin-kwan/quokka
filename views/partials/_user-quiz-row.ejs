@@ -1,4 +1,5 @@
 <tr>
-  <td class="quiz-name"><%= name %></td>
-  <td><input type="checkbox" <%= isPublic ? 'checked' : null %> /></td>
+  <td class="quiz-name"><a href="/quiz/<%= quiz_id %>"><%= name %></a></td>
+  <td><input id="<%= quiz_id %>" type="checkbox" <%= isPublic ? 'checked' : null %> /></td>
+  <td><button onclick="">Copy Link</button></td>
 </tr>

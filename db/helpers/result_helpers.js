@@ -1,5 +1,4 @@
-//Check to see if there is an attempt ID in the DB:
-
+//Given an attempt ID, select data about the attempt:
 const getAttemptData = function(attemptId, db) {
   const queryString = `
     SELECT
@@ -24,9 +23,7 @@ const getAttemptData = function(attemptId, db) {
     .catch(err => console.error('query error', err.stack));
 };
 
-
-//Load a JSON of the full quiz (questions & answer options with is_correct and user_selected) given attempt_id:
-
+//Given an attempt ID, load a JSON of the quiz attempted (questions & answer options with is_correct and user_selected fields):
 const loadWholeQuizJson = (attemptId, db) => {
   const queryString = `
   SELECT questions.question_num, questions.text,

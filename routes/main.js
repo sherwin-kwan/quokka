@@ -23,7 +23,7 @@ const mainRouter = (db) => {
       res.render("pages/index.ejs", {quizzes:parsedResults});  
     })
     .catch(err => {
-      res.render("pages/index.ejs");
+      res.render("pages/index.ejs", {quizzes:undefined});
     })
   });
 

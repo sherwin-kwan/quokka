@@ -13,7 +13,7 @@ database.connect();*/
 const express = require('express');
 const router = express.Router();
 const format = require('pg-format');
-const { loadWholeQuizJson, saveQuizAttempt } = require('../db/helpers/quiz_helpers.js');
+const { loadWholeQuizJson, saveQuizAttempt, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
 
 const quizRouter = (db) => {
 
@@ -61,6 +61,20 @@ const quizRouter = (db) => {
       });
   });
 
+  //Update isPublic status of quiz
+  router.post('/:quiz_id/public', (req, res) => {
+    changeIsPublicBoolean(req.params.quiz_id, db)
+      .then(result => {
+        console.log(result)
+        res.status(201).send();
+      })
+      .catch(err =>{
+        console.error('Error:', err.stack);
+     
+        res.status(500).json({ error: err.message });
+ 
+      });
+    });
 
   // Submit a quiz
   router.post('/:quiz_id/:user_id', (req, res) => {

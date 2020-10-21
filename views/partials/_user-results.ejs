@@ -1,12 +1,18 @@
 <table>
   <tr>
-    <th class="quiz-name">name</th>
-    <th>score</th>
-    <th>copy link</th>
+    <th class="quiz-name">Quiz Results</th>
+    <th>Score</th>
+    <th></th>
   </tr>
 
-  <!-- for-loop to generate table content -->
-  <%- include('_user-results-row.ejs', {name:'Kim Possible Lore', score:'75%', link:""}) %>
-  <%- include('_user-results-row.ejs', {name:'Care Bears Quiz', score:'100%', link:""}) %>
-  <%- include('_user-results-row.ejs', {name:'Nostalgia Trip Test', score:'80%', link:""}) %>
+  <% for (const quiz of quizzesTaken) { %>
+    <%- include('_user-results-row.ejs',
+      {
+        name: quiz.title,
+        score: quiz.percent_correct,
+        attempt_id: quiz.attempt_id
+      }
+    ) %>
+  <% }; %>
+
 </table>

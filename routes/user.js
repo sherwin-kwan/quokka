@@ -27,7 +27,7 @@ const userRouter = (db) => {
 
     const check = await checkUser(req.body.username, db);
     if (check) {
-      res.status(400).send('User already exists. Please log in.');
+      res.status(400).send(`This username is already taken. If that <em>is</em> you trying to log in, please click on "Log In" instead.`);
       return;
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 8);

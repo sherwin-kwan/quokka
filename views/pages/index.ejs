@@ -14,11 +14,14 @@
   <%- include('../partials/_header.ejs'); %>
   <main class="quiz-tile-container">
     <!-- Replace w/ for loop when data fetching ready -->
-    
-    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/ejs/quiz/1', title:'My First QUOKKA?'}}); %>
-    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/ejs/quiz/1', title:'US Presidents'}}); %>
-    <%- include('../partials/_quiz-tile.ejs', {quiz:{link:'/ejs/quiz/1', title:'Quiz to assert dominance'}}); %>
-    
+    <% if (quizzes){ %>
+      <% for (let quiz of quizzes) {%>
+        <%- include('../partials/_quiz-tile.ejs', {quiz}); %>
+      <% } %>
+    <%} else {%>
+      <p>Something went wrong. Please reload!</p>
+    <% } %>
+   
   </main>
 </body>
 </html>

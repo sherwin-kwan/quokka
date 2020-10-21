@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS user_answers CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR(50) NOT NULL,
+  username VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(100) NOT NULL,
   fname VARCHAR(50),
   lname VARCHAR(50)

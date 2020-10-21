@@ -9,12 +9,12 @@ const router = express.Router();
 const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
 // Checks if a given username appears in the database. If found, returns their password; otherwise, returns false
-const checkUser = (username) => {
+const checkUser = (username, db) => {
   return db.query(`
-  SELECT username, password FROM users
+  SELECT id, username, password FROM users
   WHERE username = $1`, [username])
     .then((data) => {
-      return (data.rows.length) ? data.rows[0].password : false;
+      return (data.rows.length) ? [data.rows[0].id, data.rows[0].password] : false;
     });
 };
 
@@ -23,15 +23,20 @@ const userRouter = (db) => {
 
   // Register:
   router.get('/register', (req, res) => {
+    if (req.session.currentUser) { // If already logged in
+      res.redirect('/');
+      return;
+    }
     res.render('pages/login_register.ejs', { procedure: 'register' });
   });
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
   // parameters will arrive in an object containing the following: fname, lname, username, password
-  router.post('/register', async function (req, res) {
-    const check = await checkUser(req.body.username);
+  router.post('/register', async (req, res) => {
+
+    const check = await checkUser(req.body.username, db);
     if (check) {
-      res.status(400).send({ message: 'User already exists' });
+      res.status(400).send({ message: 'User already exists. Please log in.' });
       return;
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 8);
@@ -48,36 +53,36 @@ const userRouter = (db) => {
 
   // Login page
   router.get('/login', (req, res) => {
+    if (req.session.currentUser) { // If already logged in
+      res.redirect('/');
+      return;
+    }
     res.render('pages/login_register.ejs', { procedure: 'login' });
   });
-
-  // router.post('/login', (req, res) => {
-  //   const userID = findUserByEmail(req.body.email, users);
-  //   const templateVars = defaultTemplateVars();
-  //   // Two checks: 1) does the user exist? 2) does the user enter the correct password?
-  //   if (!userID) {
-  //     templateVars.message = 'Your email does not appear in our database. Perhaps you need to create an account?';
-  //     res.status(403).render('error', templateVars);
-  //     return;
-  //   }
-  //   if (!bcrypt.compareSync(req.body.password, users[userID].password)) {
-  //     templateVars.message = 'Sorry, email and password do not match. Please try again.';
-  //     res.status(403).render('error', templateVars);
-  //     return;
-  //   }
-  //   // If email and password check out, log the user in and create a session cookie
-  //   req.session.userID = userID;
-  //   res.redirect('/urls');
-  // });
 
 
   // Handles login requests
   // Username and password will be submitted as parameters in req.body
 
-  router.post('/login', (req, res) => {
-    `SELECT username FROM users
-    WHERE username = $1`, [req.body.username]
-    res.send(`Sorry, logging in hasn't been implemented yet`);
+  router.post('/login', async (req, res) => {
+    // Look up the hashed password for this user
+    const data = await checkUser(req.body.username, db); // In the format [id, hashed_password]
+    const hash = data[1];
+    if (!hash) {
+      res.status(404).send('Your username does not appear in our database. Perhaps you need to create an account?')
+    } else if (!await bcrypt.compare(req.body.password, hash)) {
+      res.status(403).send(`Sorry, email and password don't match.`);
+    } else {
+      req.session.currentUser = data[0];
+      res.redirect('/');
+    }
+  });
+
+  // Logging out
+
+  router.get('/logout', (req, res) => {
+    req.session = null; // Clears the session cookie
+    res.redirect('/user/login');
   });
 
   // User profile:

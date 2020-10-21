@@ -65,11 +65,10 @@ const submitNewQuiz = ($form) => {
   if (!valid) {
     throw new Error('Validation failed');
   }
-  const userId = 35; // Hard coded to Sherwin for now, will change in the future once we set up cookies
   const dataString = $form.serialize();
   console.log('Behold the data: ' + dataString);
   // Make Ajax post to the current URL
-  $.ajax(window.location.pathname + `/${userId}`, { method: 'POST', data: dataString })
+  $.ajax(window.location.pathname, { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
         // After a successful quiz save, redirect user to the results page

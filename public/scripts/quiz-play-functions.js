@@ -84,8 +84,7 @@ const submitQuiz = ($form) => {
     throw new Error('Validation failed');
   }
   // In the future, this needs to be changed to read a cookie
-  const userId = 35;
-  $.ajax(`${window.location.pathname}/${userId}`, { method: 'POST', data: $form.serialize() })
+  $.ajax(`${window.location.pathname}`, { method: 'POST', data: $form.serialize() })
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
       // After a successful quiz save, redirect user to the results page

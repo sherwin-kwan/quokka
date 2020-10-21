@@ -238,13 +238,13 @@ a2: [ 'Greenknife', 'correct', 'Yellowknife' ]
 }
 */
 
-const saveNewQuiz = (params, body, db) => {
+const saveNewQuiz = (userId, body, db) => {
   // Convert from the JSON sent by jQuery (checked checkboxes have the value 'on') into a JS boolean
   const isPublic = (body.is_public === 'on') ? true : false;
   return db.query(`
   INSERT INTO quizzes (creator_id, title, description, created_at, is_public)
   VALUES ($1, $2, $3, NOW(), ${isPublic})
-  RETURNING id;`, [params.creator_id, body.title, body.description])
+  RETURNING id;`, [userId, body.title, body.description])
     .catch(err => console.error('Error inserting quiz ', err.stack))
     .then((data) => saveQuestions(db, body, data))
     .catch(err => console.error('Error inserting questions, ', err.stack))

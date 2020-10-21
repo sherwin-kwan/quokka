@@ -32,8 +32,8 @@ const quizRouter = (db) => {
   });
 
   // Submit a quiz
-  router.post('/new/:creator_id', (req, res) => {
-    saveNewQuiz(req.params, req.body, db)
+  router.post('/new', (req, res) => {
+    saveNewQuiz(req.session.currentUser, req.body, db)
     .then(data => {
       console.log(data);
       res.status(201).send(JSON.stringify(data)); // Will send an array [quizId, array of questions, array of answers]
@@ -64,9 +64,9 @@ const quizRouter = (db) => {
 
 
   // Submit a quiz attempt
-  router.post('/:quiz_id/:user_id', (req, res) => {
+  router.post('/:quiz_id', (req, res) => {
     console.log('Reached the server!!');
-    saveQuizAttempt(req.params.user_id, req.params.quiz_id, req.body, db)
+    saveQuizAttempt(req.session.currentUser, req.params.quiz_id, req.body, db)
       .then((data) => {
         res.status(201).send(data.rows);
       })

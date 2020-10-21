@@ -1,4 +1,5 @@
 //The below line is shorthand for "$(document).ready(function () {"; it means the function won't be invoked until the page is loaded
+
 $(() => {
 
   //The below two blocks of code handle the toggling between quizzes_made and quiz_results on the user profile page:
@@ -16,7 +17,8 @@ $(() => {
     $('#quiz').removeClass('active');
   });
 
-  $('input[type="checkbox"]').on('click', () => {
+  $('tr td input[type="checkbox"]').on('click', function() {
+    const quizId = $(this).attr('id');
 
   })
 

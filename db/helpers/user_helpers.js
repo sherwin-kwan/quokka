@@ -49,17 +49,4 @@ const getQuizzesTaken = function(userId, db) {
     .catch(err => console.error('getQuizzesTaken query error', err.stack));
 };
 
-//Update boolean value of is_public to the opposite of what it currently is:
-const changePublicBoolean = function(quizId, db) {
-  const queryString = `
-    UPDATE quizzes
-    SET is_public = NOT is_public
-    WHERE id = $1
-  `;
-  const queryParams = [quizId];
-  return db.query(queryString, queryParams)
-  .then(res => res.rows)
-  .catch(err => console.error('changePublicBoolean query error', err.stack));
-}
-
 module.exports = { getUserName, getQuizzesCreated, getQuizzesTaken };

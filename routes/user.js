@@ -8,9 +8,18 @@ const express = require('express');
 const router = express.Router();
 const { getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
 
+// Checks if a given username appears in the database. If found, returns their password; otherwise, returns false
+const checkUser = (username) => {
+  return db.query(`
+  SELECT username, password FROM users
+  WHERE username = $1`, [username])
+    .then((data) => {
+      return (data.rows.length) ? data.rows[0].password : false;
+    });
+};
+
 /* The "db" argument is a Postgres Pool object */
 const userRouter = (db) => {
-
 
   // Register:
   router.get('/register', (req, res) => {
@@ -19,18 +28,20 @@ const userRouter = (db) => {
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
   // parameters will arrive in an object containing the following: fname, lname, username, password
-  router.post('/register', (req, res) => {
-    bcrypt.hash(req.body.password, 8)
-      .then((hashedPassword) => {
-        return db.query(`INSERT INTO users (fname, lname, username, password) VALUES
+  router.post('/register', async function (req, res) {
+    const check = await checkUser(req.body.username);
+    if (check) {
+      res.status(400).send({ message: 'User already exists' });
+      return;
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 8);
+    const newUser = await db.query(`INSERT INTO users (fname, lname, username, password) VALUES
           ($1, $2, $3, $4)
           RETURNING *;`, [req.body.fname, req.body.lname, req.body.username, hashedPassword]);
-      })
-      .then((newUser) => {
-        console.log(newUser.rows[0].id);
-        req.session.currentUser = newUser.rows[0].id;
-        res.redirect('/');
-      });
+
+    console.log(newUser.rows[0].id);
+    req.session.currentUser = newUser.rows[0].id;
+    res.redirect('/');
   });
 
   // Login:
@@ -64,6 +75,8 @@ const userRouter = (db) => {
   // Username and password will be submitted as parameters in req.body
 
   router.post('/login', (req, res) => {
+    `SELECT username FROM users
+    WHERE username = $1`, [req.body.username]
     res.send(`Sorry, logging in hasn't been implemented yet`);
   });
 

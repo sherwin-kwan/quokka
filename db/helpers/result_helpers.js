@@ -9,14 +9,15 @@ const getAttemptData = function(attemptId, db) {
       COUNT(user_answers.*) AS num_total,
       ROUND((SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END)/1.00) / (COUNT(user_answers.*)/1.00)*100) AS percent_correct,
       quizzes.id AS quiz_id,
-      attempts.id as attempt_id
+      attempts.id as attempt_id,
+      attempts.finished_at as timestamp
     FROM attempts
       JOIN quizzes ON attempts.quiz_id = quizzes.id
       LEFT JOIN users ON attempts.user_id = users.id
       JOIN user_answers ON attempts.id = user_answers.attempt_id
       JOIN possible_answers ON user_answers.selected_answer = possible_answers.id
     WHERE attempts.id = $1
-    GROUP BY quizzes.title, quizzes.id, users.fname, users.lname, attempts.id
+    GROUP BY quizzes.title, quizzes.id, users.fname, users.lname, attempts.id, attempts.finished_at
   `;
   const queryParams = [attemptId];
   return db.query(queryString, queryParams)

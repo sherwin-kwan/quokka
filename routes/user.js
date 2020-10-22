@@ -18,7 +18,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'register' });
+    res.render('pages/login-register.ejs', { procedure: 'register', message: '' });
   });
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
@@ -27,7 +27,7 @@ const userRouter = (db) => {
 
     const check = await checkUser(req.body.username, db);
     if (check) {
-      res.status(400).send('User already exists. Please log in.');
+      res.status(400).send(`This username is already taken. If that <em>is</em> you trying to log in, please click on "Log In" instead.`);
       return;
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 8);
@@ -48,7 +48,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'login' });
+    res.render('pages/login-register.ejs', { procedure: 'login', message: '' });
   });
 
 
@@ -125,6 +125,15 @@ const userRouter = (db) => {
       }
     })
     .catch(err => console.error('Error executing query', err.stack));
+  });
+
+  // Bare /user/ redirects to a logged-in user's page
+  router.get('/', (req, res) => {
+    if (req.session.currentUser) {
+      res.redirect(`/user/${req.session.currentUser}`);
+    } else {
+      res.redirect('/user/login');
+    }
   });
 
   return router;

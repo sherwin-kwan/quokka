@@ -19,6 +19,7 @@
   <%- include('../partials/_header.ejs'); %>
   <main>
     <h2>Welcome to Quokka - <%= procedure %></h2>
+    <aside class="error-message"><%= message %></aside>
     <nav class="toggle">
       <button id="login" class="profile-tab <% if (procedure === 'login') { %> active <% } %>">Log In</button>
       <button id="register" class="profile-tab <% if (procedure === 'register') { %> active <% } %>">Sign Up</button>
@@ -26,26 +27,29 @@
     <form method="POST" class="login <%- (procedure === 'login') ? 'showing' : 'initialHide'; %>">
       <div class="name-wrapper">
         <label for="name">Username:
-          <input class="form-create" name="username" type="text"></label>
+          <input class="form-create" maxlength="50" name="username" type="text"></label>
       </div>
       <div class="name-wrapper">
         <label for="password">Password:
-          <input type="password" class="form-create" name="password"></label>
+          <input type="password" maxlength="50" class="form-create" name="password"></label>
+      </div>
+      <div class="error-message">
+
       </div>
       <button type="submit">Log In</button>
     </form>
     <form method="POST" class="register <%- (procedure === 'login') ? 'initialHide' : 'showing'; %> ">
-      <p class="passwordWarning">Warning, please don't use any passwords you use on other sites. Hashing has not been
-        set up yet and this
-        system might not be secure!
+      <p class="passwordWarning">Reminder: Please don't use a password that you also use on another site. While every effort has been taken to make
+        this app secure, including encryption and hashing, this is a student project and we offer NO WARRANTY. By using this app you agree to indemnify Chantal, Sherwin, and
+        Will and acknowledge that we will pay you no compensation in the unlikely event of a security breach.
       </p>
-      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+      <div class="name-wrapper">
         <label for="name">First Name:
-          <input class="form-create" name="fname" type="text"></label>
+          <input class="form-create" maxlength="50" name="fname" type="text"></label>
       </div>
-      <div class="name-wrapper" <% if (procedure === 'login')  { %> style="display: none" <% } %>>
+      <div class="name-wrapper">
         <label for="name">Last Name:
-          <input class="form-create" name="lname" type="text"></label>
+          <input class="form-create" maxlength="50" name="lname" type="text"></label>
       </div>
       <!--<div class="name-wrapper">
           <label for="email">Email:
@@ -53,11 +57,14 @@
         </div>-->
       <div class="name-wrapper">
         <label for="name">Username:
-          <input class="form-create" name="username" type="text"></label>
+          <input class="form-create" maxlength="50" name="username" type="text"></label>
       </div>
       <div class="name-wrapper">
         <label for="password">Password:
-          <input type="password" class="form-create" name="password"></label>
+          <input type="password" maxlength="50" class="form-create" name="password"></label>
+      </div>
+      <div class="error-message">
+
       </div>
       <button type="submit">Register</button>
     </form>

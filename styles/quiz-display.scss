@@ -30,6 +30,10 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  label:hover {
+    cursor: pointer;
+  }
 }
 
 .answer + label {

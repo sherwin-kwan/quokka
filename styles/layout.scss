@@ -8,7 +8,20 @@ body {
   }
 }
 
-color-testing {
+/* For testing only (i.e. to see when an element is selected asynchronously) Can remove before deploying */
+.color-test {
   background-color: red;
   color: green;
+  border: 5px solid black;
+}
+
+/* Generates red stars to indicate required fields */
+.required::after {
+  content:" *";
+  color: red;
+}
+
+.error-message {
+  color: red;
+  font-weight: 500;
 }

@@ -11,8 +11,10 @@ const { getAttemptData, loadWholeQuizJson } = require('../db/helpers/result_help
 const resultRouter = (db) => {
   router.get("/:attemptid", (req, res) => {
     const attemptId = req.params.attemptid;
+    console.log('Made it to attempt code');
     getAttemptData(attemptId, db)
     .then(overallResults => {
+      console.log('results are', overallResults);
       if (overallResults) {
         const templateVars = { overallResults };
         loadWholeQuizJson(attemptId, db)

@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const { checkUser, getUserName, getQuizzesCreated, getQuizzesTaken } = require('../db/helpers/user_helpers.js');
+const { getCurrUser } = require('./cookie-helper');
 
 
 /* The "db" argument is a Postgres Pool object */
@@ -14,11 +15,12 @@ const userRouter = (db) => {
 
   // Register:
   router.get('/register', (req, res) => {
-    if (req.session.currentUser) { // If already logged in
+    let user = getCurrUser(req);
+    if (user) { // If already logged in
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'register', message: '' });
+    res.render('pages/login-register.ejs', { procedure: 'register', message: '' , user});
   });
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
@@ -44,11 +46,12 @@ const userRouter = (db) => {
 
   // Login page
   router.get('/login', (req, res) => {
-    if (req.session.currentUser) { // If already logged in
+    let user = getCurrUser(req);
+    if (user) { // If already logged in
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'login', message: '' });
+    res.render('pages/login-register.ejs', { procedure: 'login', message: '', user });
   });
 
 
@@ -80,6 +83,7 @@ const userRouter = (db) => {
 
   // User profile:
   router.get("/:id", (req, res) => {
+    let user = getCurrUser(req);
     const userId = req.params.id;
     console.log('userid is: ', userId, 'current user is ', req.session.currentUser);
     // Note: Double equals is used intentionally here; the userId is a string '24' whereas the cookie's ID is an integer 24.
@@ -88,7 +92,7 @@ const userRouter = (db) => {
     getUserName(userId, db)
     .then (name => {
       if (name) {
-        const templateVars = { name, ownProfile };
+        const templateVars = { name, ownProfile, user };
         getQuizzesCreated(userId, !ownProfile, db)
         .then(quizzesCreated => {
           templateVars.quizzesCreated = quizzesCreated;
@@ -100,7 +104,7 @@ const userRouter = (db) => {
           });
         });
       } else {
-        res.status(404).render('../views/pages/error.ejs', {message: `This profile page could not be retrieved. If you reached this page via a link, please ask the person who sent you this link to double-check that it's correct.`});
+        res.status(404).render('../views/pages/error.ejs', {message: `This profile page could not be retrieved. If you reached this page via a link, please ask the person who sent you this link to double-check that it's correct.`, user});
       }
     })
     .catch(err => console.error('Error executing query', err.stack));

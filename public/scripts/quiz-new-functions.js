@@ -12,7 +12,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
       <h3 class="required">Question ${questionNum}</h3>
       <button class="delete-question">delete</button>
     </header>
-    <input type="text" class="required" name="questions"/>
+    <input type="text" maxlength="255" class="required" name="questions"/>
     <div class="new-option">
       <label class="option-correct" for="a${questionNum}" >correct?</label>
       <label class="option-text required" for="a${questionNum}"> option text</label>
@@ -32,7 +32,7 @@ const generateOptionMarkup = (questionNum) => {
   return `
   <div class="new-option" data-question-num=$s{questionNum}>
     <input type="radio" name="a${questionNum}" value="correct"/>
-    <input type="text" class="required" name="a${questionNum}"/>
+    <input type="text" maxlength="255" class="required" name="a${questionNum}"/>
     <button class="delete-option"><strong>-</strong></button>
   </div>`;
 }

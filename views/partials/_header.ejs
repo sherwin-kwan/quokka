@@ -1,3 +1,28 @@
 <header>
-  <h1><a href="/" class="titleLink">Quokka?</a></h1>
+  <a id="home-logo" href="/">
+    <div>
+      <img src='/img/QUOKKA.png' width="100%">
+    </div>
+    <h1>Quokka?</h1>
+  </a>
+  <div id="ham-menu-open">
+    <img src="/img/hamburger.png" width="100%">
+  </div>
+
+  
+  <div class="closed" id="main-header-links">
+    <div id="ham-menu-close">
+      <img src="/img/close.png" width="100%"/>
+    </div>
+    <a href="/">Home</a>
+    <% if(user){ %>
+      <a href="/user">Profile</a>
+      <a href="/quiz/new">New Quiz</a>
+      <a href="/user/logout">Logout</a>
+    <% } else { %>
+      <a href="/user/login">Login</a>
+      <a href="/user/register">Register</a>
+    <% } %>
+  </div>
+
 </header>

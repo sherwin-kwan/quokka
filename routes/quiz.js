@@ -13,6 +13,7 @@ database.connect();*/
 const express = require('express');
 const router = express.Router();
 const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
+const { getCurrUser } = require('./cookie-helper') 
 const inspect = require('util').inspect;
 
 const quizRouter = (db) => {
@@ -28,17 +29,19 @@ const quizRouter = (db) => {
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
+    let user = getCurrUser(req);
     if (!req.session.currentUser) { // If already logged in
-      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login'});
+      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login', user});
       return;
     }
-    res.render('pages/quiz-new.ejs');
+    res.render('pages/quiz-new.ejs', {user});
   });
 
   // Submit a quiz
   router.post('/new', (req, res) => {
-    if (!req.session.currentUser) { // If already logged in
-      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login'});
+    let user = getCurrUser(req);
+    if (!req.session.currentUser) { // If logged out?
+      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login', user});
       return;
     }
     saveNewQuiz(req.session.currentUser, req.body, db)
@@ -51,6 +54,8 @@ const quizRouter = (db) => {
 
   // Display quiz page (page B) - this will instead render a template once that file is done
   router.get("/:id", (req, res) => {
+    let user = getCurrUser(req);
+
     db.query(`SELECT title, description
     FROM quizzes
     WHERE id = $1`, [req.params.id])
@@ -58,7 +63,8 @@ const quizRouter = (db) => {
         console.log(data.rows);
         const templateVars = {
           title: data.rows[0].title,
-          description: data.rows[0].description
+          description: data.rows[0].description,
+          user
         };
         res.render('pages/quiz-play.ejs', templateVars);
       })
@@ -66,7 +72,7 @@ const quizRouter = (db) => {
         console.error('error retrieving quiz title and description', err.stack);
         res.render('pages/error.ejs', {
           message: `Your quiz could not be retrieved. If you reached this page via a link, please ask the person
-        who sent you this link to double-check that it's correct.`});
+        who sent you this link to double-check that it's correct.`, user});
       });
   });
 

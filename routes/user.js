@@ -85,14 +85,18 @@ const userRouter = (db) => {
   router.get("/:id", (req, res) => {
     let user = getCurrUser(req);
     const userId = req.params.id;
+    console.log('userid is: ', userId, 'current user is ', req.session.currentUser);
+    // Note: Double equals is used intentionally here; the userId is a string '24' whereas the cookie's ID is an integer 24.
+    // If the person viewing the page isn't the person whose profile it is, only public quizzes are displayed
+    const ownProfile = (userId == req.session.currentUser) ? true : false;
     getUserName(userId, db)
     .then (name => {
       if (name) {
-        const templateVars = { name, user };
-        getQuizzesCreated(userId, db)
+        const templateVars = { name, ownProfile, user };
+        getQuizzesCreated(userId, !ownProfile, db)
         .then(quizzesCreated => {
           templateVars.quizzesCreated = quizzesCreated;
-          getQuizzesTaken(userId, db)
+          getQuizzesTaken(userId, !ownProfile, db)
           .then(quizzesTaken => {
             templateVars.quizzesTaken = quizzesTaken;
             console.log(templateVars);

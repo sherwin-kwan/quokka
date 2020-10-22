@@ -4,6 +4,6 @@ public/styles
 *.log
 *.sqlite3
 bcrypt*
-secret-key.js
+secret-key*
 screenshots/
 

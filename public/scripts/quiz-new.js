@@ -37,6 +37,7 @@ $(() => {
   $form.on('click', 'button.delete-question', (e) => {
     e.preventDefault();
     deleteQuestion($(e.target));
+    questionCount--;
   });
 
   $form.on('click', 'button.new-option', (e) => {

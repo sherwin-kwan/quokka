@@ -18,6 +18,7 @@ const resultRouter = (db) => {
         loadWholeQuizJson(attemptId, db)
         .then(quizJson => {
           templateVars.quizJson = quizJson;
+          console.log(templateVars);
           res.render("../views/pages/result", templateVars);
         });
       } else {

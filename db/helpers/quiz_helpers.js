@@ -1,5 +1,9 @@
 const inspect = require('util').inspect;
+const pLimit = require('p-limit');
 
+// Prevent database queries from running concurrently (otherwise the Promise.all in the function to create quizzes can overload the database)
+
+const limit = pLimit(1);
 
 /*
 *
@@ -208,7 +212,11 @@ const saveAnswerOptions = (db, body, data) => {
     console.log(`QUERY FOR QUESTION ${i + 1}`, possibleAnswersQuery);
 
     // Push the query into the array (where all the queries will be run with Promise.all)
-    arr.push(db.query(possibleAnswersQuery, multipleChoices));
+    // To prevent queries from running concurrently, use limit (from the p-limit package) - this prevents overloading the database
+    // since the free version of ElephantSQL only allows 5 concurrent connections
+    arr.push(limit(() => {
+      db.query(possibleAnswersQuery, multipleChoices)
+    }));
 
   }
 

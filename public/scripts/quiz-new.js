@@ -55,9 +55,9 @@ $(() => {
       submitNewQuiz($(this));
     } catch (err) {
       if (err.responseText) {
-        console.log(err.responseText);
+        $form.find('div.error-message').html(err.responseText);
       } else {
-        console.log(err.message);
+        $form.find('div.error-message').html(err.message);
       }
     }
   })

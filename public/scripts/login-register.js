@@ -42,8 +42,7 @@ $(() => {
             window.location.href = '/';
           }
         ).catch(err => {
-          console.log('An error happened', err.responseText);
-          throw new Error(err.responseText);
+          $form.find('div.error-message').html(err.responseText);
         })
     } catch (err) {
       console.log('Message caught is: ', err.message);

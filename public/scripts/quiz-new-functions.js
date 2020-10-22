@@ -4,17 +4,18 @@
 const default_num_of_options = 2;
 
 
+
 const generateQuestionMarkup = (questionNum, num_of_options) => {
   let output = `
   <section data-question-num="${questionNum}">
     <header class="new-question">
-      <h3>Question ${questionNum}</h3>
+      <h3 class="required">Question ${questionNum}</h3>
       <button class="delete-question">delete</button>
     </header>
-    <input type="text" name="questions"/>
+    <input type="text" class="required" name="questions"/>
     <div class="new-option">
       <label class="option-correct" for="a${questionNum}" >correct?</label>
-      <label class="option-text" for="a${questionNum}"> option text</label>
+      <label class="option-text" class="required" for="a${questionNum}"> option text</label>
     </div>
   `;
   for (let j = 0; j < num_of_options; j++) {
@@ -31,7 +32,7 @@ const generateOptionMarkup = (questionNum) => {
   return `
   <div class="new-option" data-question-num=$s{questionNum}>
     <input type="radio" name="a${questionNum}" value="correct"/>
-    <input type="text" name="a${questionNum}"/>
+    <input type="text" class="required" name="a${questionNum}"/>
     <button class="delete-option"><strong>-</strong></button>
   </div>`;
 }
@@ -58,17 +59,29 @@ const deleteOption = ($button) => {
   $button.closest('div').remove();
 };
 
+// Verify for errors before submitting
+const verifyInputNotEmpty = ($form) => {
+  for (field of $form.find(`input.required[type='text']`)) {
+    console.log(field);
+    if (field.value.length === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
 const submitNewQuiz = ($form) => {
   // Do validation here
-  const valid = true;
+  const valid = verifyInputNotEmpty($form);
+  console.log(valid);
   // For now we'll assume it's valid.
   if (!valid) {
-    throw new Error('Validation failed');
+    throw new Error('All fields marked with * are required. If you created too many options, you may delete them with the - buttons.');
   }
   const dataString = $form.serialize();
   console.log('Behold the data: ' + dataString);
   // Make Ajax post to the current URL
-  $.ajax(window.location.pathname, { method: 'POST', data: dataString })
+  $.ajax('/quiz/new', { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
       if (xhr.status === 201) {
         // After a successful quiz save, redirect user to the results page
@@ -81,4 +94,5 @@ const submitNewQuiz = ($form) => {
         throw new Error(data + status);
       }
     });
+
 };

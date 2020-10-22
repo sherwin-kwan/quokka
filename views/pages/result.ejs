@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/styles/quiz-display.css" />
   <link rel="stylesheet" href="/styles/buttons.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/app-functions.js"></script>
+  <script defer src="/scripts/result.js"></script>
 
   <title>QUOKKA? - <%= overallResults.title %> Results</title>
 </head>
@@ -16,10 +18,15 @@
   <main>
     <h2 class="quiz-title"><%= overallResults.title %></h2>
     <section>
-      <p class="user-header"><%= overallResults.fname %> <%= overallResults.lname %>'s Results</p>
+      <% if (overallResults.fname) { %>
+        <p class="user-header"><%= overallResults.fname %> <%= overallResults.lname %>'s Results</p>
+      <% } else { %>
+        <p class="user-header">Results</p>
+      <% } %>
       <p class="score-header"><%= overallResults.percent_correct %>%</p>
       <p class="num-correct-header"''><%= overallResults.num_correct %> out of <%= overallResults.num_total %></p>
-      <a class="share" >Copy link to results </a>
+      <a class="share copyResultsLink" id="<%= overallResults.attempt_id %>">Copy Link to Results </a>
+      <a class="share copyQuizLink" id="<%= overallResults.quiz_id %>">Copy Link to Quiz </a>
     </section>
 
     <% for (const quizQuestion of quizJson) { %>

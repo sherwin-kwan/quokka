@@ -1,4 +1,9 @@
 
 header h1 {
   text-transform: uppercase;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

@@ -24,7 +24,9 @@ const getUserName = function(userId, db) {
 };
 
 //Given a user ID, select quiz title and isPublic for every quiz the user has created:
-const getQuizzesCreated = function(userId, db) {
+// Three arguments: user ID, whether to select only public quizzes (when viewing other people's profiles) or all quizzes (your own profile), and Pool for the pg
+const getQuizzesCreated = function(userId, publicOnly, db) {
+  const publicOnlyClause = (publicOnly) ? 'AND is_public = true' : '';
   const queryString = `
     SELECT
       title,
@@ -32,6 +34,7 @@ const getQuizzesCreated = function(userId, db) {
       id as quiz_id
     FROM quizzes
     WHERE creator_id = $1
+    ${publicOnlyClause}
     ORDER BY created_at DESC
   `;
   const queryParams = [userId];
@@ -41,7 +44,8 @@ const getQuizzesCreated = function(userId, db) {
 };
 
 //Given a user ID, select the high score & quiz title for each quiz the user has taken:
-const getQuizzesTaken = function(userId, db) {
+const getQuizzesTaken = function(userId, publicOnly, db) {
+  const publicOnlyClause = (publicOnly) ? `AND quizzes.is_public = true` : '';
   const queryString = `
     SELECT
       quizzes.title as title,
@@ -52,6 +56,7 @@ const getQuizzesTaken = function(userId, db) {
       JOIN user_answers ON attempts.id = user_answers.attempt_id
       JOIN possible_answers ON user_answers.selected_answer = possible_answers.id
     WHERE attempts.user_id = $1
+    ${publicOnlyClause}
     GROUP BY quizzes.title, attempts.finished_at, attempts.id
     ORDER BY attempts.finished_at DESC
   `;

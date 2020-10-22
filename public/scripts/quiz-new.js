@@ -37,6 +37,7 @@ $(() => {
   $form.on('click', 'button.delete-question', (e) => {
     e.preventDefault();
     deleteQuestion($(e.target));
+    questionCount--;
   });
 
   $form.on('click', 'button.new-option', (e) => {
@@ -54,7 +55,11 @@ $(() => {
     try {
       submitNewQuiz($(this));
     } catch (err) {
-      console.log(err.message, err.stack);
+      if (err.responseText) {
+        $form.find('div.error-message').html(err.responseText);
+      } else {
+        $form.find('div.error-message').html(err.message);
+      }
     }
   })
 });

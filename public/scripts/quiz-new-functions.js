@@ -101,10 +101,9 @@ const submitNewQuiz = ($form) => {
   // Make Ajax post to the current URL
   $.ajax('/quiz/new', { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
-      console.log(xhr.status);
-      console.log('data is', data);
-      window.location.href = data;
-      $form.find('div.error-message').html(`Something went wrong saving the quiz. Don't worry, this isn't your fault.`);
+      data = JSON.parse(data);
+      $form.find('div.error-message').html(`Saving ${data[0]} questions and ${data[1]} answers`);
+      window.location.href = data[2];
     })
     .catch((err) => {
       console.log('Errored');

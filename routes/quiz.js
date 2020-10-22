@@ -50,7 +50,7 @@ const quizRouter = (db) => {
         if (data[2]) {
           const numOfQuestions = data[1].length;
           const numOfAnswers = data[2].flat().length;
-          res.status(201).send(`/quiz/${data[0]}?status=created&questions=${numOfQuestions}&answers=${numOfAnswers}`); // Sends the URL to redirect the user to
+          res.status(201).send(JSON.stringify([numOfQuestions, numOfAnswers, `/quiz/${data[0]}?status=created&questions=${numOfQuestions}`])); // Sends the URL to redirect the user to
         } else { // Error in the saving process
           res.status(400).send(JSON.stringify(data)); // Will send an array [quizId, array of questions, array of answers] so the user knows
           // how much of the data was saved
@@ -81,8 +81,7 @@ const quizRouter = (db) => {
       // If user reaches this page after a redirect, interpret the info in the URL string to display a message
       const queryParams = req.query;
       if (queryParams.status === 'created' && data.rows[0].user_id === user) {
-        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} questions and ${queryParams.answers} answers has
-        been saved.`;
+        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} questions has been saved!`;
       } else {
         templateVars.message = '';
       }

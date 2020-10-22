@@ -63,7 +63,7 @@ const processTime = (date) => {
   const now = new Date(); // creates a date object for "right now"
   if (date > now) {
     // The quiz is timestamped in the future
-    return 'Quiz was taken in the future';
+    return 'in the future';
   } else if (now - date < 86400000) {
     // The quiz was taken less than 24 hours ago
     // First check if it was posted more than 1 hour ago
@@ -74,25 +74,25 @@ const processTime = (date) => {
     } else if (now - date > 1000) { // Seconds
       return `${Math.floor((now - date) / 1000)} seconds ago`;
     } else {
-      return 'Just now';
+      return 'just now';
     }
   }
   // The quiz was posted more than 24 hours ago. The function will return X days/months/years ago based on calendar months and years.
   const yearsAgo = now.getFullYear() - date.getFullYear();
   if (yearsAgo === 1) {
-    return 'Last year';
+    return 'last year';
   } else if (yearsAgo) {
     return `${yearsAgo} years ago`;
   }
   const monthsAgo = now.getMonth() - date.getMonth();
   if (monthsAgo === 1) {
-    return 'Last month';
+    return 'last month';
   } else if (monthsAgo) {
     return `${monthsAgo} months ago`;
   }
   const daysAgo = now.getDate() - date.getDate();
   if (daysAgo === 1) {
-    return 'Yesterday';
+    return 'yesterday';
   } else {
     return `${daysAgo} days ago`;
   }

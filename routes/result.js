@@ -16,9 +16,9 @@ const resultRouter = (db) => {
     console.log('Made it to attempt code');
     getAttemptData(attemptId, db)
     .then(overallResults => {
-      overallResults.timestamp = processTime(overallResults.timestamp);
       console.log('results are', overallResults);
       if (overallResults) {
+        overallResults.timestamp = processTime(overallResults.timestamp);
         const templateVars = { overallResults, user };
         loadWholeQuizJson(attemptId, db)
         .then(quizJson => {

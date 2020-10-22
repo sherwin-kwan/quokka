@@ -51,8 +51,8 @@ const deleteQuestion = ($button) => {
     section.dataset.questionNum--;
     console.log(section.dataset.questionNum);
     $(section).find('h3').text(`Question ${section.dataset.questionNum}`);
-    $(section).find(`label[for='a${currentNum}']`).attr('for',`a${section.dataset.questionNum}`);
-    $(section).find(`input[name='a${currentNum}']`).attr('name',`a${section.dataset.questionNum}`);
+    $(section).find(`label[for='a${currentNum}']`).attr('for', `a${section.dataset.questionNum}`);
+    $(section).find(`input[name='a${currentNum}']`).attr('name', `a${section.dataset.questionNum}`);
   }
   $thisQuestion.remove();
 };
@@ -101,14 +101,16 @@ const submitNewQuiz = ($form) => {
   // Make Ajax post to the current URL
   $.ajax('/quiz/new', { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
-      if (xhr.status === 201) {
-        console.log(data);
-        window.location.href = data;
-      } else {
-        $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
-        This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of
-         the database. Please try again in a few moments.`);
-      }
-    });
+      console.log(xhr.status);
+      console.log('data is', data);
+      window.location.href = data;
+      $form.find('div.error-message').html(`Something went wrong saving the quiz. Don't worry, this isn't your fault.`);
+    })
+    .catch((err) => {
+      console.log('Errored');
+      $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
+      This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of
+       the database. Please try again in a few moments.`);
+    })
 
 };

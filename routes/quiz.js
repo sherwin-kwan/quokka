@@ -56,7 +56,11 @@ const quizRouter = (db) => {
           // how much of the data was saved
         }
       })
-      .catch(err => console.error('Error saving a quiz ' + err.stack));
+      .catch(err => {
+        console.log(err, err.stack);
+        res.status(400).send('Error saving quiz' + err.stack); // Will send an array [quizId, array of questions, array of answers] so the user knows
+        // how much of the data was saved
+      });
   });
 
   // Display quiz page (page B) - this will instead render a template once that file is done

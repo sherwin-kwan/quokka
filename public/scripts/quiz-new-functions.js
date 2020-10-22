@@ -7,7 +7,7 @@ const default_num_of_options = 2;
 
 const generateQuestionMarkup = (questionNum, num_of_options) => {
   let output = `
-  <section data-question-num="${questionNum}">
+  <section class="question" data-question-num="${questionNum}">
     <header class="new-question">
       <h3 class="required">Question ${questionNum}</h3>
       <button class="delete-question">delete</button>
@@ -15,7 +15,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
     <input type="text" class="required" name="questions"/>
     <div class="new-option">
       <label class="option-correct" for="a${questionNum}" >correct?</label>
-      <label class="option-text" class="required" for="a${questionNum}"> option text</label>
+      <label class="option-text required" for="a${questionNum}"> option text</label>
     </div>
   `;
   for (let j = 0; j < num_of_options; j++) {
@@ -67,6 +67,13 @@ const verifyInputNotEmpty = ($form) => {
       return false;
     }
   }
+  // Check that at least one option has been checked as correct
+  for (let question of $form.find('section.question')) {
+    if ($(question).find('input[type=radio]:checked, input[type=checkbox]:checked').length > 0) {
+      continue;
+    }
+    return false;
+  }
   return true;
 };
 
@@ -76,22 +83,25 @@ const submitNewQuiz = ($form) => {
   console.log(valid);
   // For now we'll assume it's valid.
   if (!valid) {
-    throw new Error('All fields marked with * are required. If you created too many options, you may delete them with the - buttons.');
+    throw new Error(`All fields marked with * are required. If you created too many options, you may delete them with the - buttons.
+    You should also make sure that you have specified a correct answer for each question.`);
   }
   const dataString = $form.serialize();
   console.log('Behold the data: ' + dataString);
   // Make Ajax post to the current URL
   $.ajax('/quiz/new', { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
-      if (xhr.status === 201) {
+      if (xhr.status === 201 && data) {
+        console.log(data);
         // After a successful quiz save, redirect user to the results page
         const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds]]
         const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions.
         You may find your quiz at the following link: ${window.location.host + '/quiz/' + arr[0]}`;
         alert(message);
       } else {
-        // Something went wrong
-        throw new Error(data + status);
+        $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
+        This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of
+         the database. Please try again in a few moments.`);
       }
     });
 

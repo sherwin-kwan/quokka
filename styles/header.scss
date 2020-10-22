@@ -1,4 +1,12 @@
 @import 'partials/columns';
+@import 'partials/colors';
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 header h1 {
@@ -13,8 +21,45 @@ header h1 {
   align-items: center;
 
   text-decoration: none;
-  
+
   div {
     width:$mobile-col-1 + $mobile-gutter;
+  }
+}
+
+#ham-menu-close, #ham-menu-open {
+  width:$mobile-col-1;
+}
+
+#main-header-links {
+  display: flex;
+  flex-direction: column;
+  // justify-content: start;
+  align-items: flex-end;
+
+  position: fixed;
+  right: 0;
+  top:0;
+  padding-right: $mobile-margin;
+  padding-top: $mobile-margin;
+
+  width:$mobile-col-4 + $mobile-gutter + $mobile-margin;
+  height:100vh;
+
+  background-color: $sky-blue;
+
+  a {
+    margin: 1rem 0 1rem 0;
+
+    width:$mobile-col-4;
+
+    font-style: 'Open-Sans', sans-serif;
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+
+    color: $ice-blue;
   }
 }

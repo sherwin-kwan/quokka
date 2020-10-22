@@ -51,8 +51,8 @@ const deleteQuestion = ($button) => {
     section.dataset.questionNum--;
     console.log(section.dataset.questionNum);
     $(section).find('h3').text(`Question ${section.dataset.questionNum}`);
-    $(section).find(`label[for='a${currentNum}']`).attr('for',`a${section.dataset.questionNum}`);
-    $(section).find(`input[name='a${currentNum}']`).attr('name',`a${section.dataset.questionNum}`);
+    $(section).find(`label[for='a${currentNum}']`).attr('for', `a${section.dataset.questionNum}`);
+    $(section).find(`input[name='a${currentNum}']`).attr('name', `a${section.dataset.questionNum}`);
   }
   $thisQuestion.remove();
 };
@@ -108,7 +108,7 @@ const submitNewQuiz = ($form) => {
 
         //May need this for deployment:
         // const redirect = window.location.hostname + `/quiz/${arr[0]}`;
-        
+
         const redirect = `/quiz/${arr[0]}`;
         window.location.replace(redirect);
       } else {
@@ -117,5 +117,4 @@ const submitNewQuiz = ($form) => {
          the database. Please try again in a few moments.`);
       }
     });
-
 };

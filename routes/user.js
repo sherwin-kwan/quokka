@@ -85,6 +85,7 @@ const userRouter = (db) => {
   router.get("/:id", (req, res) => {
     let user = getCurrUser(req);
     const userId = req.params.id;
+    const queryParams = req.query;
     console.log('userid is: ', userId, 'current user is ', req.session.currentUser);
     // Note: Double equals is used intentionally here; the userId is a string '24' whereas the cookie's ID is an integer 24.
     // If the person viewing the page isn't the person whose profile it is, only public quizzes are displayed

@@ -14,7 +14,7 @@ const mainRouter = (db) => {
   // Separate them into separate routes files (see above).
   router.get("/", (req, res) => {
     let user = getCurrUser(req);
-    loadPublicQuizzes('popular', 16, db) // sorting method, limit, database
+    loadPublicQuizzes('popular', 16, 1, db) // sorting method, limit, page number, database
     .then(results => {
       // console.log(results);
       let parsedResults = [];

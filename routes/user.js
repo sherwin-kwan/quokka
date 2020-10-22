@@ -81,10 +81,13 @@ const userRouter = (db) => {
   // User profile:
   router.get("/:id", (req, res) => {
     const userId = req.params.id;
+    console.log('userid is: ', userId, 'current user is ', req.session.currentUser);
+    // Note: Double equals is used intentionally here; the userId is a string '24' whereas the cookie's ID is an integer 24.
+    const ownProfile = (userId == req.session.currentUser) ? true : false;
     getUserName(userId, db)
     .then (name => {
       if (name) {
-        const templateVars = { name };
+        const templateVars = { name, ownProfile };
         getQuizzesCreated(userId, db)
         .then(quizzesCreated => {
           templateVars.quizzesCreated = quizzesCreated;

@@ -15,6 +15,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
     <input type="text" maxlength="255" class="required" name="questions"/>
     <div class="new-option">
       <label class="option-correct required" for="a${questionNum}" >correct?</label>
+
       <label class="option-text required" for="a${questionNum}"> option text</label>
     </div>
   `;

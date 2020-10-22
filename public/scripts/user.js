@@ -17,11 +17,13 @@ $(() => {
     $('#quiz').removeClass('active');
   });
 
+  //The below handles toggling between isPublic true and false by clicking the isPublic checkbox:
   $('tr td input[type="checkbox"]').on('click', function() {
     const quizId = $(this).parent().parent().attr('id');
     $.post(`/quiz/${quizId}/public`);
   });
 
+  //The below two blocks of code handle copy-to-clipboard for the quizzes-made and quizzes-taken tabs, respectively:
   $('.quizCopyButton').on('click', function() {
     const quizId = $(this).parent().parent().attr('id');
     const string = `http://localhost:8080/quiz/${quizId}`;

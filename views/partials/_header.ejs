@@ -15,9 +15,14 @@
       <img src="/img/close.png" width="100%"/>
     </div>
     <a href="/">Home</a>
-    <a href="/user">Profile</a>
-    <a href="/quiz/new">New Quiz</a>
-    <a href="/user/logout">Logout</a>
+    <% if(user){ %>
+      <a href="/user">Profile</a>
+      <a href="/quiz/new">New Quiz</a>
+      <a href="/user/logout">Logout</a>
+    <% } else { %>
+      <a>Login</a>
+      <a>Register</a>
+    <% } %>
   </div>
 
 </header>

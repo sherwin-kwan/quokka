@@ -29,7 +29,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
 
 const generateOptionMarkup = (questionNum) => {
   return `
-  <div class="new-option" data-question-num=$s{questionNum}>
+  <div class="new-option" data-question-num=${questionNum}>
     <input type="radio" name="a${questionNum}" value="correct"/>
     <input type="text" name="a${questionNum}"/>
     <button class="delete-option"><strong>-</strong></button>
@@ -43,7 +43,17 @@ const addNewQuestion = ($questions, currentQuestionCount) => {
 
 // This takes a jQuery wrapper on a button as an argument, and removes the question (section) it's located in
 const deleteQuestion = ($button) => {
-  $button.closest('section').remove();
+  const $thisQuestion = $button.closest('section');
+  // Renumber all subsequent questions, and set the data-question-num attribute accordingly
+  for (const section of $thisQuestion.nextAll()) {
+    const currentNum = section.dataset.questionNum;
+    section.dataset.questionNum--;
+    console.log(section.dataset.questionNum);
+    $(section).find('h3').text(`Question ${section.dataset.questionNum}`);
+    $(section).find(`label[for='a${currentNum}']`).attr('for',`a${section.dataset.questionNum}`);
+    $(section).find(`input[name='a${currentNum}']`).attr('name',`a${section.dataset.questionNum}`);
+  }
+  thisQuestion.remove();
 };
 
 // This takes a jQuery wrapper on a button as an argument, and adds an option immediately prior to that button

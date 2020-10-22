@@ -66,6 +66,7 @@ const loadWholeQuizJson = (quizId, db) => {
       (SELECT id, answer_text
         FROM possible_answers
         WHERE question_id = questions.id
+        ORDER BY RANDOM()
       ) filtered_answers
     )
   AS answer_options

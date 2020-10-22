@@ -212,8 +212,7 @@ const saveAnswerOptions = (db, body, data) => {
     console.log(`QUERY FOR QUESTION ${i + 1}`, possibleAnswersQuery);
 
     // Push the query into the array (where all the queries will be run with Promise.all)
-    // To prevent queries from running concurrently, use limit (from the p-limit package) - this prevents overloading the database
-    // since the free version of ElephantSQL only allows 5 concurrent connections
+    // Note: In free tier of ElephantSQL, need to prevent concurrent database connections from getting too high.
     arr.push(limit(() => {
       db.query(possibleAnswersQuery, multipleChoices)
     }));

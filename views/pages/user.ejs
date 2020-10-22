@@ -17,10 +17,10 @@
 <body>
   <%- include('../partials/_header.ejs'); %>
   <main>
-    <h2>Hello, <%= name.fname %>!</h2>
+    <h2><%- (ownProfile) ? 'Hello, ' +  name.fname : name.fname + `'s Profile`; %>!</h2>
     <nav id="profile">
-      <button class="profile-tab active" id="quiz">Your Quizzes</button>
-      <button class="profile-tab" id="results">Your Results</button>
+      <button class="profile-tab active" id="quiz"><%- (ownProfile) ? 'Your' : name.fname + `'s`; %> Quizzes</button>
+      <button class="profile-tab" id="results"><%- (ownProfile) ? 'Your' : name.fname + `'s`; %> Results</button>
     </nav>
     <section id="listOfQuizzesCreated">
       <%- include('../partials/_user-quiz.ejs'); %>

@@ -20,18 +20,20 @@
   <main>
     <h2>Make a New Quiz</h2>
     <form>
-      <label for="title">Quiz name</label>
-      <input type="text" name="title" />
-      <label for="description">Short blurb about your quiz</label>
-      <input type="text" name="description" />
+      <label for="title" class="required">Quiz name</label>
+      <input type="text" class="required" name="title" maxlength="100"  />
+      <label for="description" class="required">Short blurb about your quiz</label>
+      <input type="text" class="required" name="description" maxlength="255" />
       <input type="checkbox" name="is_public"><label for="is_public">Make quiz appear publicly on home page</label>
       <!-- WARNING: The original version of this file started numbering from questionIndex 0.
       This has now been changed. The first question now has questionIndex 1, so it's consistent with quiz-play.ejs -->
       <article>
-        <!-- This partial has been commented out. jQuery is being used to load all questions on this page. -->
-        <%- /* include('../partials/_new-question.ejs', {questionIndex: X})  */ %>
+        <!-- Questions appear here -->
       </article>
       <button class="new-question" data-att="att"> + Add Question</button>
+      <div class="error-message">
+        <!-- Error messages appear here -->
+      </div>
       <button class="save-quiz" type="submit">Save Quiz</button>
     </form>
   </main>

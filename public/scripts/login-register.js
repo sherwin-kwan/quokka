@@ -22,44 +22,42 @@ $(() => {
     $loginForm.hide();
   });
 
-  $loginForm.on('submit', (e) => {
-    e.preventDefault();
-    // VAlidation code here
-    //
-    const valid = true;
-    //
-    //
-    if (valid) {
-      $.ajax('/user/login', { method: 'POST', data: $loginForm.serialize() })
+  const verifyInputNotEmpty = ($form) => {
+    for (input of $form.find(`input[type='text']`)) {
+      if (input.value.length === 0) {
+        throw new Error('All fields are required and cannot be empty');
+      }
+    }
+    if ($form.find(`input[type='password']`).val().length < 5) {
+      throw new Error('Please choose a password at least 5 characters long');
+    }
+  };
+
+  const ajaxLoginHandler = ($form, procedure) => {
+    try {
+      verifyInputNotEmpty($form);
+      $.ajax(`/user/${procedure}`, { method: 'POST', data: $form.serialize() })
         .then(// Successful
-          (data, status, xhr) => {
+          () => {
             window.location.href = '/';
           }
-        )
-        .catch(err => {
-          alert(err.responseText);
-        });
+        ).catch(err => {
+          $form.find('div.error-message').html(err.responseText);
+        })
+    } catch (err) {
+      console.log('Message caught is: ', err.message);
+      $form.find('div.error-message').html(err.message);
     };
+  };
+
+  $loginForm.on('submit', (e) => {
+    e.preventDefault();
+    ajaxLoginHandler($loginForm, 'login');
   });
 
   $registerForm.on('submit', (e) => {
     e.preventDefault();
-    // VAlidation code here
-    //
-    const valid = true;
-    //
-    //
-    if (valid) {
-      $.ajax('/user/register', { method: 'POST', data: $registerForm.serialize() })
-        .then(// Successful
-          (data, status, xhr) => {
-            window.location.href = '/';
-          }
-        )
-        .catch(err => {
-          alert(err.responseText);
-        });
-    };
+    ajaxLoginHandler($registerForm, 'register');
   });
 
 })

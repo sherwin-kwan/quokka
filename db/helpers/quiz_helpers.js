@@ -1,4 +1,5 @@
 const inspect = require('util').inspect;
+// Prevent database queries from running concurrently (otherwise the Promise.all in the function to create quizzes can overload the database)
 
 
 /*
@@ -209,15 +210,18 @@ const saveAnswerOptions = (db, body, data) => {
     console.log(`QUERY FOR QUESTION ${i + 1}`, possibleAnswersQuery);
 
     // Push the query into the array (where all the queries will be run with Promise.all)
-    arr.push(db.query(possibleAnswersQuery, multipleChoices));
+    // Note: In free tier of ElephantSQL, need to prevent concurrent database connections from getting too high.
+    arr.push(
+      db.query(possibleAnswersQuery, multipleChoices)
+    );
 
   }
 
 
   return Promise.all(arr)
-  .then(() => {
-    return [data[1], questionIdArray]; // data[1] is the quiz id passed from the previous promise
-  });
+    .then(() => {
+      return [data[1], questionIdArray]; // data[1] is the quiz id passed from the previous promise
+    });
 };
 
 
@@ -258,7 +262,7 @@ const saveNewQuiz = (userId, body, db) => {
 };
 
 //Update boolean value of quiz is_public field to the opposite of what it currently is:
-const changeIsPublicBoolean = function(quizId, db) {
+const changeIsPublicBoolean = function (quizId, db) {
   const queryString = `
     UPDATE quizzes
     SET is_public = NOT is_public
@@ -266,8 +270,8 @@ const changeIsPublicBoolean = function(quizId, db) {
   `;
   const queryParams = [quizId];
   return db.query(queryString, queryParams)
-  .then(res => res.rows)
-  .catch(err => console.error('Error changing isPublic boolean:', err.stack));
+    .then(res => res.rows)
+    .catch(err => console.error('Error changing isPublic boolean:', err.stack));
 }
 
 module.exports = { loadOneQuestionJson, loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean };

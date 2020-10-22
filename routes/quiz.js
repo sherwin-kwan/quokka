@@ -28,11 +28,19 @@ const quizRouter = (db) => {
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
+    if (!req.session.currentUser) { // If already logged in
+      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login'});
+      return;
+    }
     res.render('pages/quiz-new.ejs');
   });
 
   // Submit a quiz
   router.post('/new', (req, res) => {
+    if (!req.session.currentUser) { // If already logged in
+      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login'});
+      return;
+    }
     saveNewQuiz(req.session.currentUser, req.body, db)
     .then(data => {
       console.log(data);
@@ -71,9 +79,9 @@ const quizRouter = (db) => {
       })
       .catch(err =>{
         console.error('Error:', err.stack);
-     
+
         res.status(500).json({ error: err.message });
- 
+
       });
     });
 

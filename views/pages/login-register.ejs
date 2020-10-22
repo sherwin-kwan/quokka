@@ -19,6 +19,7 @@
   <%- include('../partials/_header.ejs'); %>
   <main>
     <h2>Welcome to Quokka - <%= procedure %></h2>
+    <aside class="error-message"><%= message %></aside>
     <nav class="toggle">
       <button id="login" class="profile-tab <% if (procedure === 'login') { %> active <% } %>">Log In</button>
       <button id="register" class="profile-tab <% if (procedure === 'register') { %> active <% } %>">Sign Up</button>

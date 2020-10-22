@@ -1,4 +1,20 @@
+@import 'partials/columns';
+
 
 header h1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+
   text-transform: uppercase;
+}
+
+#home-logo {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  
+  div {
+    width:$mobile-col-1 + $mobile-gutter;
+  }
 }

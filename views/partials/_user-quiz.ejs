@@ -15,3 +15,6 @@
     ) %>
   <% }; %>
 </table>
+<% if (quizzesCreated.length < 1) { %>
+  <p>You have no quizzes. <a href="/quiz/new">Create a new one!</a></p>
+<% } %>

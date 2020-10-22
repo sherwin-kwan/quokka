@@ -13,6 +13,7 @@ database.connect();*/
 const express = require('express');
 const router = express.Router();
 const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
+const { getCurrUser } = require('./cookie-helper') 
 const inspect = require('util').inspect;
 
 const quizRouter = (db) => {
@@ -28,11 +29,12 @@ const quizRouter = (db) => {
 
   // Create a new quiz (template page)
   router.get('/new', (req, res) => {
+    let user = getCurrUser(req);
     if (!req.session.currentUser) { // If already logged in
-      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login'});
+      res.render('pages/login-register.ejs', {message: 'You need to log in before creating a quiz.', procedure: 'login', user});
       return;
     }
-    res.render('pages/quiz-new.ejs');
+    res.render('pages/quiz-new.ejs', {user});
   });
 
   // Submit a quiz

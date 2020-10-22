@@ -127,6 +127,15 @@ const userRouter = (db) => {
     .catch(err => console.error('Error executing query', err.stack));
   });
 
+  // Bare /user/ redirects to a logged-in user's page
+  router.get('/', (req, res) => {
+    if (req.session.currentUser) {
+      res.redirect(`/user/${req.session.currentUser}`);
+    } else {
+      res.redirect('/user/login');
+    }
+  });
+
   return router;
 };
 

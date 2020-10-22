@@ -6,16 +6,14 @@
 const express = require('express');
 const router  = express.Router();
 const { loadPublicQuizzes } = require('../db/helpers/home_helpers');
+const { getCurrUser } = require('./cookie-helper');
 
 const mainRouter = (db) => {
   // Home page
   // Warning: avoid creating more routes in this file!
   // Separate them into separate routes files (see above).
   router.get("/", (req, res) => {
-    let user = undefined;
-    if(req.session.currentUser) {
-      user = req.session.currentUser;
-    }
+    let user = getCurrUser(req);
     loadPublicQuizzes(db)
     .then(results => {
       // console.log(results);
@@ -33,10 +31,7 @@ const mainRouter = (db) => {
 
   // Catch-all code for non-existent routes. If the route doesn't match anything above, it will send this 404 page:
   router.use((req, res) => {
-    let user = undefined;
-    if(req.session.currentUser) {
-      user = req.session.currentUser;
-    }
+    let user = getCurrUser(req);
 
     res.status(404).render('pages/error.ejs', {message: `The page you're looking for could not be found.`, user});
   });

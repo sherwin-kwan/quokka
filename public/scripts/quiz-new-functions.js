@@ -105,9 +105,12 @@ const submitNewQuiz = ($form) => {
         console.log(data);
         // After a successful quiz save, redirect user to the results page
         const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds]]
-        const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions.
-        You may find your quiz at the following link: ${window.location.host + '/quiz/' + arr[0]}`;
-        alert(message);
+
+        //May need this for deployment:
+        // const redirect = window.location.hostname + `/quiz/${arr[0]}`;
+        
+        const redirect = `/quiz/${arr[0]}`;
+        window.location.replace(redirect);
       } else {
         $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
         This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of

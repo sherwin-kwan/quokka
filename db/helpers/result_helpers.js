@@ -9,14 +9,15 @@ const getAttemptData = function(attemptId, db) {
       COUNT(user_answers.*) AS num_total,
       ROUND((SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END)/1.00) / (COUNT(user_answers.*)/1.00)*100) AS percent_correct,
       quizzes.id AS quiz_id,
-      attempts.id as attempt_id
+      attempts.id as attempt_id,
+      attempts.finished_at as timestamp
     FROM attempts
       JOIN quizzes ON attempts.quiz_id = quizzes.id
       LEFT JOIN users ON attempts.user_id = users.id
       JOIN user_answers ON attempts.id = user_answers.attempt_id
       JOIN possible_answers ON user_answers.selected_answer = possible_answers.id
     WHERE attempts.id = $1
-    GROUP BY quizzes.title, quizzes.id, users.fname, users.lname, attempts.id
+    GROUP BY quizzes.title, quizzes.id, users.fname, users.lname, attempts.id, attempts.finished_at
   `;
   const queryParams = [attemptId];
   return db.query(queryString, queryParams)
@@ -57,4 +58,44 @@ const loadWholeQuizJson = (attemptId, db) => {
     .catch(err => console.error('query error', err.stack));
 };
 
-module.exports = { getAttemptData, loadWholeQuizJson };
+//The below function handles the date for the results page:
+const processTime = (date) => {
+  const now = new Date(); // creates a date object for "right now"
+  if (date > now) {
+    // The quiz is timestamped in the future
+    return 'in the future';
+  } else if (now - date < 86400000) {
+    // The quiz was taken less than 24 hours ago
+    // First check if it was posted more than 1 hour ago
+    if (now - date > 3600000) {
+      return `${Math.floor((now - date) / 3600000)} hours ago`;
+    } else if (now - date > 60000) { // Minutes
+      return `${Math.floor((now - date) / 60000)} minutes ago`;
+    } else if (now - date > 1000) { // Seconds
+      return `${Math.floor((now - date) / 1000)} seconds ago`;
+    } else {
+      return 'just now';
+    }
+  }
+  // The quiz was posted more than 24 hours ago. The function will return X days/months/years ago based on calendar months and years.
+  const yearsAgo = now.getFullYear() - date.getFullYear();
+  if (yearsAgo === 1) {
+    return 'last year';
+  } else if (yearsAgo) {
+    return `${yearsAgo} years ago`;
+  }
+  const monthsAgo = now.getMonth() - date.getMonth();
+  if (monthsAgo === 1) {
+    return 'last month';
+  } else if (monthsAgo) {
+    return `${monthsAgo} months ago`;
+  }
+  const daysAgo = now.getDate() - date.getDate();
+  if (daysAgo === 1) {
+    return 'yesterday';
+  } else {
+    return `${daysAgo} days ago`;
+  }
+};
+
+module.exports = { getAttemptData, loadWholeQuizJson, processTime };

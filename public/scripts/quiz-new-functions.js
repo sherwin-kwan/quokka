@@ -44,6 +44,7 @@ const addNewQuestion = ($questions, currentQuestionCount) => {
 
 // This takes a jQuery wrapper on a button as an argument, and removes the question (section) it's located in
 const deleteQuestion = ($button) => {
+  $button.
   $button.closest('section').remove();
 };
 

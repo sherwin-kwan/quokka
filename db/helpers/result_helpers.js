@@ -42,6 +42,7 @@ const loadWholeQuizJson = (attemptId, db) => {
         ) THEN 1 ELSE 0 END AS user_selected
         FROM possible_answers
         WHERE possible_answers.question_id = questions.id
+        ORDER BY RANDOM()
       ) filtered_answers
     )
   AS answer_options

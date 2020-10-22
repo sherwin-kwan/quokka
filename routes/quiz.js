@@ -77,10 +77,10 @@ const quizRouter = (db) => {
       // If user reaches this page after a redirect, interpret the info in the URL string to display a message
       const queryParams = req.query;
       if (queryParams.status === 'created' && data.rows[0].user_id === user) {
-        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} questions and ${queryParams.answers} answers has been saved.`
+        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} questions and ${queryParams.answers} answers has
+        been saved.`;
       } else {
-        templateVars.quiz = 0;
-        templateVars.questions = 0;
+        templateVars.message = '';
       }
       res.render('pages/quiz-play.ejs', templateVars);
     } catch (err) {

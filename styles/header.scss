@@ -38,7 +38,7 @@ header h1 {
   align-items: flex-end;
 
   position: fixed;
-  right: 0;
+  // right: 0;
   top:0;
   padding-right: $mobile-margin;
   padding-top: $mobile-margin;
@@ -62,4 +62,13 @@ header h1 {
 
     color: $ice-blue;
   }
+}
+
+.closed {
+  right:- ($mobile-col-4 + $mobile-gutter + $mobile-margin);
+  transition: 0.5s;
+}
+.open {
+  right:0px;
+  transition: 0.5s;
 }

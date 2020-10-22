@@ -1,20 +1,21 @@
-<table>
-  <tr>
-    <th class="quiz-name">Quiz</th>
-    <th>Public?</th>
-    <th></th>
-  </tr>
-
-  <% for (const quiz of quizzesCreated) { %>
-    <%- include('_user-quiz-row.ejs',
-      {
-        name: quiz.title,
-        isPublic: quiz.is_public,
-        quiz_id: quiz.quiz_id
-      }
-    ) %>
-  <% }; %>
-</table>
 <% if (quizzesCreated.length < 1) { %>
-  <p>You have no quizzes. <a href="/quiz/new">Create a new one!</a></p>
+  <p class="empty-message">You have no quizzes. <a href="/quiz/new">Create a new one!</a></p>
+<% } else {%>
+  <table>
+    <tr>
+      <th class="quiz-name">Quiz</th>
+      <th>Public?</th>
+      <th></th>
+    </tr>
+
+    <% for (const quiz of quizzesCreated) { %>
+      <%- include('_user-quiz-row.ejs',
+        {
+          name: quiz.title,
+          isPublic: quiz.is_public,
+          quiz_id: quiz.quiz_id
+        }
+      ) %>
+    <% }; %>
+  </table>
 <% } %>

@@ -5,7 +5,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { getAttemptData, loadWholeQuizJson } = require('../db/helpers/result_helpers.js');
+const { getAttemptData, loadWholeQuizJson, processTime } = require('../db/helpers/result_helpers.js');
 const { getCurrUser } = require('./cookie-helper');
 
 /* The "db" argument is a Postgres Pool object */
@@ -18,11 +18,11 @@ const resultRouter = (db) => {
     .then(overallResults => {
       console.log('results are', overallResults);
       if (overallResults) {
+        overallResults.timestamp = processTime(overallResults.timestamp);
         const templateVars = { overallResults, user };
         loadWholeQuizJson(attemptId, db)
         .then(quizJson => {
           templateVars.quizJson = quizJson;
-          console.log(templateVars);
           res.render("../views/pages/result", templateVars);
         });
       } else {

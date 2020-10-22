@@ -14,7 +14,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
     </header>
     <input type="text" maxlength="255" class="required" name="questions"/>
     <div class="new-option">
-      <label class="option-correct" for="a${questionNum}" >correct?</label>
+      <label class="option-correct required" for="a${questionNum}" >correct?</label>
       <label class="option-text required" for="a${questionNum}"> option text</label>
     </div>
   `;
@@ -44,7 +44,6 @@ const addNewQuestion = ($questions, currentQuestionCount) => {
 
 // This takes a jQuery wrapper on a button as an argument, and removes the question (section) it's located in
 const deleteQuestion = ($button) => {
-<<<<<<< HEAD
   const $thisQuestion = $button.closest('section');
   // Renumber all subsequent questions, and set the data-question-num attribute accordingly
   for (const section of $thisQuestion.nextAll()) {
@@ -55,11 +54,7 @@ const deleteQuestion = ($button) => {
     $(section).find(`label[for='a${currentNum}']`).attr('for',`a${section.dataset.questionNum}`);
     $(section).find(`input[name='a${currentNum}']`).attr('name',`a${section.dataset.questionNum}`);
   }
-  thisQuestion.remove();
-=======
-  $button.
-  $button.closest('section').remove();
->>>>>>> validation
+  $thisQuestion.remove();
 };
 
 // This takes a jQuery wrapper on a button as an argument, and adds an option immediately prior to that button

@@ -18,7 +18,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'register' });
+    res.render('pages/login-register.ejs', { procedure: 'register', message: '' });
   });
 
   // Handles new user requests. (This is a synchronous POST for now, not an AJAX post)
@@ -48,7 +48,7 @@ const userRouter = (db) => {
       res.redirect('/');
       return;
     }
-    res.render('pages/login-register.ejs', { procedure: 'login' });
+    res.render('pages/login-register.ejs', { procedure: 'login', message: '' });
   });
 
 

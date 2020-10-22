@@ -17,7 +17,7 @@
 <body>
   <%- include('../partials/_header.ejs'); %>
   <main>
-    <h2>Hello, <%= name.fname %>!</h2>
+    <h2><%- (ownProfile) ? 'Hello, ' +  name.fname : name.fname + `'s Profile`; %>!</h2>
     <nav id="profile">
       <button class="profile-tab active" id="quiz">Your Quizzes</button>
       <button class="profile-tab" id="results">Your Results</button>

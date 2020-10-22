@@ -14,7 +14,7 @@ const mainRouter = (db) => {
   // Separate them into separate routes files (see above).
   router.get("/", (req, res) => {
     let user = getCurrUser(req);
-    loadPublicQuizzes(db)
+    loadPublicQuizzes('popular', 16, db) // sorting method, limit, database
     .then(results => {
       // console.log(results);
       let parsedResults = [];
@@ -22,7 +22,7 @@ const mainRouter = (db) => {
         parsedResults.push({link:`/quiz/${quiz.id}`, title:quiz.title});
       }
       console.log(parsedResults);
-      res.render("pages/index.ejs", {quizzes:parsedResults, user});  
+      res.render("pages/index.ejs", {quizzes:parsedResults, user});
     })
     .catch(err => {
       res.render("pages/index.ejs", {quizzes:undefined, user});

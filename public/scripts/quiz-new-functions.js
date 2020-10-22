@@ -101,13 +101,9 @@ const submitNewQuiz = ($form) => {
   // Make Ajax post to the current URL
   $.ajax('/quiz/new', { method: 'POST', data: dataString })
     .then((data, status, xhr) => {
-      if (xhr.status === 201 && data) {
+      if (xhr.status === 201) {
         console.log(data);
-        // After a successful quiz save, redirect user to the results page
-        const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds]]
-        const message = `Congratulations! You have just created quiz ${arr[0]}, with ${arr[1].length} questions.
-        You may find your quiz at the following link: ${window.location.host + '/quiz/' + arr[0]}`;
-        alert(message);
+        window.location.href = data;
       } else {
         $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
         This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of

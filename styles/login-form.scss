@@ -41,3 +41,12 @@ form > button[type=submit] {
 form {
   margin-top: $mobile-col-1;
 }
+
+.passwordWarning {
+  width: $mobile-col-4 + ($mobile-gutter * 2);
+
+  margin: $mobile-gutter $mobile-col-1 0 $mobile-col-1;
+
+  font-size: .7rem;
+  
+}

@@ -40,10 +40,7 @@
       <button type="submit">Log In</button>
     </form>
     <form method="POST" class="register <%- (procedure === 'login') ? 'initialHide' : 'showing'; %> ">
-      <p class="passwordWarning">Reminder: Please don't use a password that you also use on another site. While every effort has been taken to make
-        this app secure, including encryption and hashing, this is a student project and we offer NO WARRANTY. By using this app you agree to indemnify Chantal, Sherwin, and
-        Will and acknowledge that we will pay you no compensation in the unlikely event of a security breach.
-      </p>
+      
       <div class="name-wrapper">
         <label for="name">First Name:
           <input class="form-create" maxlength="50" name="fname" type="text"></label>
@@ -68,6 +65,9 @@
 
       </div>
       <button type="submit">Register</button>
+      <p class="passwordWarning">
+        Please don't use a password that you also use on another site. While every effort has been taken to make this app secure, including encryption and hashing, this is a student project and we offer no warranties or guarantees
+      </p>
     </form>
 
     <!-- A convenient link for users to go between login and register pages -->

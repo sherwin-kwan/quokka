@@ -29,6 +29,7 @@ form {
 .date-time-header {
   @extend .user-header;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .answer-container {
@@ -76,12 +77,13 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: -30px;
 }
 
 .result-word-correct {
-  color: darkgreen;
+  color: #B3F570;
 }
 
 .result-word-incorrect {
-  color: darkred;
+  color: #F3659D;
 }

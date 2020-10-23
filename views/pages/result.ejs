@@ -25,10 +25,10 @@
       <% } %>
       <p class="score-header"><%= overallResults.percent_correct %>%</p>
       <p class="num-correct-header"><%= overallResults.num_correct %> out of <%= overallResults.num_total %></p>
-      <p class="date-time-header">Quiz attempted <%= overallResults.timestamp %>
+      <p class="date-time-header">attempted <%= overallResults.timestamp %>
       </p>
       <a class="share copyResultsLink" id="<%= overallResults.attempt_id %>">Copy Link to Results </a>
-      <a class="share copyQuizLink" id="<%= overallResults.quiz_id %>">Copy Link to Quiz </a>
+      <a class="share secondaryShare copyQuizLink" id="<%= overallResults.quiz_id %>">Copy Link to Quiz </a>
     </section>
 
     <% for (const quizQuestion of quizJson) { %>

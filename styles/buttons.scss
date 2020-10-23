@@ -1,4 +1,5 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
 
 form > button[type=submit], .button-style {
@@ -19,6 +20,11 @@ form > button[type=submit], .button-style {
   height: $mobile-col-1;
   margin: $mobile-gutter $mobile-col-1 $mobile-gutter $mobile-col-1;
 
-  background-color: deepskyblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  border-radius: 12px;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.38);
+}
+
+.secondaryShare {
+  background-color: $gray-blue;
 }

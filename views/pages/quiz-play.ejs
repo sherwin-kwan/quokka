@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/quiz-display.css" />
   <link rel="stylesheet" href="/styles/buttons.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/app-functions.js"></script>
   <script defer src="/scripts/quiz-play-functions.js"></script>
   <script defer src="/scripts/quiz-play.js"></script>
 
@@ -21,7 +22,8 @@
     <!-- back to home button for mobile? -->
     <article>
       <%- include('../partials/_quiz-details.ejs', {title, description}); %>
-      <button type="button" class="button-style">Start Quiz</button>
+      <button class="start-quiz">Start Quiz</button>
+      <button class="secondary">Copy Link</button>
     </article>
     <form method="POST">
       <!-- Questions inserted here by AJAX -->

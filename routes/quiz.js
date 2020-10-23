@@ -46,7 +46,7 @@ const quizRouter = (db) => {
     }
     saveNewQuiz(req.session.currentUser, req.body, db)
       .then(data => {
-        console.log(data);
+        console.log('Full data array is: ', data);
         if (data[2]) {
           const numOfQuestions = data[1].length;
           const numOfAnswers = data[2].flat().length;

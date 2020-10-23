@@ -1,4 +1,6 @@
 @import 'partials/columns';
+@import 'partials/colors';
+
 
 form {
   display: none;
@@ -6,7 +8,32 @@ form {
 
 .quiz-title {
   text-align: center;
+  font-size: 3rem;
   margin: $mobile-gutter 0 $mobile-gutter 0;
+}
+
+
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  section {
+    text-align: center;
+  }
+
+
+  button {
+    max-width: 64.8vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 0;
 }
 
 .user-header {
@@ -14,6 +41,7 @@ form {
   font-size: 2.25rem;
   font-weight:bold;
   margin: $mobile-gutter 0 $mobile-gutter 0;
+  margin-bottom: -20px;
 }
 
 .score-header {
@@ -24,11 +52,14 @@ form {
 .num-correct-header {
   @extend .user-header;
   font-size: 1.5rem;
+  margin-bottom: -12px;
 }
 
 .date-time-header {
   @extend .user-header;
   font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 30px;
 }
 
 .answer-container {
@@ -50,24 +81,26 @@ form {
   height:$mobile-col-1;
   margin-bottom: $mobile-gutter;
 
-  background-color: gray;
-  border-radius: 5px;
+  background-color: $ice-blue;
+  border-radius: 12px;
+  color: black;
+
+
+  &.incorrect {
+    background-color: $red;
+  }
+
+  &.correct {
+    background-color: $green;
+  }
 }
 
 .answer:checked + label {
-  background-color: teal;
+  background-color: $gray-blue;
 }
 
 .answer {
   appearance: none;
-}
-
-.answer.correct + label {
-  background-color: darkgreen;
-}
-
-.answer.incorrect + label {
-  background-color: darkred;
 }
 
 .question-header {
@@ -76,12 +109,14 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: -30px;
 }
 
 .result-word-correct {
-  color: darkgreen;
+  color: $green;
 }
 
 .result-word-incorrect {
-  color: darkred;
+  color: #F3659D;
 }
+

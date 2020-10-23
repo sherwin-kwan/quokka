@@ -1,14 +1,14 @@
 <div class="answer-container">
   <input
-    class="answer <%=
+    class="answer"
+    type="radio" id="q<%= questionIndex %>-<%= option.index %>"" value=" <%= option.label %>"
+    name="q<%= questionIndex %>" <%= option.clickable ? null : 'disabled' %> />
+  <label class="shadow-inset <%=
       option.showCorrect ?
       ( option.correct ?
         'correct' :
         option.selected?
         'incorrect' : null )
       : null
-      %>"
-    type="radio" id="q<%= questionIndex %>-<%= option.index %>"" value=" <%= option.label %>"
-    name="q<%= questionIndex %>" <%= option.clickable ? null : 'disabled' %> />
-  <label for="q<%= questionIndex %>-<%= option.index %>"><%= option.label %></label>
+      %>" for="q<%= questionIndex %>-<%= option.index %>"><%= option.label %></label>
 </div>

@@ -36,3 +36,15 @@
 a {
   text-decoration: none;
 }
+/* Homepage */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sorting {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}

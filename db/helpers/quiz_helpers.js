@@ -119,13 +119,13 @@ HELPER FUNCTIONS FOR MAKING A NEW QUIZ
 // body is req.body from the quiz being created; data is the returned quiz ID
 
 
-const saveQuestions = (db, body, data) => {
+const saveQuestions = async (db, body, data) => {
   const quizId = data.rows[0].id;
   console.log(`Created quiz ${quizId}`);
   // Begin building a query for the questions table
   let questionsQuery = `
-INSERT INTO questions (quiz_id, question_num, text)
-VALUES `;
+  INSERT INTO questions (quiz_id, question_num, text)
+  VALUES `;
   // If there is only a single question, body.questions will be a string instead of an array of strings.
   // Convert it into an array with a single string to make sure all the functions below still work
   if (!Array.isArray(body.questions)) {
@@ -145,7 +145,8 @@ VALUES `;
   //  VALUES (42, 1, $1),(42, 2, $2),(42,3,$3) RETURNING id;
 
   console.log('Body.questions is: ', body.questions);
-  return Promise.all([db.query(questionsQuery, body.questions), quizId]);
+  const returnedQuestionIds = await db.query(questionsQuery, body.questions);
+  return [returnedQuestionIds, quizId];
 };
 
 
@@ -154,7 +155,7 @@ VALUES `;
 // This function takes three arguments: db is the database Pool,
 // body is req.body from the quiz being created; data is an array consisting of [*database response*, quizId]
 
-const saveAnswerOptions = (db, body, data) => {
+const saveAnswerOptions = async (db, body, data) => {
 
   // The question IDs will be returned in an array of objects such as [ {id: 1}, {id: 2}, {id: 3}]
   // Extract the numbers from these objects to make the array easier to use [1, 2, 3]
@@ -217,11 +218,13 @@ const saveAnswerOptions = (db, body, data) => {
 
   }
 
+  const responseData = await Promise.all(arr);
+  console.log(inspect(responseData));
+  const processedOptionData = responseData.map((data) => data.rows.map((row) => row.id));
+  console.log('Procssed IDs: ', processedOptionData);
+  return [data[1], questionIdArray, processedOptionData];// data[1] is the quiz id passed from the previous promise
+  // So this returns: [quizId, [array of questions], [[array of answers to q1]. [array of answers to q2, [array of answers to q3]. etc. ]]]
 
-  return Promise.all(arr)
-    .then(() => {
-      return [data[1], questionIdArray]; // data[1] is the quiz id passed from the previous promise
-    });
 };
 
 
@@ -243,22 +246,24 @@ a2: [ 'Greenknife', 'correct', 'Yellowknife' ]
 }
 */
 
-const saveNewQuiz = (userId, body, db) => {
+const saveNewQuiz = async (userId, body, db) => {
   // Convert from the JSON sent by jQuery (checked checkboxes have the value 'on') into a JS boolean
   const isPublic = (body.is_public === 'on') ? true : false;
-  return db.query(`
+  const quizInsertResponse = await db.query(`
   INSERT INTO quizzes (creator_id, title, description, created_at, is_public)
   VALUES ($1, $2, $3, NOW(), ${isPublic})
-  RETURNING id;`, [userId, body.title, body.description])
-    .catch(err => console.error('Error inserting quiz ', err.stack))
-    .then((data) => saveQuestions(db, body, data))
-    .catch(err => console.error('Error inserting questions, ', err.stack))
-    .then((data) => saveAnswerOptions(db, body, data))
-    .catch(err => console.error('Error inserting options ', err.stack))
-    .then((arr) => {
-      console.log(`Created options`);
-      return arr; // An array consisting of quizID, [array of questionIDs]
-    });
+  RETURNING id;`, [userId, body.title, body.description]);
+  const questionInsertResponse = await saveQuestions(db, body, quizInsertResponse);
+  const answerInsertResponse = await saveAnswerOptions(db, body, questionInsertResponse);
+  return answerInsertResponse;
+  // .catch(err => console.error('Error inserting quiz ', err.stack))
+  // .then((data) => saveQuestions(db, body, data))
+  // .catch(err => console.error('Error inserting questions, ', err.stack))
+  // .then((data) => saveAnswerOptions(db, body, data))
+  // .catch(err => console.error('Error inserting options ', err.stack))
+  // .then((arr) => {
+  //   console.log(`Created options`);
+  //   return arr; // An array consisting of quizID, [array of questionIDs]
 };
 
 //Update boolean value of quiz is_public field to the opposite of what it currently is:

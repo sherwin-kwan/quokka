@@ -10,31 +10,53 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
   <section class="question" data-question-num="${questionNum}">
     <header class="new-question">
       <h3 class="required">Question ${questionNum}</h3>
-      <button class="delete-question">delete</button>
+      <button class="delete-question"><img src="/img/trash.png"></button>
     </header>
-    <input type="text" maxlength="255" class="required" name="questions"/>
-    <div class="new-option">
-      <label class="option-correct required" for="a${questionNum}" >correct?</label>
-      <label class="option-text required" for="a${questionNum}"> option text</label>
-    </div>
+    <input type="text" placeholder="Ask something" maxlength="255" class="required transparent" name="questions"/>
+    <table>
+      <thead>
+        <tr class="new-option-header">
+          <th class="option-correct required" for="a${questionNum}" >?</th>
+          <th class="option-text required" for="a${questionNum}"> option text</th>
+          <th class="dummy"></th>
+        </tr>
+      </thead>
+      <tbody>
   `;
   for (let j = 0; j < num_of_options; j++) {
     output += generateOptionMarkup(questionNum, j);
   };
   // Add the final button and close section tag at the end of the HTML for this question
   output += `
-  <button class="new-option"> + Add Option </button>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+          </td>
+          <td colspan="2">
+            <button class="green new-option"> + Add Option </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </section>`;
+  console.log(output);
   return output;
 };
 
 const generateOptionMarkup = (questionNum) => {
   return `
-  <div class="new-option" data-question-num=${questionNum}>
-    <input type="radio" name="a${questionNum}" value="correct"/>
-    <input type="text" maxlength="255" class="required" name="a${questionNum}"/>
-    <button class="delete-option"><strong>-</strong></button>
-  </div>`;
+  <tr class="new-option" data-question-num=${questionNum}>
+    <td>
+      <input type="radio" name="a${questionNum}" value="correct"/>
+    </td>
+    <td>
+      <input type="text" maxlength="255" class="required" name="a${questionNum}"/>
+    </td>
+    <td>
+      <button class="delete-option"><img src="/img/trash.png"></button>
+    </td>
+  </tr>`;
 }
 
 const addNewQuestion = ($questions, currentQuestionCount) => {
@@ -60,7 +82,7 @@ const deleteQuestion = ($button) => {
 // This takes a jQuery wrapper on a button as an argument, and adds an option immediately prior to that button
 const addNewOption = ($button) => {
   const markup = generateOptionMarkup($button.closest('section').data('question-num'));
-  $button.before(markup);
+  $button.closest('tr').before(markup);
 };
 
 // This function takes a jQuery wrapper on a button beside an option as an argument, and deletes the option

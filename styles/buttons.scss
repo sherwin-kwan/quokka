@@ -14,13 +14,17 @@ button, .button-style {
   cursor: pointer;
   font-weight: bold;
 
+
+  &:active {
+    background-color: #4da3ff;
+    transform: translateY(4px);
+  }
+
   &.secondary {
     background-color: $gray-blue;
-
     &:active {
       background-color: #577ea8;
     }
-
   }
 
   &.green {
@@ -31,6 +35,32 @@ button, .button-style {
     background-color: $red;
   }
 
+  &.delete-option, &.delete-question {
+    background-color: $red;
+    width: $mobile-col-1;
+    height: $mobile-col-1;
+    margin-top: 0;
+    border-radius: $mobile-col-1 / 4;
+
+    img {
+      max-height: 70%;
+      margin: auto;
+    }
+  }
+
+  &.new-question {
+    // display: flex;
+    margin-top: $mobile-gutter;
+    width: 100%;
+    height: $mobile-col-1;
+    text-align: center;
+  }
+
+  &.new-option {
+    width:$mobile-col-5;
+    height: $mobile-col-1;
+    text-align: center;
+  }
   &.sort-label {
     display: flex;
     flex-direction: column;
@@ -57,10 +87,4 @@ button, .button-style {
   color: black;
   font-weight: 600;
 
-  &:active {
-    background-color: #4da3ff;
-    transform: translateY(4px);
-  }
 }
-
-

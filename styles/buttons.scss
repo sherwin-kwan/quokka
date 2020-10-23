@@ -22,11 +22,9 @@ button, .button-style {
 
   &.secondary {
     background-color: $gray-blue;
-
     &:active {
       background-color: #577ea8;
     }
-
   }
 
   &.green {
@@ -35,6 +33,14 @@ button, .button-style {
 
   &.red {
     background-color: $red;
+  }
+
+  &.delete-option, &.delete-question {
+    background-color: $red;
+    width: 12.26vw;
+    height: 12.26vw;
+    margin-top: 0;
+    border-radius: 10px;
   }
 }
 

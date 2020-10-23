@@ -18,6 +18,19 @@ button.new-question {
   height: $mobile-col-1;
   text-align: center;
 }
+// New Option Headers
+
+div.new-option-header {
+
+  label.option-correct{
+    width: $mobile-col-1;
+  }
+
+  label.option-text{
+    width: $mobile-col-4;
+  }
+
+}
 
 // New Options
 div.new-option {
@@ -31,24 +44,16 @@ div.new-option {
     text-align: center;
   }
 
-  label.option-correct{
+  input[type=checkbox] {
     width: $mobile-col-1;
+    height: $mobile-col-1;
   }
 
-  label.option-text{
-    width: $mobile-col-5;
+  input[type='text'] {
+    width: $mobile-col-4;
   }
 }
 
-
-.new-option input[type=text] {
-  width: $mobile-col-5;
-  height: $mobile-col-1;
-}
-.new-option input[type=checkbox] {
-  width: $mobile-col-1;
-  height: $mobile-col-1;
-}
 
 button.new-option {
   width:$mobile-col-5;

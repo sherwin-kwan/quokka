@@ -13,7 +13,8 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
       <button class="delete-question">delete</button>
     </header>
     <input type="text" maxlength="255" class="required" name="questions"/>
-    <div class="new-option">
+    <table>
+    <div class="new-option-header">
       <label class="option-correct required" for="a${questionNum}" >correct?</label>
       <label class="option-text required" for="a${questionNum}"> option text</label>
     </div>

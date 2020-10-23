@@ -1,7 +1,7 @@
 @import 'partials/columns';
 @import 'partials/colors';
 
-nav#profile {
+nav#profile, nav.toggle {
   display:flex;
   justify-content: center;
 }

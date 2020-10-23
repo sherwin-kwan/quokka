@@ -1,11 +1,11 @@
 @import 'partials/columns';
-
+@import 'partials/colors';
 
 form > button[type=submit], .button-style {
   width:100%;
   height:$mobile-col-1;
-  background-color: cornflowerblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  border-radius: 12px;
   border:none;
   margin-top: $mobile-margin;
 }
@@ -20,5 +20,5 @@ form > button[type=submit], .button-style {
   margin: $mobile-gutter $mobile-col-1 $mobile-gutter $mobile-col-1;
 
   background-color: deepskyblue;
-  border-radius: 5px;
+  border-radius: 12px;
 }

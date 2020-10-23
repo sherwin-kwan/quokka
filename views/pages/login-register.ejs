@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="/styles/user.css" />
   <link rel="stylesheet" href="/styles/buttons.css" />
+  <link rel="stylesheet" href="/styles/login-form.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
   <script defer src="/scripts/login-register.js"></script>
 
@@ -26,12 +27,12 @@
     </nav>
     <form method="POST" class="login <%- (procedure === 'login') ? 'showing' : 'initialHide'; %>">
       <div class="name-wrapper">
-        <label for="name">Username:
-          <input class="form-create" maxlength="50" name="username" type="text"></label>
+        <label for="name">Username:</label>
+        <input class="form-create" maxlength="50" name="username" type="text">
       </div>
       <div class="name-wrapper">
-        <label for="password">Password:
-          <input type="password" maxlength="50" class="form-create" name="password"></label>
+        <label for="password">Password:</label>
+        <input type="password" maxlength="50" class="form-create" name="password">
       </div>
       <div class="error-message">
 

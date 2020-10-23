@@ -1,0 +1,43 @@
+@import 'partials/columns';
+@import 'partials/colors';
+
+div.name-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: $mobile-gutter $mobile-col-1 0 $mobile-col-1;
+  // margin-left: $mobile-col-1;
+  // margin-right: $mobile-col-1;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type=password], input[type=text] {
+  width:$mobile-col-4 + ($mobile-gutter * 2);
+  height:$mobile-col-1;
+  
+  padding: 0 $mobile-gutter 0 $mobile-gutter;
+
+  border: none;
+  border-radius: 12px;
+
+  -webkit-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+}
+
+form > button[type=submit] {
+  width:$mobile-col-4 + ($mobile-gutter * 2);
+  height:$mobile-col-1 + $mobile-gutter;
+
+  margin: $mobile-gutter*2 $mobile-col-1 0 $mobile-col-1;
+
+  -webkit-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+}
+
+form {
+  margin-top: $mobile-col-1;
+}

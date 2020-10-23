@@ -52,9 +52,7 @@ app.set('trust proxy', 1) // trust first proxy
 
 app.use(cookieSession({
   name: 'session',
-  keys: process.env.SECRET_KEY,
-  secure: true,
-  secureProxy: true,
+  keys: [process.env.SECRET_KEY],
   maxAge: 3600000 // expires after 1 hour
 }));
 

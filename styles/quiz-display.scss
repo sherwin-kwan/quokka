@@ -15,6 +15,7 @@ form {
   font-size: 2.25rem;
   font-weight:bold;
   margin: $mobile-gutter 0 $mobile-gutter 0;
+  margin-bottom: -20px;
 }
 
 .score-header {
@@ -25,12 +26,14 @@ form {
 .num-correct-header {
   @extend .user-header;
   font-size: 1.5rem;
+  margin-bottom: -12px;
 }
 
 .date-time-header {
   @extend .user-header;
   font-size: 1rem;
   font-weight: 400;
+  margin-bottom: 30px;
 }
 
 .answer-container {
@@ -55,7 +58,7 @@ form {
   background-color: $ice-blue;
   border-radius: 12px;
   color: black;
-  box-shadow: inset 0px 2px 4px #000000;
+  box-shadow: inset 0px 3px 4px #000000;
 }
 
 .answer:checked + label {
@@ -73,7 +76,7 @@ form {
 
 .answer.incorrect + label {
   background-color: $red;
-  box-shadow: inset 0px 4px 11px #000000;
+  box-shadow: inset 0px 3px 6px #000000;
 }
 
 .question-header {

@@ -4,7 +4,6 @@ $(() => {
   // On document ready
   const $moreButton = $('button.more');
   const $sorting = $('p.sorting');
-  const bottomMessage = $('span.message');
 
   $sorting.on('click', 'label', (e) => {
     const sort = $(e.target).attr('name');

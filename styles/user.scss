@@ -39,7 +39,7 @@ table {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: $mobile-col-1;
+    height: $mobile-col-1 + $mobile-gutter;
     border-bottom: 2px solid dimgray;
 
     * {
@@ -84,4 +84,23 @@ table {
 .empty-message {
   width:100%;
   text-align: center; 
+}
+
+.resultsCopyButton {
+  height:$mobile-col-1;
+
+  background-color: $sky-blue;
+  outline: none;
+  border:none;
+  border-radius: 10px;
+  div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+
+    img{
+      width: 80%;
+    }
+  }
 }

@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="/styles/user.css" />
   <link rel="stylesheet" href="/styles/buttons.css" />
+  <link rel="stylesheet" href="/styles/login-form.css" />
   <%- include('../partials/_head-scripts.ejs'); %>
   <script defer src="/scripts/login-register.js"></script>
 
@@ -26,12 +27,12 @@
     </nav>
     <form method="POST" class="login <%- (procedure === 'login') ? 'showing' : 'initialHide'; %>">
       <div class="name-wrapper">
-        <label for="name">Username:
-          <input class="form-create" maxlength="50" name="username" type="text"></label>
+        <label for="name">Username:</label>
+        <input class="form-create" maxlength="50" name="username" type="text">
       </div>
       <div class="name-wrapper">
-        <label for="password">Password:
-          <input type="password" maxlength="50" class="form-create" name="password"></label>
+        <label for="password">Password:</label>
+        <input type="password" maxlength="50" class="form-create" name="password">
       </div>
       <div class="error-message">
 
@@ -39,10 +40,7 @@
       <button type="submit">Log In</button>
     </form>
     <form method="POST" class="register <%- (procedure === 'login') ? 'initialHide' : 'showing'; %> ">
-      <p class="passwordWarning">Reminder: Please don't use a password that you also use on another site. While every effort has been taken to make
-        this app secure, including encryption and hashing, this is a student project and we offer NO WARRANTY. By using this app you agree to indemnify Chantal, Sherwin, and
-        Will and acknowledge that we will pay you no compensation in the unlikely event of a security breach.
-      </p>
+      
       <div class="name-wrapper">
         <label for="name">First Name:
           <input class="form-create" maxlength="50" name="fname" type="text"></label>
@@ -67,6 +65,9 @@
 
       </div>
       <button type="submit">Register</button>
+      <p class="passwordWarning">
+        Please don't use a password that you also use on another site. While every effort has been taken to make this app secure, including encryption and hashing, this is a student project and we offer no warranties or guarantees
+      </p>
     </form>
 
     <!-- A convenient link for users to go between login and register pages -->

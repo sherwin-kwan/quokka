@@ -16,10 +16,16 @@
   width:$mobile-col-3;
   height:$mobile-col-3;
   margin-bottom: $mobile-gutter;
+  border-radius: 15px;
 
   background-color: $ice-blue;
   text-align: center;
   text-decoration: none;
+  color:black;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-image: url('/img/QUOKKA.png');
+  background-size:100%;
 }
 
 .homepage-header {

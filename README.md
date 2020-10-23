@@ -7,7 +7,23 @@
 
 ## Screenshots
 
-Insert screenshots here
+### Homepage
+!["Homepage"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Homepage.png)
+
+### Take a quiz
+!["Take quiz 1"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Take_Quiz_Start.png)
+!["Take quiz 2"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Take_Quiz.png)
+
+### View quiz results
+!["Results 1"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Results_1.png)
+!["Results 2"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Results_2.png)
+
+### Create a quiz
+!["New quiz"](https://github.com/sherwin-kwan/quokka/blob/master/docs/New_Quiz.png)
+
+### Profile
+!["Profile 1"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Profile_Created.png)
+!["Profile 2"](https://github.com/sherwin-kwan/quokka/blob/master/docs/Profile_Taken.png)
 
 ## Stack
 

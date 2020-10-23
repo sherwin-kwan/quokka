@@ -5,6 +5,5 @@ public/styles
 *.sqlite3
 bcrypt*
 secret-key*
-screenshots/
 npm-debug.log
 .DS_Store

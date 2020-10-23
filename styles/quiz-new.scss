@@ -1,36 +1,41 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
 // input[type=text] {
 //   width:100%
 // }
 
+input[type='text'].transparent {
+  background-color: inherit;
+  border-bottom: 5px solid $ice-blue;
+  color: $ice-blue;
+}
+
+table {
+  table-layout: fixed;
+  border-spacing: $mobile-gutter;
+  // New Option Headers
+
+  th {
+    &.option-correct{
+      width: $mobile-col-1;
+    }
+
+    &.option-text{
+      width: $mobile-col-4;
+    }
+
+    &.dummy {
+      width: $mobile-col-1;
+    }
+  }
+}
+
 //New Questions
 header.new-question {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: $mobile-gutter 0;
 }
 
-button.new-question {
-  // display: flex;
-  margin-top: $mobile-gutter;
-  width: 100%;
-  height: $mobile-col-1;
-  text-align: center;
-}
-// New Option Headers
-
-div.new-option-header {
-
-  label.option-correct{
-    width: $mobile-col-1;
-  }
-
-  label.option-text{
-    width: $mobile-col-4;
-  }
-
-}
 
 // New Options
 div.new-option {
@@ -54,21 +59,12 @@ div.new-option {
   }
 }
 
-
-button.new-option {
-  width:$mobile-col-5;
-  height: $mobile-col-1;
-  margin-left: $mobile-col-1 + $mobile-gutter;
-  text-align: center;
-}
-
 //Other
 input[type=text] {
   border: none;
   border-bottom: 2px solid dimgray;
   width:100%;
   height:$mobile-col-1;
-  margin-bottom: $mobile-gutter;
 }
 
 label {

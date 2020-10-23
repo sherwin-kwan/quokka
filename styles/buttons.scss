@@ -61,6 +61,13 @@ button, .button-style {
     height: $mobile-col-1;
     text-align: center;
   }
+  &.sort-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+  }
 
 }
 
@@ -81,5 +88,3 @@ button, .button-style {
   font-weight: 600;
 
 }
-
-

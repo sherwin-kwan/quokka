@@ -1,6 +1,7 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
-nav#profile {
+nav#profile, nav.toggle {
   display:flex;
   justify-content: center;
 }
@@ -10,20 +11,33 @@ nav#profile {
   height: $mobile-col-1;
   margin: 0;
 
+  color: $ice-blue;
+  font-weight: normal;
+
   border: none;
-  border-bottom: 2px solid dimgray;
-  background-color: white;
+  border-radius: 0px;
+  border-bottom: 2px solid $ice-blue;
+  background-color: $deep-blue;
 }
 
 .profile-tab.active {
-  border: 2px solid dimgray;
+  font-weight: bold;
+
+  border: 2px solid $ice-blue;
   border-bottom: none;
-  background-color: lightgray;
+
+  -webkit-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+}
+
+.profile-tab:focus {
+  outline:none
 }
 
 table {
   width:100%;
-  margin-bottom: $mobile-col-1;
+  margin-bottom: $mobile-col-1 + $mobile-gutter;
   th {
     text-align: left;
   }
@@ -31,23 +45,32 @@ table {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: $mobile-col-1;
-    border-bottom: 2px solid dimgray;
+    height: $mobile-col-1 + $mobile-gutter;
+    border-bottom: 2px solid $ice-blue;
 
     * {
       width:$mobile-col-1;
     }
     .quiz-name {
-      width: 45%;
+      width: $mobile-col-4;
       text-align: left;
     }
 
     input {
       display: flex;
       align-items: center;
+
       width:$mobile-col-1 *.9;
       height:$mobile-col-1 * .9;
 
+    }
+
+    a {
+      color:$ice-blue;
+    }
+
+    a:visited {
+      color:$sky-blue;
     }
 
   }
@@ -59,14 +82,25 @@ table {
   align-items: center;
 
   position: fixed;
-  bottom: 5px;
+  bottom: $mobile-gutter;
 
   width: $mobile-col-6;
   height: $mobile-col-1;
 
-  background-color: cadetblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  border-radius: 10px;
 
+  color:black;
+  font-weight: bold;
+  text-decoration: none;
+
+  -webkit-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 7px 4px 0px rgba(0,0,0,0.35);
+
+  &:visited{
+    color:black;
+  }
 }
 
 .initialHide {
@@ -76,4 +110,23 @@ table {
 .empty-message {
   width:100%;
   text-align: center; 
+}
+
+.resultsCopyButton, .quizCopyButton {
+  height:$mobile-col-1;
+
+  background-color: $sky-blue;
+  outline: none;
+  border:none;
+  border-radius: 10px;
+  div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+
+    img{
+      width: 80%;
+    }
+  }
 }

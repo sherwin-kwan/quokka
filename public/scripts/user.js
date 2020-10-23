@@ -26,13 +26,13 @@ $(() => {
   //The below two blocks of code handle copy-to-clipboard for the quizzes-made and quizzes-taken tabs, respectively:
   $('.quizCopyButton').on('click', function() {
     const quizId = $(this).parent().parent().attr('id');
-    const string = `http://localhost:8080/quiz/${quizId}`;
+    const string = `${window.location.origin}/quiz/${quizId}`;
     copyToClipboardAnyString(string);
   })
 
   $('.resultsCopyButton').on('click', function() {
     const attemptId = $(this).parent().parent().attr('id');
-    const string = `http://localhost:8080/result/${attemptId}`;
+    const string = `${window.location.origin}/result/${attemptId}`;
     copyToClipboardAnyString(string);
   })
 

@@ -25,6 +25,9 @@ app.use(compression());
 const helmet = require('helmet');
 app.use(helmet());
 
+const cors = require('cors');
+app.use(cors());
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.

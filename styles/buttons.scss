@@ -1,16 +1,40 @@
 @import 'partials/columns';
+@import 'partials/colors';
+@import 'layout';
 
-
-form > button[type=submit], .button-style {
+button, .button-style {
+  @extend .shadow;
   width:100%;
   height:$mobile-col-1;
-  background-color: cornflowerblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  color: black;
+  border-radius: 12px;
   border:none;
   margin-top: $mobile-margin;
+  cursor: pointer;
+  font-weight: bold;
+
+  &.secondary {
+    background-color: $gray-blue;
+
+    &:active {
+      background-color: #577ea8;
+    }
+
+  }
+
+  &.green {
+    background-color:$green;
+  }
+
+  &.red {
+    background-color: $red;
+  }
 }
 
 .share {
+
+  @extend .shadow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +43,15 @@ form > button[type=submit], .button-style {
   height: $mobile-col-1;
   margin: $mobile-gutter $mobile-col-1 $mobile-gutter $mobile-col-1;
 
-  background-color: deepskyblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  border-radius: 12px;
+  color: black;
+  font-weight: 600;
+
+  &:active {
+    background-color: #4da3ff;
+    transform: translateY(4px);
+  }
 }
+
+

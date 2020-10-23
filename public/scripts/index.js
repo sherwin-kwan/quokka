@@ -2,7 +2,7 @@
 
 $(() => {
   // On document ready
-  const $moreButton = $('button.more'); // Should be equated to the button once we have it
+  const $moreButton = $('button.more');
   const $sorting = $('p.sorting');
 
   $sorting.on('click', 'label', (e) => {

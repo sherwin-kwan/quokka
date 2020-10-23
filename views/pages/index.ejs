@@ -15,12 +15,13 @@
 <body>
   <%- include('../partials/_header.ejs'); %>
   <h1 class="homepage-header">QUOKKA? QUIZ!</h1>
+  <p class="message sorting">
+    <label name="popular">Popular</label>
+    <label name="recent">Recently created</label>
+    <label name="long">Longest</label>
+  </p>
   <main class="quiz-tile-container">
-    <p class="message sorting">
-      <label name="popular">Popular</label>
-      <label name="recent">Recently created</label>
-      <label name="long">Longest</label>
-    </p>
+
     <!-- Replace w/ for loop when data fetching ready -->
     <% if (quizzes){ %>
       <% for (let quiz of quizzes) {%>

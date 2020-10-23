@@ -21,8 +21,11 @@ const sortQuizzes = (sort) => {
   .then((res) => {
     res = JSON.parse(res);
     if (res.length) {
+      const $main = $('main');
+      $main.empty();
       for (quiz of res) {
         console.log(quiz);
+        $main.append(addQuizSquare(quiz));
       }
     }
   })

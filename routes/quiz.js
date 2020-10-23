@@ -81,7 +81,7 @@ const quizRouter = (db) => {
       // If user reaches this page after a redirect, interpret the info in the URL string to display a message
       const queryParams = req.query;
       if (queryParams.status === 'created' && data.rows[0].user_id === user) {
-        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} questions has been saved!`;
+        templateVars.message = `Congrats! Your new quiz with ${queryParams.questions} question${queryParams.questions > 1 ? 's' : ''}  has been saved!`;
       } else {
         templateVars.message = '';
       }

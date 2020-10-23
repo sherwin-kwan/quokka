@@ -1,7 +1,7 @@
 @import 'partials/columns';
 @import 'partials/colors';
 
-nav#profile {
+nav#profile, nav.toggle {
   display:flex;
   justify-content: center;
 }
@@ -15,6 +15,7 @@ nav#profile {
   font-weight: normal;
 
   border: none;
+  border-radius: 0px;
   border-bottom: 2px solid $ice-blue;
   background-color: $deep-blue;
 }

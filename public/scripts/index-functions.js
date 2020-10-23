@@ -46,7 +46,7 @@ const loadMore = ($btn, currentPage, sort) => {
   $.ajax('/', {
     method: 'POST',
     data: {
-      getPage: currentPage + 1,
+      getPage: Number(currentPage) + 1,
       sort
     }
   })

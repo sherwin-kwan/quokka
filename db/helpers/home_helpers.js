@@ -5,7 +5,7 @@ const loadPublicQuizzes = (sort, limit, page, db) => {
   let query;
   switch (sort) {
     case 'recent':
-      query = `SELECT id, title
+      query = `SELECT id, title, created_at
       FROM quizzes
       WHERE is_public = true
       ORDER BY created_at DESC

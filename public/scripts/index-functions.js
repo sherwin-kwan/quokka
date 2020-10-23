@@ -9,13 +9,31 @@ const addQuizSquare = (quiz, title) => {
   </a>`;
 }
 
+// Sort by the chosen method
+const sortQuizzes = (sort) => {
+  $.ajax('/', {
+    method: 'POST',
+    data: {
+      getPage: 0,
+      sort
+    }
+  })
+  .then((res) => {
+    res = JSON.parse(res);
+    if (res.length) {
+      for (quiz of res) {
+        console.log(quiz);
+      }
+    }
+  })
+};
+
 // Loads next page of quizzes
 const loadMore = ($btn, currentPage, sort) => {
   $.ajax('/', {
     method: 'POST',
     data: {
-      currentPage,
-      procedure: 'more',
+      getPage: currentPage + 1,
       sort
     }
   })

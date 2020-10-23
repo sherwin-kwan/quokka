@@ -1,5 +1,5 @@
 <% if (quizzesTaken.length < 1) { %>
-  <p class="empty-message">You have no quiz results. You can <a href="/">find quizzes to take here!</a></p>
+  <p class="empty-message"><%= (ownProfile ? 'You have' : name.fname + ' has')%> no quiz results. You can <a href="/">find quizzes to take here!</a></p>
 <% } else {%>
   <table>
     <tr>

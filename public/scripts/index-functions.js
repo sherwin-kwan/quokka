@@ -1,5 +1,8 @@
 // Client side functions for the home page
 
+// Defining constants
+const $bottomMessage = $('span.message');
+const $moreButton = $('button.more');
 
 const addQuizSquare = (quiz, title) => {
   return `<a href='/quiz/${quiz.id}'>

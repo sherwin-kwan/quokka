@@ -39,7 +39,7 @@ app.use(express.static('public'));
 
 app.use(cookieSession({
   name: 'session',
-  keys: [mySecretKey],
+  keys: process.env.SECRET_KEY,
   maxAge: 3600000 // expires after 1 hour
 }));
 

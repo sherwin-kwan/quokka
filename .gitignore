@@ -6,4 +6,5 @@ public/styles
 bcrypt*
 secret-key*
 screenshots/
-
+npm-debug.log
+.DS_Store

@@ -1,15 +1,17 @@
 // See: https://sass-lang.com/
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import 'partials/colors';
 
 
 body {
-  // background-color: #EEE;
+  background-color: $deep-blue;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   padding: 0 5% 0 5%;
+  color: $ice-blue;
   h1 {
-    color: #244751;
+    color: $ice-blue;
   }
 }
 

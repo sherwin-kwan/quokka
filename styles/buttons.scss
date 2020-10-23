@@ -27,6 +27,16 @@ form > button[type=submit], .button-style {
   font-weight: 600;
 }
 
+.share:active {
+  background-color: #4da3ff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.38);
+  transform: translateY(4px);
+}
+
 .secondaryShare {
   background-color: $gray-blue;
+}
+
+.secondaryShare:active {
+  background-color: #577ea8;
 }

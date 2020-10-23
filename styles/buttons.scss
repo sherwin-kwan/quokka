@@ -30,6 +30,14 @@ button, .button-style {
   &.red {
     background-color: $red;
   }
+
+  &.sort-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+  }
 }
 
 .share {

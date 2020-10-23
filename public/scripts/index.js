@@ -3,7 +3,7 @@
 $(() => {
   // On document ready
   const $sorting = $('p.sorting');
-  let sort;
+  let sort = 'popular';
 
   $sorting.on('click', 'label', (e) => {
     sort = $(e.target).attr('name');

@@ -85,6 +85,9 @@ h3 {
   border-radius: 12px;
   color: black;
 
+  &:active{
+    transform: translateY(4px);
+  }
 
   &.incorrect {
     background-color: $red;

@@ -7,6 +7,7 @@
   <%- include('../partials/_head-styles.ejs'); %>
   <link rel="stylesheet" href="/styles/quiz-tile.css">
   <%- include('../partials/_head-scripts.ejs'); %>
+  <script defer src="/scripts/index.js"></script>
 
   <title>QUOKKA? - Home</title>
 </head>
@@ -21,7 +22,11 @@
     <%} else {%>
       <p>Something went wrong. Please reload!</p>
     <% } %>
-   
+
   </main>
+  <footer>
+    <button class="more" data-currentpage="0">Show more</button>
+    <p class="message"><!-- Messages appear here --></p>
+  </footer>
 </body>
 </html>

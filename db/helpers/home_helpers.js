@@ -37,7 +37,7 @@ const loadPublicQuizzes = (sort, limit, page, db) => {
       FROM quizzes
       JOIN questions ON quizzes.id = questions.quiz_id
       WHERE is_public = true
-      GROUP BY quizzes
+      GROUP BY quizzes.id
       ORDER BY num_questions
       LIMIT $1
       OFFSET $2`;
@@ -48,13 +48,14 @@ const loadPublicQuizzes = (sort, limit, page, db) => {
       JOIN attempts ON quizzes.id = attempts.quiz_id
       WHERE is_public = true
       AND attempts.finished_at > NOW() - interval '48 hour'
-      GROUP BY quizzes
+      GROUP BY quizzes.id
       ORDER BY recent_submissions DESC
       LIMIT $1
       OFFSET $2`;
       break;
   };
-  return db.query(query, [limit, limit * (page - 1)])
+  return db.query(query, [limit, limit * page])
+  // Note: Zero-based numbering for pages. The initial page that loads is "page 0", the next page is "page 1", and so on...
   .then(results => {
     return results.rows;
   })

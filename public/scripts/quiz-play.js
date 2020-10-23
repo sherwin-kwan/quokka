@@ -22,7 +22,8 @@ $(() => {
     }
   });
 
-  $article.on('click', '.copy-link', () => {
+  // Copy link to clipboard
+  $article.on('click', '.secondary', () => {
     const url = window.location.href.split('?')[0];
     // Removes any query string at the end (e.g. if someone is copying localhost:8080/quiz/1?status=created)
      copyToClipboardAnyString(url);

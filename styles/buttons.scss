@@ -1,13 +1,28 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
-
-form > button[type=submit], .button-style {
+button, .button-style {
   width:100%;
   height:$mobile-col-1;
-  background-color: cornflowerblue;
-  border-radius: 5px;
+  background-color: $sky-blue;
+  color: black;
+  border-radius: 12px;
   border:none;
   margin-top: $mobile-margin;
+  cursor: pointer;
+  font-weight: bold;
+
+  &.secondary {
+    background-color: $gray-blue;
+  }
+
+  &.green {
+    background-color:$green;
+  }
+
+  &.red {
+    background-color: $red;
+  }
 }
 
 .share {

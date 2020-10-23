@@ -11,8 +11,28 @@ form {
   margin: $mobile-gutter 0 $mobile-gutter 0;
 }
 
-.creator {
-  text-align: center;
+
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  section {
+    text-align: center;
+  }
+
+
+  button {
+    max-width: 64.8vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 0;
 }
 
 .user-header {
@@ -56,12 +76,13 @@ form {
   height:$mobile-col-1;
   margin-bottom: $mobile-gutter;
 
-  background-color: gray;
-  border-radius: 5px;
+  background-color: $ice-blue;
+  color: black;
+  border-radius: 12px;
 }
 
 .answer:checked + label {
-  background-color: teal;
+  background-color: $gray-blue;
 }
 
 .answer {
@@ -69,11 +90,11 @@ form {
 }
 
 .answer.correct + label {
-  background-color: darkgreen;
+  background-color: $green;
 }
 
 .answer.incorrect + label {
-  background-color: darkred;
+  background-color: $red;
 }
 
 .question-header {
@@ -90,8 +111,4 @@ form {
 
 .result-word-incorrect {
   color: darkred;
-}
-
-button.copy-link {
-  background-color: $gray-blue;
 }

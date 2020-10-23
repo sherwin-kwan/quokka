@@ -20,15 +20,22 @@ const sortQuizzes = (sort) => {
   })
   .then((res) => {
     res = JSON.parse(res);
+    const $main = $('main');
+    // Empty the existing quizzes on the page
+    $main.empty();
     if (res.length) {
-      const $main = $('main');
-      $main.empty();
       for (quiz of res) {
         console.log(quiz);
         $main.append(addQuizSquare(quiz));
       }
+    } else {
+      $bottomMessage.text('No quizzes found');
     }
+    // Reset to page 0 so "load more" button works properly
+    $moreButton[0].dataset.currentpage = 0;
+    $bottomMessage.text('');
   })
+  .catch(err => console.log(err));
 };
 
 // Loads next page of quizzes
@@ -51,7 +58,7 @@ const loadMore = ($btn, currentPage, sort) => {
         $btn[0].dataset.currentpage++;
         // Increment the current page so the next time the button is hit, another N results show
       } else {
-        $btn.next().text('No more quizzes to show');
+        $bottomMessage.text('No more quizzes to show');
       }
     })
     .catch((err) => console.log(err));

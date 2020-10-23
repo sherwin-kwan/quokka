@@ -1,4 +1,9 @@
 @import 'partials/columns';
+@import 'partials/colors';
+
+h2{
+  color:$ice-blue;
+}
 
 nav#profile {
   display:flex;
@@ -7,18 +12,24 @@ nav#profile {
 
 .profile-tab {
   width: 49%;
-  height: $mobile-col-1;
+  min-height: $mobile-col-1;
   margin: 0;
 
   border: none;
-  border-bottom: 2px solid dimgray;
-  background-color: white;
+  border-bottom: 2px solid $ice-blue;
+  background-color: $deep-blue;
+
+  color:$ice-blue;
 }
 
 .profile-tab.active {
-  border: 2px solid dimgray;
+  border: 2px solid $ice-blue;
   border-bottom: none;
-  background-color: lightgray;
+  background-color: $deep-blue;
+
+  -webkit-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
 }
 
 table {

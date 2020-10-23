@@ -23,7 +23,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
   };
   // Add the final button and close section tag at the end of the HTML for this question
   output += `
-  <button class="new-option"> + Add Option </button>
+  <button class="green new-option"> + Add Option </button>
   </section>`;
   return output;
 };

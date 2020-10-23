@@ -14,6 +14,12 @@ button, .button-style {
   cursor: pointer;
   font-weight: bold;
 
+
+  &:active {
+    background-color: #4da3ff;
+    transform: translateY(4px);
+  }
+
   &.secondary {
     background-color: $gray-blue;
 
@@ -48,10 +54,6 @@ button, .button-style {
   color: black;
   font-weight: 600;
 
-  &:active {
-    background-color: #4da3ff;
-    transform: translateY(4px);
-  }
 }
 
 

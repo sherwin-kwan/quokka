@@ -13,7 +13,6 @@ $(() => {
   }
 
   $moreButton.on('click', (e) => {
-    alert('Clicked!');
     // The more button should have a data attribute "currentpage" tracking the number of pages that have already been loaded
     $.ajax('/', {
       method: 'POST',

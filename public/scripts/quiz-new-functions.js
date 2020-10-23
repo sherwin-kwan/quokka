@@ -40,7 +40,6 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
       </tbody>
     </table>
   </section>`;
-  console.log(output);
   return output;
 };
 
@@ -88,7 +87,7 @@ const addNewOption = ($button) => {
 // This function takes a jQuery wrapper on a button beside an option as an argument, and deletes the option
 // (i.e. deletes its parent div entirely)
 const deleteOption = ($button) => {
-  $button.closest('div').remove();
+  $button.closest('tr').remove();
 };
 
 // Verify for errors before submitting

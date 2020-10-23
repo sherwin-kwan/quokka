@@ -51,8 +51,8 @@ const deleteQuestion = ($button) => {
     section.dataset.questionNum--;
     console.log(section.dataset.questionNum);
     $(section).find('h3').text(`Question ${section.dataset.questionNum}`);
-    $(section).find(`label[for='a${currentNum}']`).attr('for',`a${section.dataset.questionNum}`);
-    $(section).find(`input[name='a${currentNum}']`).attr('name',`a${section.dataset.questionNum}`);
+    $(section).find(`label[for='a${currentNum}']`).attr('for', `a${section.dataset.questionNum}`);
+    $(section).find(`input[name='a${currentNum}']`).attr('name', `a${section.dataset.questionNum}`);
   }
   $thisQuestion.remove();
 };
@@ -103,19 +103,13 @@ const submitNewQuiz = ($form) => {
     .then((data, status, xhr) => {
       if (xhr.status === 201 && data) {
         console.log(data);
-        // After a successful quiz save, redirect user to the results page
-        const arr = JSON.parse(data); // The response will be an array [quizId, [array of questionIds]]
-
-        //May need this for deployment:
-        // const redirect = window.location.hostname + `/quiz/${arr[0]}`;
-        
-        const redirect = `/quiz/${arr[0]}`;
-        window.location.replace(redirect);
+        const arr = JSON.parse(data);
+        $form.find('div.error-message').html(`Saving ${arr[0]} questions and ${arr[1]} answers ...`);
+        window.location.href = arr[2];
       } else {
         $form.find('div.error-message').html(`There was an error which caused only part of your quiz to be saved to the database.
         This is often caused by an overload where the number of people trying to use Quokka at this time is greater than the capacity of
          the database. Please try again in a few moments.`);
       }
     });
-
 };

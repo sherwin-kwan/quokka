@@ -31,9 +31,7 @@
   background-position: center;
 }
 
-.quiz-tile::after {
-  opacity:.4;
-}
+/* Homepage */
 
 .homepage-header {
   text-align: center;
@@ -43,7 +41,6 @@
 a {
   text-decoration: none;
 }
-/* Homepage */
 
 footer {
   display: flex;
@@ -55,3 +52,4 @@ footer {
   justify-content: space-evenly;
   width: 100%;
 }
+

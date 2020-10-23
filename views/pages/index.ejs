@@ -17,9 +17,9 @@
   <%- include('../partials/_header.ejs'); %>
   <h1 class="homepage-header">QUOKKA? QUIZ!</h1>
   <p class="sorting">
-    <label name="popular">Popular</label>
-    <label name="recent">Recently created</label>
-    <label name="long">Longest</label>
+    <label class="button-style sort-label" name="popular">Popular</label>
+    <label class="button-style sort-label" name="recent">Newest</label>
+    <label class="button-style sort-label" name="long">Longest</label>
   </p>
   <main class="quiz-tile-container">
 
@@ -34,8 +34,8 @@
 
   </main>
   <footer>
-    <button class="more" data-currentpage="0">Show more</button>
     <span class="message"><!-- Messages appear here --></span>
+    <button class="more" data-currentpage="0">Show more</button>
   </footer>
 </body>
 </html>

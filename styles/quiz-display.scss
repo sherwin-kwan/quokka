@@ -40,6 +40,7 @@ h3 {
   font-size: 2.25rem;
   font-weight:bold;
   margin: $mobile-gutter 0 $mobile-gutter 0;
+  margin-bottom: -20px;
 }
 
 .score-header {
@@ -50,11 +51,14 @@ h3 {
 .num-correct-header {
   @extend .user-header;
   font-size: 1.5rem;
+  margin-bottom: -12px;
 }
 
 .date-time-header {
   @extend .user-header;
   font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 30px;
 }
 
 .answer-container {
@@ -77,8 +81,9 @@ h3 {
   margin-bottom: $mobile-gutter;
 
   background-color: $ice-blue;
-  color: black;
   border-radius: 12px;
+  color: black;
+  box-shadow: inset 0px 3px 4px #000000;
 }
 
 .answer:checked + label {
@@ -91,10 +96,12 @@ h3 {
 
 .answer.correct + label {
   background-color: $green;
+  box-shadow: inset 0px 6px 4px rgba(0, 0, 0, 0.38);
 }
 
 .answer.incorrect + label {
   background-color: $red;
+  box-shadow: inset 0px 3px 6px #000000;
 }
 
 .question-header {
@@ -103,12 +110,13 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: -30px;
 }
 
 .result-word-correct {
-  color: darkgreen;
+  color: $green;
 }
 
 .result-word-incorrect {
-  color: darkred;
+  color: #F3659D;
 }

@@ -25,7 +25,7 @@
       <% } %>
       <p class="score-header"><%= overallResults.percent_correct %>%</p>
       <p class="num-correct-header"><%= overallResults.num_correct %> out of <%= overallResults.num_total %></p>
-      <p class="date-time-header" title="<%= overallResults.timestamp %>">Quiz attempted <%= overallResults.processedTime %>
+      <p class="date-time-header" title="<%= overallResults.timestamp %>">attempted <%= overallResults.processedTime %>
       </p>
       <a class="share button-style copyResultsLink" id="<%= overallResults.attempt_id %>">Copy Link to Results </a>
       <a class="share button-style secondary copyQuizLink" id="<%= overallResults.quiz_id %>">Copy Link to Quiz </a>

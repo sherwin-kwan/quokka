@@ -16,7 +16,7 @@
   width:$mobile-col-3;
   height:$mobile-col-3;
   margin-bottom: $mobile-gutter;
-  border-radius: 15px;
+  border-radius: 12px;
 
   background-color: $ice-blue;
   text-align: center;
@@ -24,9 +24,14 @@
   color:black;
   font-weight: bold;
   font-size: 1.1rem;
-  background-image: url('/img/QUOKKA.png');
-  background-size:100%;
+
+  background-image: url('/img/Quokka_-lighter.png');
+  background-size:95%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
+
+/* Homepage */
 
 .homepage-header {
   text-align: center;
@@ -36,7 +41,6 @@
 a {
   text-decoration: none;
 }
-/* Homepage */
 
 footer {
   display: flex;
@@ -48,3 +52,4 @@ footer {
   justify-content: space-evenly;
   width: 100%;
 }
+

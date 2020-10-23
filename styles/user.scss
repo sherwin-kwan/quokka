@@ -45,7 +45,7 @@ table {
     justify-content: space-between;
     align-items: center;
     height: $mobile-col-1 + $mobile-gutter;
-    border-bottom: 2px solid dimgray;
+    border-bottom: 2px solid $ice-blue;
 
     * {
       width:$mobile-col-1;
@@ -62,6 +62,14 @@ table {
       width:$mobile-col-1 *.9;
       height:$mobile-col-1 * .9;
 
+    }
+
+    a {
+      color:$ice-blue;
+    }
+
+    a:visited {
+      color:$sky-blue;
     }
 
   }

@@ -1,4 +1,5 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
 nav#profile {
   display:flex;
@@ -12,13 +13,20 @@ nav#profile {
 
   border: none;
   border-bottom: 2px solid dimgray;
-  background-color: white;
+  background-color: $deep-blue;
 }
 
 .profile-tab.active {
   border: 2px solid dimgray;
   border-bottom: none;
-  background-color: lightgray;
+
+  -webkit-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+  box-shadow: inset 0px 7px 9px 1px rgba(0,0,0,0.25);
+}
+
+.profile-tab:focus {
+  outline:none
 }
 
 table {

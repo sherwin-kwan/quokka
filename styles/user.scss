@@ -53,6 +53,7 @@ table {
     input {
       display: flex;
       align-items: center;
+
       width:$mobile-col-1 *.9;
       height:$mobile-col-1 * .9;
 
@@ -86,7 +87,7 @@ table {
   text-align: center; 
 }
 
-.resultsCopyButton {
+.resultsCopyButton, .quizCopyButton {
   height:$mobile-col-1;
 
   background-color: $sky-blue;

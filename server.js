@@ -46,6 +46,8 @@ app.use('/styles', sass({
 }));
 app.use(express.static('public'));
 
+app.set('trust proxy', 1) // trust first proxy
+
 // Cookies
 
 app.use(cookieSession({

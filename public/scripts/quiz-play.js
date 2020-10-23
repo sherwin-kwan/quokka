@@ -11,15 +11,21 @@ $(() => {
   // CONSTANTS
   // Define variables (with $ to signify jQuery object) for key nodes in the DOM
   const $quizForm = $('form');
+  const $article = $('article');
 
-
-  $('.button-style').on('click', () => {
+  $article.on('click', '.start-quiz', () => {
     try {
       const quizId = window.location.pathname.split('/').pop(); // Extracts the number from the URL, so '/quiz/43' becomes '43';
       loadQuiz($quizForm, quizId); // Just using a hard-coded quiz 1 for now
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }
+  });
+
+  $article.on('click', '.copy-link', () => {
+    const url = window.location.href.split('?')[0];
+    // Removes any query string at the end (e.g. if someone is copying localhost:8080/quiz/1?status=created)
+     copyToClipboardAnyString(url);
   });
 
   $quizForm.on('submit', function (event) {

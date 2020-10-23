@@ -1,4 +1,5 @@
 @import 'partials/columns';
+@import 'partials/colors';
 
 form {
   display: none;
@@ -84,4 +85,8 @@ form {
 
 .result-word-incorrect {
   color: darkred;
+}
+
+button.copy-link {
+  background-color: $gray-blue;
 }

@@ -16,7 +16,7 @@ const generateQuestionMarkup = (questionNum, num_of_options) => {
     <table>
       <thead>
         <tr class="new-option-header">
-          <th class="option-correct required" for="a${questionNum}" >?</th>
+          <th class="option-correct required" for="a${questionNum}" >☑️</th>
           <th class="option-text required" for="a${questionNum}"> option text</th>
           <th class="dummy"></th>
         </tr>

@@ -36,6 +36,7 @@
 .homepage-header {
   text-align: center;
   font-size: 11vw;
+  margin-top: 10px;
 }
 
 a {
@@ -44,12 +45,16 @@ a {
 
 footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .sorting {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+  margin-top:-30px;
+  margin-bottom: 25px;
 }
-

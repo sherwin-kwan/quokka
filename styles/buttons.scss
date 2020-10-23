@@ -1,7 +1,9 @@
 @import 'partials/columns';
 @import 'partials/colors';
+@import 'layout';
 
 button, .button-style {
+  @extend .shadow;
   width:100%;
   height:$mobile-col-1;
   background-color: $sky-blue;
@@ -14,6 +16,11 @@ button, .button-style {
 
   &.secondary {
     background-color: $gray-blue;
+
+    &:active {
+      background-color: #577ea8;
+    }
+
   }
 
   &.green {
@@ -26,6 +33,8 @@ button, .button-style {
 }
 
 .share {
+
+  @extend .shadow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,21 +45,13 @@ button, .button-style {
 
   background-color: $sky-blue;
   border-radius: 12px;
-  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.38);
   color: black;
   font-weight: 600;
+
+  &:active {
+    background-color: #4da3ff;
+    transform: translateY(4px);
+  }
 }
 
-.share:active {
-  background-color: #4da3ff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.38);
-  transform: translateY(4px);
-}
 
-.secondaryShare {
-  background-color: $gray-blue;
-}
-
-.secondaryShare:active {
-  background-color: #577ea8;
-}

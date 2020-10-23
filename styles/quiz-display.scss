@@ -1,6 +1,7 @@
 @import 'partials/columns';
 @import 'partials/colors';
 
+
 form {
   display: none;
 }
@@ -83,7 +84,15 @@ h3 {
   background-color: $ice-blue;
   border-radius: 12px;
   color: black;
-  box-shadow: inset 0px 3px 4px #000000;
+
+
+  &.incorrect {
+    background-color: $red;
+  }
+
+  &.correct {
+    background-color: $green;
+  }
 }
 
 .answer:checked + label {
@@ -92,16 +101,6 @@ h3 {
 
 .answer {
   appearance: none;
-}
-
-.answer.correct + label {
-  background-color: $green;
-  box-shadow: inset 0px 6px 4px rgba(0, 0, 0, 0.38);
-}
-
-.answer.incorrect + label {
-  background-color: $red;
-  box-shadow: inset 0px 3px 6px #000000;
 }
 
 .question-header {
@@ -120,3 +119,4 @@ h3 {
 .result-word-incorrect {
   color: #F3659D;
 }
+

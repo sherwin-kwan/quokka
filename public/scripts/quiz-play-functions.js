@@ -47,7 +47,7 @@ const generateOneQuestion = (obj) => {
     output += `
     <div class="answer-container">
       <input class="answer"  type="radio" id="q${num}-${i}"" value="a${options[i].id}" name="q${num}"  />
-      <label for="q${num}-${i}" >${sanitizedText}</label>
+      <label class="shadow" for="q${num}-${i}" >${sanitizedText}</label>
     </div>
     `;
     // Result of this: when the form submits, it will submit in the format q1: a1; ???

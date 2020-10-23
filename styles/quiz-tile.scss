@@ -25,10 +25,14 @@
   font-weight: bold;
   font-size: 1.1rem;
 
-  background-image: url('/img/Quokka_.png');
+  background-image: url('/img/Quokka_-lighter.png');
   background-size:95%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.quiz-tile::after {
+  opacity:.4;
 }
 
 .homepage-header {

@@ -12,7 +12,7 @@ database.connect();*/
 
 const express = require('express');
 const router = express.Router();
-const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean } = require('../db/helpers/quiz_helpers.js');
+const { loadWholeQuizJson, saveQuizAttempt, saveNewQuiz, changeIsPublicBoolean, getQuizLeaders } = require('../db/helpers/quiz_helpers.js');
 const { getCurrUser } = require('./cookie-helper')
 const inspect = require('util').inspect;
 
@@ -21,20 +21,9 @@ const quizRouter = (db) => {
   // Leaderboard
   router.get('/:id/top', async (req, res) => {
     const quizId = req.params.id;
-    const data = await db.query(`SELECT
-        CONCAT(users.fname, ' ', users.lname) AS name,
-        ROUND((SUM(CASE WHEN possible_answers.is_correct = true THEN 1 ELSE 0 END)/1.00) / (count(user_answers.*)/1.00)*100) as percent_correct,
-        attempts.finished_at as attempt_time
-      FROM quizzes
-        JOIN attempts ON quizzes.id = attempts.quiz_id
-        JOIN user_answers ON attempts.id = user_answers.attempt_id
-        JOIN possible_answers ON user_answers.selected_answer = possible_answers.id
-        JOIN users ON users.id = attempts.user_id
-      WHERE attempts.quiz_id = $1
-      GROUP BY CONCAT(users.fname, ' ', users.lname), attempts.id
-      ORDER BY percent_correct DESC;
-    `, [quizId]);
-    res.status(200).send(data);
+    const data = await getQuizLeaders(quizId, db);
+    console.log('data is: ', data);
+    res.send(data.rows);
   })
 
   // Load a quiz asynchronously

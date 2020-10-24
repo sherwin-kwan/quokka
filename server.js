@@ -50,6 +50,11 @@ app.set('trust proxy', 1) // trust first proxy
 
 // Cookies
 
+// Fallback if no secret key found
+if (!process.env.SECRET_KEY) {
+  process.env.SECRET_KEY = 'dkjb24g8oysdfGKHL2';
+}
+
 app.use(cookieSession({
   name: 'session',
   keys: [process.env.SECRET_KEY],

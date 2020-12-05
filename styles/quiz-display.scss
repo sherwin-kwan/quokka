@@ -104,7 +104,9 @@ h3 {
 
 .answer {
   appearance: none;
+  display: none;
 }
+
 
 .question-header {
   @extend .user-header;

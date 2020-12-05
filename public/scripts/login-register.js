@@ -39,9 +39,11 @@ $(() => {
       $.ajax(`/user/${procedure}`, { method: 'POST', data: $form.serialize() })
         .then(// Successful
           () => {
+            console.log('Successful login yay!');
             window.location.href = '/';
           }
         ).catch(err => {
+          console.log('error is ', err);
           $form.find('div.error-message').html(err.responseText);
         })
     } catch (err) {

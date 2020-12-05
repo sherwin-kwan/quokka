@@ -3,13 +3,12 @@ require('dotenv').config();
 
 // Web server config
 const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || 'development';
+const ENV        = process.env.ENV || 'production';
 const express    = require('express');
 const bodyParser = require('body-parser');
 const sass       = require('node-sass-middleware');
 const app        = express();
 const morgan     = require('morgan');
-const mySecretKey= require('./secret-key.js');
 const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
@@ -17,6 +16,18 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
+// Compression
+
+const compression = require('compression');
+app.use(compression());
+
+const helmet = require('helmet');
+app.use(helmet());
+
+const cors = require('cors');
+app.use(cors());
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -35,11 +46,18 @@ app.use('/styles', sass({
 }));
 app.use(express.static('public'));
 
+app.set('trust proxy', 1) // trust first proxy
+
 // Cookies
+
+// Fallback if no secret key found
+if (!process.env.SECRET_KEY) {
+  process.env.SECRET_KEY = 'dkjb24g8oysdfGKHL2';
+}
 
 app.use(cookieSession({
   name: 'session',
-  keys: [mySecretKey],
+  keys: [process.env.SECRET_KEY],
   maxAge: 3600000 // expires after 1 hour
 }));
 
